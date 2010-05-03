@@ -3,7 +3,7 @@
 # To start this script, open a terminal window in the virtual machine and run these commands
 #
 # sudo aptitude -y install cvs wget
-# cvs -z6 -d:pserver:anonymous:anonymous@cvs.drupal.org:/cvs/drupal-contrib checkout -d ~/quickstart contributions/modules/quickstart
+# cvs -z6 -d:pserver:anonymous:anonymous@cvs.drupal.org:/cvs/drupal-contrib checkout -d quickstart contributions/modules/quickstart
 # bash ~/quickstart/install.sh
 
 cd ~
