@@ -1,0 +1,29 @@
+Here are some manual tweaks I've done to bittorrent image that you may find useful:
+
+1) Disable screensaver.  Host computer takes care of this, just an annoyance to login.
+  - System -> Preferences -> uncheck "Activate...", uncheck "Lock..."
+
+2) Auto login.  Host computer takes care of security.
+  - System -> Administration -> Login Screen -> Unlock -> Uncheck "Play...", Select "Log in as..."
+
+3) Install security updates automatically.  No sense in skipping this, or doing it manually.
+  - System -> Administration -> Software Sources -> "Updates" Tab -> Select "Install security..."
+
+4) Added links to top toolbar:
+  - Terminal (command line prompt).  It's the black box with a >
+  - Chrome browser
+
+5) Firefox 3.6 removed the ability to command-line install extensions.  
+  - This is the list of Firefox add-ons that come with Quickstart:
+    - Firebug HTML/CSS/JS Debugger     - http://getfirebug.com/
+      - YSlow (performance tips)         - http://developer.yahoo.com/yslow/
+      - FirePHP (php log messages to firebug) - http://www.firephp.org/
+    - Web Developer (Toolbar)          - http://chrispederick.com/work/web-developer/
+    - Greasemonkey (website tweaks)    - http://www.greasespot.net/
+      - Dreditor (Code review script)  - http://drupal.org/project/dreditor
+    - Measureit (pixel ruler)          - http://www.kevinfreitas.net/extensions/measureit/
+    - ColorZilla (color picker)        - http://www.colorzilla.com/firefox/
+    - FireFTP (FTP Client)             - http://fireftp.mozdev.org/
+    - Clear Cache Button               - http://clearcachebutton.mozdev.org/
+    - Dummy Lipsum (generate dummy text) - http://sogame.awardspace.com/dummylipsum/
+

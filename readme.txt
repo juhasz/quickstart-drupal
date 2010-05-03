@@ -1,1 +1,6 @@
-See the project page at (todo: link) for more information about this project.
+Project Page: http://drupal.org/project/quickstart
+
+Installation: http://drupal.org/project/quickstart
+
+Project Documentation: http://drupal.org/node/788080
+
