@@ -10,75 +10,77 @@ sudo aptitude update   		# update my database of newest packages
 #sudo aptitude -y install localepurge # package to delete unnecessary translations.  Select en and en_us packages to keep them.
 
 sudo aptitude -y install deborphan # package to find orphan packages
-# 329mb - Open office
+# 351mb - Open office
 sudo aptitude remove --purge openoffice.org-core openoffice.org-common openoffice.org-writer openoffice.org-calc openoffice.org-math openoffice.org-impress openoffice.org-base-core openoffice.org-draw openoffice.org-emailmerge   openoffice.org-gnome openoffice.org-gtk openoffice.org-help-en-gb openoffice.org-help-en-us openoffice.org-l10n-en-gb openoffice.org-l10n-en-za openoffice.org-style-human openoffice.org-thesaurus-en-au python-uno language-support-writing-en openoffice.org-thesaurus-en-us openoffice.org-hyphenation openoffice.org-hyphenation-en-us openoffice.org-l10n-common language-support-translations-en language-support-en thunderbird-locale-en-gb uno-libs3 ure
-#  47mb - games
-sudo aptitude remove --purge gnome-games gnome-games-data libggz2 libggzcore9 libggzmod4 ggzcore-bin
-#  17mb - accessability
+#  0mb - games FIXME
+sudo aptitude remove --purge quadrapassel gbrainy aisleriot gnomine gnome-mahjongg gnome-sudoku
+sudo aptitude remove --purge gnome-games gnome-games-data libggz2 libggzcore9 libggzmod4 ggzcore-bin #9.04
+#  20mb - accessability
 sudo aptitude remove --purge gnome-orca gnome-mag brltty brltty-x11 onboard                                           
-#  10mb - screen savers
+#   9mb - screen savers
 sudo aptitude remove --purge xscreensaver-data xscreensaver-gl screensaver-default-images gnome-screensaver ubuntu-desktop
-#  11mb - music player cd creator
-sudo aptitude remove --purge rythmbox brasero wodim libbrasero-media0 cdparanoia rhythmbox-plugins{a} rhythmbox-ubuntuone-music-store{a}
-#  28mb - help files
+#  ?mb - music player cd creator  FIXME
+sudo aptitude remove --purge rhythmbox brasero wodim libbrasero-media0 cdparanoia rhythmbox-plugins rhythmbox-ubuntuone-music-store
+#   0mb - help files  FIXME
 sudo aptitude remove --purge gimp-help-common gimp-help-en                                
-#  68mb - user guide
+# 277mb - user guide
 sudo aptitude remove --purge gnome-user-guide gnome-user-guide-en ubuntu-docs             
 
 #   9mb - user guide - for 9mb, not worth it.
 #sudo aptitude remove --purge man-db manpages yelp info evolution-documentation-en ubuntu-standard 
 
-#   6mb - bluetooth
+#   7mb - bluetooth
 sudo aptitude remove --purge gnome-bluetooth gnome-user-share bluez-gnome bluez bluetooth bluez-utils bluez-alsa bluez-gstreamer bluez-cups 
-#  16mb - skype clone
+#  .3mb - skype clone FIXME
 sudo aptitude remove --purge espeak ekiga                                                 
-#  55mb - email - FIXME may need force yes for gnome-control-center and gnome-panel
+#  75mb - email - FIXME may need force yes for gnome-control-center and gnome-panel
 sudo aptitude remove --purge evolution evolution-common evolution-data-server evolution-exchange evolution-indicator evolution-plugins evolution-webcal evolution-couchdb
-#  10mb - spam filter
+#   1mb - spam filter
 sudo aptitude remove --purge bogofilter bogofilter-bdb bogofilter-common                  
-#   5mb - palm pilot
+#   1mb - palm pilot
 sudo aptitude remove --purge gnome-pilot gnome-pilot-conduits  libpisock9 libpisync1 libgnome-pilot2                           
-#  14mb - video player
+#  12mb - video player
 sudo aptitude remove --purge totem totem-mozilla totem-common totem-gstreamer totem-plugins 
-#  76mb - printing
+#   ?mb - printing FIXME
 sudo aptitude remove --purge ubuntu-standard \
      cups cups-bsd cups-client cups-common cupsddk cupsddk-drivers \
-     ghostscript ghostscript-x ghostscript-cups groff-base \
+     ghostscript ghostscript-x ghostscript-cups \
      cups-driver-gutenprint hal-cups-utils python-cups \
      system-config-printer-common system-config-printer-gnome system-config-printer-udev \
      foo2zjs foomatic-db foomatic-db-engine foomatic-filters foomatic-db-hpijs \
      min12xxw openprinting-ppds pnm2ppa pxljr splix hplip-data hplip hpijs 
-#   5mb - scanner drivers
+#  .6mb - scanner drivers FIXME
 sudo aptitude remove --purge xsane sane-utils xsane-common                                
 #  .5mb - understand raw camera images
 sudo aptitude remove --purge dcraw                                                        
-#  30mb - mono .net layer
-sudo aptitude remove --purge  f-spot gbrainy{a} libart2.0-cil{a} libflickrnet2.2-cil{a} libgconf2.0-cil{a} libglade2.0-cil{a} libglib2.0-cil{a} \
-  libgmime2.4-cil{a} libgnome-keyring1.0-cil{a} libgnome-vfs2.0-cil{a} libgnome2.24-cil libgnomepanel2.24-cil libgtk2.0-cil{a} \
-  liblaunchpad-integration1.0-cil{a} libmono-addins-gui0.2-cil libmono-addins0.2-cil libmono-cairo2.0-cil{a} \
-  libmono-corlib2.0-cil{a} libmono-data-tds2.0-cil{a} libmono-i18n-west2.0-cil{a} libmono-posix2.0-cil{a} \
-  libmono-security2.0-cil{a} libmono-sharpzip2.84-cil{a} libmono-sqlite2.0-cil{a} libmono-system-data2.0-cil{a} \
-  libmono-system-runtime2.0-cil{a} libmono-system-web2.0-cil libmono-system2.0-cil{a} libmono2.0-cil \
-  libndesk-dbus-glib1.0-cil{a} libndesk-dbus1.0-cil{a} libnunit2.4-cil{a} mono-2.0-gac mono-gac mono-runtime tomboy 
+#  ?mb - mono .net layer FIXME
+sudo aptitude remove --purge  f-spot libart2.0-cil libflickrnet2.2-cil libgconf2.0-cil libglade2.0-cil libglib2.0-cil \
+  libgmime2.4-cil libgnome-keyring1.0-cil libgnome-vfs2.0-cil libgnome2.24-cil libgnomepanel2.24-cil libgtk2.0-cil \
+  liblaunchpad-integration1.0-cil libmono-addins-gui0.2-cil libmono-addins0.2-cil libmono-cairo2.0-cil \
+  libmono-corlib2.0-cil libmono-data-tds2.0-cil libmono-i18n-west2.0-cil libmono-posix2.0-cil \
+  libmono-security2.0-cil libmono-sharpzip2.84-cil libmono-sqlite2.0-cil libmono-system-data2.0-cil \
+  libmono-system-runtime2.0-cil libmono-system-web2.0-cil libmono-system2.0-cil libmono2.0-cil \
+  libndesk-dbus-glib1.0-cil libndesk-dbus1.0-cil libnunit2.4-cil mono-2.0-gac mono-gac mono-runtime tomboy 
 
-
-#  26mb - Fancy GUI Compiz
+#  15mb - Fancy GUI Compiz
 sudo aptitude remove --purge compiz compiz-core compiz-gnome compiz-plugins compiz-wrapper compiz-fusion-plugins-extra compiz-fusion-plugins-main compizconfig-backend-gconf libcompizconfig0 libdecoration0 
-#  11mb - example videos and stuff
-sudo aptitude remove --purge example-content                                              
+#   8mb - example videos and stuff
+sudo aptitude remove --purge example-content  
+                                            
 #  13mb - pgp GUI - keep for communicating with hosting companies silly!
 #sudo aptitude remove --purge seahorse seahorse-plugins                                   
-#   4mb - Video drivers
+
+#  .1mb - Video drivers
 sudo aptitude remove --purge nvidia-common rss-glx                                        
-#   3mb - Math app - linear programming
+#  .7mb - Math app - linear programming
 sudo aptitude remove --purge lp-solve 
                                         
 #  93mb - Headers for Programming linux - need these for VBox Extensions
 #sudo aptitude remove --purge linux-headers-2.6.28-11 linux-headers-2.6.28-11-generic linux-headers-generic linux-libc-dev libc6-dev 
 
-#  30mb - bittorrent client
+#   4mb - bittorrent client
 sudo aptitude remove --purge transmission-common transmission-gtk                         
-#  31mb - Instant Messaging 
+#  10mb - Instant Messaging 
 sudo aptitude remove --purge empathy nautilus-sendto-empathy nautilus-sendto telepathy-haze nautilus-sendto-empathy libpurple0
 sudo aptitude remove --purge pidgin pidgin-data libpurple0 pidgin-otr pidgin-libnotify nautilus-sendto #9.04
 #  39mb - OpenGL
