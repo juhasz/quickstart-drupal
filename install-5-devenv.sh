@@ -95,10 +95,8 @@ END
 # don't use fstab, error happens during boot.  Could try noauto?
 #  echo "shared /mnt/shared vboxsf uid=1000,gid=1000" | sudo tee -a /etc/fstab > /dev/null
 # Can't use simple sudo because >> doesn't get sudo'd.
-sudo mkdir /mnt/shared
-sudo chmod 777 -R /mnt/shared
-sudo chown 1000:1000 -R /mnt/shared
-sudo sed -i 's/# By default this script does nothing./mount.vboxsf -w -o rw,uid=1000,gid=1000,dmode=666,fmode=777 shared \/mnt\/shared/g'     /etc/fstab
+sudo mkdir /mnt/vbox-shared
+sudo sed -i 's/# By default this script does nothing./mount -t vboxsf -o uid=1000,gid=1000 shared \/mnt\/vbox-shared/g'     /etc/rc.local
 # reboot for effect
 
 # ################################################################################ Desktop shortcuts
@@ -134,7 +132,7 @@ END
 chmod 755 ~/Desktop/gnome-terminal.desktop
 
 ln -s ~/websites ~/Desktop/websites
-ln -s /mnt/shared ~/Desktop/shared
+ln -s /mnt/vbox-shared ~/Desktop/vbox-shared
 #ln -s ~/quickstart/scripts ~/Desktop/scripts
 
 # ################################################################################ Log Files
