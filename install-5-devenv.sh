@@ -12,14 +12,15 @@ DRUSH_FILE='drush-All-versions-3.0.tar.gz'
 wget http://ftp.drupal.org/files/projects/$DRUSH_FILE
 tar -xzf $DRUSH_FILE
 chmod u+x ~/drush/drush
-sudo ln -s ~/drush/drush /usr/local/bin/drush
+ln -s ~/drush/drush /usr/local/bin/drush
 rm $DRUSH_FILE
 
 # ################################################################################ Replace localhost/index.html
 
 # add interesting default document for localhost:
 sudo rm /var/www/index.html
-sudo cat > /var/www/index.php <<END
+sudo chmod 777 /var/www
+cat > /var/www/index.php <<END
 <html><body>
   <h1>Drupaldev Quickstart:</h1>
   <div>
@@ -48,11 +49,12 @@ sudo cat > /var/www/index.php <<END
   <?php phpinfo(); ?>
 </body></html>
 END
+sudo chmod 755 /var/www
 
 # ################################################################################ Command line shortcuts (bash aliases)
 
 #don't sudo...
-echo >> .bash_profile <<END
+cat >> .bash_profile <<END
 #   svn_add_all [folder]            - recursive add folders unversioned files (espects svn:ignore and spaces in filenames)
 #   svn_rid_all [folder]            - recursive svn-deletes missing files (deleted by user, but not svn-deleted)
 #   svn_revert_all [folder]         - recursive revert any change in folder
@@ -89,15 +91,14 @@ END
 
 # setup shared folders between virtualbox host and virtualbox guest
 # sudo mount -t vboxfs shared /mnt/shared
-# don't use ~/ in fstab
-mkdir /mnt/shared
-sudo echo >> /etc/fstab <<END
-shared /mnt/shared vboxsf
-END
+# don't use ~/ in fstab.  Can't use simple sudo because >> doesn't get sudo'd.
+sudo mkdir /mnt/shared
+echo "shared /mnt/shared vboxsf" | sudo tee -a /path/to/file > /dev/null
+sudo mount -a
 
 # ################################################################################ Desktop shortcuts
 
-echo > ~/Desktop/README.desktop <<END
+cat > ~/Desktop/README.desktop <<END
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Type=Link
@@ -106,7 +107,7 @@ Name=README
 Icon=/usr/share/pixmaps/firefox.png
 END
 
-echo > ~/Desktop/CommandLine.desktop <<END
+cat > ~/Desktop/CommandLine.desktop <<END
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Type=Application
@@ -117,37 +118,39 @@ Icon=bash
 END
 
 ln -s ~/websites ~/Desktop/websites
-ln -s ~/quickstart/scripts ~/Desktop/scripts
 ln -s /mnt/shared ~/Desktop/shared
+#ln -s ~/quickstart/scripts ~/Desktop/scripts
 
 # ################################################################################ Log Files
 
-mkdir ~/websites/logs
+LOGS=~/websites/logs
+mkdir $LOGS
 
 # Apache error logs are configured in the VirtualHosts section of each website (defaults from apache2.conf)
 sudo touch /var/log/apache-error.log
-ln -s /var/log/apache2/error.log                ~/websites/logs/apache-error.log
+ln -s /var/log/apache2/error.log                $LOGS/apache-error.log
 # this file catches any unconfigured log info for virtualhosts
 sudo touch /var/log/apache2/other_vhosts_access.log
-ln -s /var/log/apache2/other_vhosts_access.log  ~/websites/logs/apache-access.log
+ln -s /var/log/apache2/other_vhosts_access.log  $LOGS/apache-access.log
 # php error logs are configured in php.ini  (changed in install-2-lamp.sh)
 sudo touch /var/log/php-error.log
-ln -s /var/log/php-error.log                    ~/websites/logs/php-error.log
+ln -s /var/log/php-error.log                    $LOGS/php-error.log
 # MySQL error and slow query logs (changed in install-2-lamp.sh)
 sudo touch /var/log/mysql/error.log
-ln -s /var/log/mysql/error.log                  ~/websites/logs/mysql-error.log
-sudo touch /var/log/mysql/mysql-slow.log        ~/websites/logs/mysql-slow.log
+ln -s /var/log/mysql/error.log                  $LOGS/mysql-error.log
+sudo touch /var/log/mysql/mysql-slow.log        $LOGS/mysql-slow.log
 
 
 # ################################################################################ Config Files
 
-mkdir ~/websites/config
-ln -s /etc/apache2/apache2.conf      ~/websites/config/apache2.conf
-ln -s /etc/apache2/apache2.conf      ~/websites/config/httpd.conf
-ln -s /etc/apache2/apache2.conf      ~/websites/config/ports.conf
-ln -s /etc/php5/apache2/php.ini      ~/websites/config/php-apache.ini
-ln -s /etc/php5/cli/php.ini          ~/websites/config/php-cli.ini
-ln -s /etc/mysql/my.cnf              ~/websites/config/mysql.cnf
-ln -s /etc/hosts                     ~/websites/config/hosts
-ln -s /etc/apache2/sites-enabled/    ~/websites/config/apache-sites-enabled
+CONFIGS=~/websites/config
+mkdir $CONFIGS
+ln -s /etc/apache2/apache2.conf      $CONFIGS/apache2.conf
+ln -s /etc/apache2/apache2.conf      $CONFIGS/httpd.conf
+ln -s /etc/apache2/apache2.conf      $CONFIGS/ports.conf
+ln -s /etc/php5/apache2/php.ini      $CONFIGS/php-apache.ini
+ln -s /etc/php5/cli/php.ini          $CONFIGS/php-cli.ini
+ln -s /etc/mysql/my.cnf              $CONFIGS/mysql.cnf
+ln -s /etc/hosts                     $CONFIGS/hosts
+ln -s /etc/apache2/sites-enabled/    $CONFIGS/apache-sites-enabled
 

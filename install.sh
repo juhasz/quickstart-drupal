@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# To start this script, open a terminal window in the virtual machine and run these commands
+# To install Quickstart:
 #
-# sudo aptitude -y install cvs wget
+# 1) open a terminal window in the virtual machine (Applications->Accessories->Terminal)
+#
+# 2) Paste in these three commands: (install cvs, download from drupal.org, run install.sh)
+#
+# sudo aptitude -y install cvs
 # cvs -z6 -d:pserver:anonymous:anonymous@cvs.drupal.org:/cvs/drupal-contrib checkout -d quickstart contributions/modules/quickstart
 # bash ~/quickstart/install.sh
 
