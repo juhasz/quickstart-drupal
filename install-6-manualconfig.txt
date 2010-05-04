@@ -12,12 +12,12 @@ Here are some manual tweaks I've done to bittorrent image that you may find usef
 4) Added links to top toolbar:
   - Terminal (command line prompt).  It's the black box with a >
   - Chrome browser
+  - System Monitor
 
 5) Firefox 3.6 removed the ability to command-line install extensions.  
   - This is the list of Firefox add-ons that come with Quickstart:
     - Firebug HTML/CSS/JS Debugger     - http://getfirebug.com/
       - YSlow (performance tips)         - http://developer.yahoo.com/yslow/
-      - FirePHP (php log messages to firebug) - http://www.firephp.org/
     - Web Developer (Toolbar)          - http://chrispederick.com/work/web-developer/
     - Greasemonkey (website tweaks)    - http://www.greasespot.net/
       - Dreditor (Code review script)  - http://drupal.org/project/dreditor
@@ -26,4 +26,8 @@ Here are some manual tweaks I've done to bittorrent image that you may find usef
     - FireFTP (FTP Client)             - http://fireftp.mozdev.org/
     - Clear Cache Button               - http://clearcachebutton.mozdev.org/
     - Dummy Lipsum (generate dummy text) - http://sogame.awardspace.com/dummylipsum/
+  - Add Buttons to shortcuts toolbar: clear cache, firebug, fireftp, dummylipsum
 
+  What about?
+      - FirePHP (php log messages to firebug) - http://www.firephp.org/  ?
+      - Drupal for Firebug?
