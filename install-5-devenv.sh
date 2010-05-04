@@ -93,7 +93,7 @@ END
 # sudo mount -t vboxfs shared /mnt/shared
 # don't use ~/ in fstab.  Can't use simple sudo because >> doesn't get sudo'd.
 sudo mkdir /mnt/shared
-sudo chmod -R 777 /mnt/shared
+#sudo chmod -R 777 /mnt/shared
 echo "shared /mnt/shared vboxsf uid=1000,gid=1000" | sudo tee -a /etc/fstab > /dev/null
 sudo mount -a
 
@@ -126,9 +126,8 @@ Categories=GNOME;GTK;Utility;TerminalEmulator;
 StartupNotify=true
 OnlyShowIn=GNOME;
 X-Ubuntu-Gettext-Domain=gnome-terminal
-
 END
-chmod 755 ~/Desktop/CommandLine.desktop
+chmod 755 ~/Desktop/gnome-terminal.desktop
 
 ln -s ~/websites ~/Desktop/websites
 ln -s /mnt/shared ~/Desktop/shared
