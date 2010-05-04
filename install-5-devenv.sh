@@ -12,7 +12,7 @@ DRUSH_FILE='drush-All-versions-3.0.tar.gz'
 wget http://ftp.drupal.org/files/projects/$DRUSH_FILE
 tar -xzf $DRUSH_FILE
 chmod u+x ~/drush/drush
-ln -s ~/drush/drush /usr/local/bin/drush
+sudo ln -s ~/drush/drush /usr/local/bin/drush
 rm $DRUSH_FILE
 
 # ################################################################################ Replace localhost/index.html
@@ -23,10 +23,10 @@ sudo chmod 777 /var/www
 cat > /var/www/index.php <<END
 <html><body>
   <h1>Drupaldev Quickstart:</h1>
-  <div>
-    <div>
+  <table><tr>
+    <td>
       <p>Helpful Links:</p>
-      <ul >
+      <ul>
         <li><a href='http://localhost/phpmyadmin'>phpmyadmin</a> database editor</li>
         <li><a href='http://drupal.org/node/788080'>Quickstart documentation</li>
         <li><a href='http://drupal.org/node/477684'>Drush</a> command line reference</li>
@@ -34,8 +34,7 @@ cat > /var/www/index.php <<END
         <li><a href='http://drupal.org/project/issues?projects=3060&states=8,13,14'>Drupal Patch Queue</a> and <a href='http://drupal.org/patch/review'>Patch reviewing tips</a></li>
         <li>Configuring <a href='http://wiki.netbeans.org/HowToConfigureXDebug'>xdebug and netbeans</a></li>
       </ul>
-    </div>
-    <div style='float: right'>
+    </td><td>
       <p>Verify phpinfo() below:</p>
       <ul>
         <li>xdebug, apc are On</li>
@@ -43,8 +42,8 @@ cat > /var/www/index.php <<END
         <li>max_execution_time = 300s</li>
         <li>memory_limit is 64m</li>
       </ul>
-    </div>
-  </div>
+    </td>
+  </tr></table>
   <h1>Current phpinfo():</h1>
   <?php phpinfo(); ?>
 </body></html>
@@ -93,7 +92,8 @@ END
 # sudo mount -t vboxfs shared /mnt/shared
 # don't use ~/ in fstab.  Can't use simple sudo because >> doesn't get sudo'd.
 sudo mkdir /mnt/shared
-echo "shared /mnt/shared vboxsf" | sudo tee -a /path/to/file > /dev/null
+sudo chmod -R 777 /mnt/shared
+echo "shared /mnt/shared vboxsf" | sudo tee -a /etc/fstab > /dev/null
 sudo mount -a
 
 # ################################################################################ Desktop shortcuts
@@ -111,11 +111,13 @@ cat > ~/Desktop/CommandLine.desktop <<END
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Type=Application
-Terminal=true
+Terminal=false
 Exec=bash
 Name=Command Line
+Comment=aka Terminal/Dos/shell
 Icon=bash
 END
+chmod 755 ~/Desktop/CommandLine.desktop
 
 ln -s ~/websites ~/Desktop/websites
 ln -s /mnt/shared ~/Desktop/shared
