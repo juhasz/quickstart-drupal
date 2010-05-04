@@ -90,12 +90,14 @@ END
 # ################################################################################ Shared folder
 
 # setup shared folders between virtualbox host and virtualbox guest
-# sudo mount -t vboxfs shared /mnt/shared
-# don't use ~/ in fstab.  Can't use simple sudo because >> doesn't get sudo'd.
+# don't use .bash_rc, mount happens every time bash is run.
+#  sudo mount -t vboxfs shared /mnt/shared
+# don't use fstab, error happens during boot.
+#  echo "shared /mnt/shared vboxsf uid=1000,gid=1000" | sudo tee -a /etc/fstab > /dev/null
+# Can't use simple sudo because >> doesn't get sudo'd.
 sudo mkdir /mnt/shared
-#sudo chmod -R 777 /mnt/shared
-echo "shared /mnt/shared vboxsf uid=1000,gid=1000" | sudo tee -a /etc/fstab > /dev/null
-sudo mount -a
+sudo sed -i 's/# By default this script does nothing./mount.vboxsf -w shared /mnt/shared/g'     /etc/fstab
+# reboot for effect
 
 # ################################################################################ Desktop shortcuts
 
