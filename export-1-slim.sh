@@ -45,9 +45,9 @@ sudo aptitude remove --purge ubuntu-standard \
 sudo aptitude remove --purge xsane sane-utils xsane-common                                
 #  .5mb - understand raw camera images
 sudo aptitude remove --purge dcraw
-#   ?mb - tomboy and f-spot
+#  20mb - tomboy and f-spot
 sudo aptitude remove --purge f-spot tomboy
-#  ?mb - mono .net layer
+#  26mb - mono .net layer
 sudo aptitude remove --purge libart2.0-cil libflickrnet2.2-cil libgconf2.0-cil libglade2.0-cil libglib2.0-cil \
   libgmime2.4-cil libgnome-keyring1.0-cil libgnome-vfs2.0-cil libgnome2.24-cil libgnomepanel2.24-cil libgtk2.0-cil \
   liblaunchpad-integration1.0-cil libmono-addins-gui0.2-cil libmono-addins0.2-cil libmono-cairo2.0-cil \
