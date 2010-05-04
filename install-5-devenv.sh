@@ -84,6 +84,7 @@ alias l='ls -CF'
 # throw window users a bone
 alias dir='dir --color=auto'
 alias copy='cp'
+alias del='rm'
 END
 
 # ################################################################################ Shared folder
@@ -93,7 +94,7 @@ END
 # don't use ~/ in fstab.  Can't use simple sudo because >> doesn't get sudo'd.
 sudo mkdir /mnt/shared
 sudo chmod -R 777 /mnt/shared
-echo "shared /mnt/shared vboxsf" | sudo tee -a /etc/fstab > /dev/null
+echo "shared /mnt/shared vboxsf uid=1000,gid=1000" | sudo tee -a /etc/fstab > /dev/null
 sudo mount -a
 
 # ################################################################################ Desktop shortcuts
@@ -107,15 +108,25 @@ Name=README
 Icon=/usr/share/pixmaps/firefox.png
 END
 
-cat > ~/Desktop/CommandLine.desktop <<END
+cat > ~/Desktop/gnome-terminal.desktop <<END
 #!/usr/bin/env xdg-open
 [Desktop Entry]
+Name=Terminal
+Comment=Use the command line
+TryExec=gnome-terminal
+Exec=gnome-terminal
+Icon=utilities-terminal
 Type=Application
-Terminal=false
-Exec=bash
-Name=Command Line
-Comment=aka Terminal/Dos/shell
-Icon=bash
+X-GNOME-DocPath=gnome-terminal/index.html
+X-GNOME-Bugzilla-Bugzilla=GNOME
+X-GNOME-Bugzilla-Product=gnome-terminal
+X-GNOME-Bugzilla-Component=BugBuddyBugs
+X-GNOME-Bugzilla-Version=2.29.6
+Categories=GNOME;GTK;Utility;TerminalEmulator;
+StartupNotify=true
+OnlyShowIn=GNOME;
+X-Ubuntu-Gettext-Domain=gnome-terminal
+
 END
 chmod 755 ~/Desktop/CommandLine.desktop
 
