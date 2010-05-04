@@ -12,8 +12,8 @@ bash ./netbeans.sh
 rm netbeans.sh
 cd ~
 
-# install graphics editors - Nice idea, but weights about 200mb
-#sudo aptitude -y install inkscape gimp
+# install graphics editors - weights about 120mb
+sudo aptitude -y install gimp
 
 # install graphical version control - weighs about 70mb
 sudo add-apt-repository ppa:rabbitvcs/ppa && sudo aptitude update

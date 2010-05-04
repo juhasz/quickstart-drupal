@@ -19,8 +19,6 @@ sudo aptitude remove --purge gnome-orca gnome-mag brltty brltty-x11 onboard
 sudo aptitude remove --purge xscreensaver-data xscreensaver-gl screensaver-default-images gnome-screensaver ubuntu-desktop
 #  21mb - music player cd creator
 sudo aptitude remove --purge rhythmbox brasero wodim libbrasero-media0 cdparanoia rhythmbox-plugins rhythmbox-ubuntuone-music-store rhythmbox-plugin-cdrecorder
-#   0mb - help files  FIXME
-sudo aptitude remove --purge gimp-help-common gimp-help-en                                
 # 277mb - user guide
 sudo aptitude remove --purge gnome-user-guide gnome-user-guide-en ubuntu-docs             
 #   7mb - bluetooth
@@ -47,9 +45,9 @@ sudo aptitude remove --purge ubuntu-standard \
 sudo aptitude remove --purge xsane sane-utils xsane-common                                
 #  .5mb - understand raw camera images
 sudo aptitude remove --purge dcraw
-#   ?mb - tomboy and f-spot  FIXME
+#   ?mb - tomboy and f-spot
 sudo aptitude remove --purge f-spot tomboy
-#  ?mb - mono .net layer FIXME
+#  ?mb - mono .net layer
 sudo aptitude remove --purge libart2.0-cil libflickrnet2.2-cil libgconf2.0-cil libglade2.0-cil libglib2.0-cil \
   libgmime2.4-cil libgnome-keyring1.0-cil libgnome-vfs2.0-cil libgnome2.24-cil libgnomepanel2.24-cil libgtk2.0-cil \
   liblaunchpad-integration1.0-cil libmono-addins-gui0.2-cil libmono-addins0.2-cil libmono-cairo2.0-cil \
@@ -140,7 +138,7 @@ sudo rm /var/lib/apt/lists/partial
 #Ending size
 df -h -T > size_end.txt
 
-#2.2gb -> 1.1gb
+#3.0gb -> 2.2gb
 
 # to put it all back (written and untested in 9.04):
 #sudo aptitude install ubuntu-desktop ubuntu-standard 
