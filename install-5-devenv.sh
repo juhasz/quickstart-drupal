@@ -92,11 +92,13 @@ END
 # setup shared folders between virtualbox host and virtualbox guest
 # don't use .bash_rc, mount happens every time bash is run.
 #  sudo mount -t vboxfs shared /mnt/shared
-# don't use fstab, error happens during boot.
+# don't use fstab, error happens during boot.  Could try noauto?
 #  echo "shared /mnt/shared vboxsf uid=1000,gid=1000" | sudo tee -a /etc/fstab > /dev/null
 # Can't use simple sudo because >> doesn't get sudo'd.
 sudo mkdir /mnt/shared
-sudo sed -i 's/# By default this script does nothing./mount.vboxsf -w shared /mnt/shared/g'     /etc/fstab
+sudo chmod 777 -R /mnt/shared
+sudo chown 1000:1000 -R /mnt/shared
+sudo sed -i 's/# By default this script does nothing./mount.vboxsf -w -o rw,uid=1000,gid=1000,dmode=666,fmode=777 shared \/mnt\/shared/g'     /etc/fstab
 # reboot for effect
 
 # ################################################################################ Desktop shortcuts
