@@ -95,7 +95,20 @@ END
 # don't use fstab, error happens during boot.  Could try noauto?
 #  echo "shared /mnt/shared vboxsf uid=1000,gid=1000" | sudo tee -a /etc/fstab > /dev/null
 # Can't use simple sudo because >> doesn't get sudo'd.
+# Finally got this to work with rc.local.  Note difference between shared and vbox-shared.  That's important.
 sudo mkdir /mnt/vbox-shared
+sudo chmod 777 /mnt/vbox-shared
+cat > /mnt/vbox-shared/readme.txt <<END
+If you are seeing this file, then virtualbox's shared folders are not configured correctly.
+
+1) Power down the Quickstart virtual machine.
+2) On the host computer, start the Virtualbox management UI.
+3) right-click Quickstart -> settings -> shared folders -> click the folder with the green plus on the right
+4) Set the "Folder Path" to a path on the host computer.  Give full read/write access.
+5) Set the "Folder Name" to "shared".  no caps.  no vbox-
+6) Ok -> Ok -> start Quickstart vm and this file should disappear.  
+7) Test by moving a file in the host computer into the host shared folder.
+END
 sudo sed -i 's/# By default this script does nothing./mount -t vboxsf -o uid=1000,gid=1000 shared \/mnt\/vbox-shared/g'     /etc/rc.local
 # reboot for effect
 
