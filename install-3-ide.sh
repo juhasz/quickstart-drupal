@@ -5,11 +5,11 @@ sudo aptitude -y install default-jre
 
 # download and install netbeans
 cd ~/Desktop
-wget "http://services.netbeans.org/bouncer/index.php?product=netbeans-6.8-ml-php&os=linux"
-chmod +x ./netbeans-6.8-ml-php-linux.sh
+wget -O netbeans.sh "http://services.netbeans.org/bouncer/index.php?product=netbeans-6.8-ml-php&os=linux"
+chmod +x ./netbeans.sh
 # MESSAGE: Accept defaults
-bash ./netbeans-6.8-ml-php-linux.sh
-rm netbeans-6.8-ml-php-linux.sh
+bash ./netbeans.sh
+rm netbeans.sh
 cd ~
 
 # install graphics editors
