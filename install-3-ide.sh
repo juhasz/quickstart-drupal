@@ -1,13 +1,15 @@
 #!/bin/bash
 
+NETBEANS_URL="http://services.netbeans.org/bouncer/index.php?product=netbeans-6.8-ml-php&os=linux"
+
 # install java
 sudo aptitude -y install default-jre
 
 # download and install netbeans
 cd ~/Desktop
-wget -O netbeans.sh "http://services.netbeans.org/bouncer/index.php?product=netbeans-6.8-ml-php&os=linux"
+wget -O netbeans.sh $NETBEANS_URL
 chmod +x ./netbeans.sh
-# MESSAGE: Accept defaults
+zenity --info --text="The Netbeans PHP installer will start now.  Accept the defaults.  Uncheck 'register' on last screen."
 bash ./netbeans.sh
 rm netbeans.sh
 cd ~

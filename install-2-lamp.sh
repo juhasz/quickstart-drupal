@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install LAMP
-# MESSAGE: set password to drupaldev, select apache, yes to phpmyadmin, set password to drupaldev
+zenity --info --text="Set all passwords to 'quickstart'.  Select 'apache' to configure.  Click 'yes' to phpmyadmin."
 sudo aptitude -y install apache2 mysql-server phpmyadmin php5 php5-gd php-pear # basic lamp server with phpmyadmin
 sudo aptitude -y install php5-mysql php5-pgsql php5-sqlite # database support
 sudo aptitude -y install apache2-threaded-dev php5-dev # apc and xdebug
@@ -27,16 +27,8 @@ sudo sed -i 's/# /\/\/ /g'            /etc/php5/cli/conf.d/mcrypt.ini
 sudo sed -i 's/#log_slow_queries/log_slow_queries/g'          /etc/mysql/my.conf
 sudo sed -i 's/#long_query_time/long_query_time/g'            /etc/mysql/my.conf
 
-#log_slow_queries -> log_slow_queries in my.cnf  in file /var/log/mysql/mysql-slow.log
-#long_query_time -> long_query_time
-
-
 #install APC (op-code cache - improves performance)
 sudo aptitude -y install php-apc
-# FIXME: Below may be replaced by line above.
-#MESSAGE: Accept defaults
-#sudo pecl install apc-beta # using beta fixes duplicate 'static' compile error
-#echo "extension=apc.so" | sudo tee -a /etc/php5/apache2/conf.d/apc.ini
 
 #install xdebug
 sudo aptitude -y install php5-xdebug

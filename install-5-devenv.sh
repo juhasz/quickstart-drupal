@@ -111,6 +111,8 @@ If you are seeing this file, then virtualbox's shared folders are not configured
 END
 sudo sed -i 's/# By default this script does nothing./mount -t vboxsf -o uid=1000,gid=1000 shared \/mnt\/vbox-shared/g'     /etc/rc.local
 # reboot for effect
+zenity --info --text="For shared folders to work, they must be configured in host OS, and guest OS rebooted."
+
 
 # ################################################################################ Desktop shortcuts
 
