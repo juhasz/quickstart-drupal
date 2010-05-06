@@ -2,10 +2,30 @@
 
 # install LAMP
 zenity --info --text="Set all passwords to 'quickstart'.  Select 'apache' to configure.  Click 'yes' to phpmyadmin."
-sudo aptitude -y install apache2 mysql-server phpmyadmin php5 php5-gd php-pear # basic lamp server with phpmyadmin
-sudo aptitude -y install php5-mysql php5-pgsql php5-sqlite # database support
-sudo aptitude -y install apache2-threaded-dev php5-dev # apc and xdebug
-sudo aptitude -y install php5-xsl php5-curl # symfony/propel
+
+# php 5.3 doesn't work for Drupal and Aegir.  Downgrade to 5.2 from Karmic (Ubuntu 9.10).
+#   set default release
+echo 'APT::Default-Release "hardy";' | sudo tee -a /etc/apt/apt.conf.d/01ubuntu > /dev/null
+#   enable Karmic repositories
+echo "# needed sources for php5.2:
+deb http://archive.ubuntu.com/ubuntu      karmic          main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu  karmic          main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu      karmic-updates  main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu  karmic-updates  main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu     karmic-security main restricted universe multiverse
+deb-src http://security.ubuntu.com/ubuntu karmic-security main restricted universe multiverse
+" | sudo tee -a /etc/apt/sources.list.d/karmic.list > /dev/null
+
+#   "Pin" PHP to karmic repositories
+PHP_PACKAGES="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql libapache2-mod-php5 php-pear php5-xdebug php-apc"
+echo '' | sudo tee -a /etc/apt/preferences.d/php5  # blank file
+for i in $PHP_PACKAGES ; do echo "Package: $i
+Pin: release a=karmic
+Pin-Priority: 991
+" | sudo tee -a /etc/apt/preferences.d/php5 > /dev/null; done
+
+sudo aptitude -y install apache2 apache2-threaded-dev mysql-server
+sudo aptitude -y -t karmic install $PHP_PACKAGES
 
 # configure Apache - enable rewrite, disable unneeded
 sudo a2enmod rewrite
