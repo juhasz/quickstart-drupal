@@ -23,6 +23,7 @@ for i in $PHP_PACKAGES ; do echo "Package: $i
 Pin: release a=karmic
 Pin-Priority: 991
 " | sudo tee -a /etc/apt/preferences.d/php5 > /dev/null; done
+sudo aptitude update
 
 sudo aptitude -y install apache2 apache2-threaded-dev mysql-server
 sudo aptitude -y -t karmic install $PHP_PACKAGES
