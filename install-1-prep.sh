@@ -28,7 +28,7 @@ echo ''>/etc/apt/preferences.d/php5.2  # blank file
 for i in $PHP_PACKAGES ; do echo "Package: $i
 Pin: release a=karmic
 Pin-Priority: 991
-">>/etc/apt/preferences.d/php5.2; done
+" | sudo tee -a /etc/apt/preferences.d/php5.2; done
 
 # update local cache of repository info
 sudo aptitude update
