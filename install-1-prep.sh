@@ -23,7 +23,7 @@ sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu/ karmic-security 
 sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu/ karmic-security universe"
 sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu/ karmic-security multiverse"
 #   "Pin" PHP to karmic repositories
-PHP_PACKAGES=php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql libapache2-mod-php5 php-pear php5-xdebug php-apc
+PHP_PACKAGES="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql libapache2-mod-php5 php-pear php5-xdebug php-apc"
 echo ''>/etc/apt/preferences.d/php5.2  # blank file
 for i in $PHP_PACKAGES ; do echo "Package: $i
 Pin: release a=karmic
