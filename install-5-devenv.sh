@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd ~
+sudo adduser quickstart www-data    #make quickstart a user of group www-data
 
 # ################################################################################ Drupal sites and Drush
 
@@ -96,6 +97,8 @@ END
 #  echo "shared /mnt/shared vboxsf uid=1000,gid=1000" | sudo tee -a /etc/fstab > /dev/null
 # Can't use simple sudo because >> doesn't get sudo'd.
 # Finally got this to work with rc.local.  Note difference between shared and vbox-shared.  That's important.
+sudo sed -i 's/# By default this script does nothing./mount -t vboxsf -o uid=1000,gid=1000 shared \/mnt\/vbox-shared/g'     /etc/rc.local
+# reboot for effect
 sudo mkdir /mnt/vbox-shared
 sudo chmod 777 /mnt/vbox-shared
 cat > /mnt/vbox-shared/readme.txt <<END
@@ -109,8 +112,6 @@ If you are seeing this file, then virtualbox's shared folders are not configured
 6) Ok -> Ok -> start Quickstart vm and this file should disappear.  
 7) Test by moving a file in the host computer into the host shared folder.
 END
-sudo sed -i 's/# By default this script does nothing./mount -t vboxsf -o uid=1000,gid=1000 shared \/mnt\/vbox-shared/g'     /etc/rc.local
-# reboot for effect
 zenity --info --text="For shared folders to work, they must be configured in host OS, and guest OS rebooted."
 
 

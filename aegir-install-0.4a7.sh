@@ -56,11 +56,14 @@ sudo /etc/init.d/apache2 restart
 
 # ############################################# END INSTALL.txt instructions
 
+# fix localhost readme file
+sudo cp /home/quickstart/Desktop/websites/config/apache-sites-enabled/000-default /var/aegir/config/vhost.d/
+
 # make run as aegir shortcut
 rm install.sh.txt
 cat > ./aegir <<END
 #!/bin/bash
-sudo su -s /bin/sh aegir -c "$*"
+sudo su -s /bin/bash aegir
 END
 chmod 755 ./aegir
 sudo mv ./aegir /var/aegir/aegir 
@@ -70,6 +73,7 @@ sudo ln -s /var/aegir/aegir /usr/local/bin/aegir
 sudo chmod u+x /var/aegir/drush/drush
 sudo ln -s /var/aegir/drush/drush /usr/local/bin/drush
 
+# show some install tips
 cat > aegir_manual_config.txt <<END
 In the browser window, aegir is completing the installation wizard.  Follow these steps:
 
@@ -95,7 +99,11 @@ In the browser window, aegir is completing the installation wizard.  Follow thes
   If it's green, you're good to go.
   Remember it's alpha, I got alot of warnings which had to do with PHP 5.3 compatibility...
 END
+gedit aegir_manual_config.txt 
 
-# continue install
+# change files so www-data group (apache and quickstart) can edit
+sudo chown -R aegir:www-data /var/aegir
+
+# start web installer
 firefox http://$AEGIR_LOCAL_DOMAIN &
 
