@@ -17,7 +17,7 @@ deb-src http://security.ubuntu.com/ubuntu karmic-security main restricted univer
 " | sudo tee -a /etc/apt/sources.list.d/karmic.list > /dev/null
 
 #   "Pin" PHP to karmic repositories
-PHP_PACKAGES="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql libapache2-mod-php5 php-pear php5-xdebug php-apc"
+PHP_PACKAGES="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql libapache2-mod-php5 php-pear php5-xdebug php-apc phpmyadmin libapache2-mod-php5"
 echo '' | sudo tee -a /etc/apt/preferences.d/php5  # blank file
 for i in $PHP_PACKAGES ; do echo "Package: $i
 Pin: release a=karmic
@@ -26,7 +26,6 @@ Pin-Priority: 991
 sudo aptitude update
 sudo aptitude -y install apache2 apache2-threaded-dev mysql-server 
 sudo aptitude -y -t karmic install $PHP_PACKAGES
-sudo aptitude -y install libapache2-mod-php5
 
 # configure Apache - enable rewrite, disable unneeded
 sudo a2enmod rewrite
@@ -53,12 +52,11 @@ sudo aptitude -y install php-apc
 
 #install xdebug
 sudo aptitude -y install php5-xdebug
-sudo echo >> /etc/php5/conf.d/xdebug.ini <<END
-xdebug.remote_enable=on
+echo "xdebug.remote_enable=on
 xdebug.remote_handler=dbgp
 xdebug.remote_host=localhost
 xdebug.remote_port=9000
-END
+" | sudo tee -a /etc/php5/conf.d/xdebug.ini
 
 # clean up aptitude
 sudo aptitude clean
