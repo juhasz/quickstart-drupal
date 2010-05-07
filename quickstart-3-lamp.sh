@@ -35,7 +35,7 @@ Pin: version 1.6.5*
 Pin-Priority: 1001
 " | sudo tee -a /etc/apt/preferences.d/php-karmic > /dev/null
 sudo apt-get update
-sudo apt-get -y install apache2 apache2-threaded-dev mysql-server phpmyadmin $PHP_PHP $PIN_OTHER
+sudo apt-get -y install apache2 apache2-threaded-dev mysql-server phpmyadmin $PIN_PHP $PIN_OTHER
 # aptitude hold php.  Aptitude doesn't listen to pinning of apt.  This should prevent 'aptitude safe-upgrade' overwriting php 5.2 with 5.3
 sudo aptitude update
 sudo aptitude hold $PIN_PHP $PIN_OTHER

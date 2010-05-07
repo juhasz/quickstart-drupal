@@ -15,7 +15,7 @@ cd ~
 bash ~/quickstart/quickstart-1-prep.sh
 bash ~/quickstart/quickstart-2-slim.sh
 bash ~/quickstart/quickstart-3-lamp.sh
-bash ~/quickstart/quickstart-4-ide.sh
+bash ~/quickstart/quickstart-4-ides.sh
 bash ~/quickstart/quickstart-5-browsers.sh
 bash ~/quickstart/quickstart-6-devenv.sh
 # Show manual config steps

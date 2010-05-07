@@ -129,15 +129,15 @@ sudo aptitude clean
 sudo apt-get clean
 # Clean up apt cache
 sudo rm /var/lib/apt/lists/*   # approx 44mb -> 12mb compressed
-sudo rm /var/lib/apt/lists/partial
+sudo rm /var/lib/apt/lists/partial/*
 
 # What's installed: look in file whats_installed.txt
 for pkg in `dpkg --list | awk '/ii/ {print $2}'`; do echo -e "`dpkg --status $pkg | grep Installed-Size | awk '{print $2}'` \t\t $pkg" >> pkgs.tmp; done; sort -rg pkgs.tmp > whats_installed.txt; rm -f pkgs.tmp;
-echo "------------  -------------------" >> whats_installed.txt
-echo "size(kb)         packagename" >> whats_installed.txt
+echo "------------  -------------------" >> ~/quickstart/whats_installed.txt
+echo "size(kb)         packagename" >> ~/quickstart/whats_installed.txt
 
 # Ending size
-df -h -T > quickstart-size-slim.txt
+df -h -T > ~/quickstart/quickstart-size-slim.txt
 
 # 3.0gb -> 2.2gb
 

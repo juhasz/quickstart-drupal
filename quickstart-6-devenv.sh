@@ -198,5 +198,5 @@ ln -s /etc/hosts                     $CONFIGS/hosts
 ln -s /etc/apache2/sites-enabled/    $CONFIGS/apache-sites-enabled
 
 cd ~
-df -h -T > quickstart-size-end.txt
+df -h -T > ~/quickstart/quickstart-size-end.txt
 

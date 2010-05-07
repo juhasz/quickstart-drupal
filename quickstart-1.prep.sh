@@ -8,5 +8,5 @@ iface eth0 inet dhcp" | sudo tee -a /etc/network/interfaces
 sudo /etc/init.d/networking restart
 
 # Starting size:
-df -h -T > quickstart-size-start.txt
+df -h -T > ~/quickstart/quickstart-size-start.txt
 
