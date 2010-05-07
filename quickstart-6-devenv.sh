@@ -1,14 +1,28 @@
 #!/bin/bash
 
 cd ~
-sudo adduser quickstart www-data    #make quickstart a user of group www-data
+
+# Make quickstart a user of group www-data
+sudo adduser quickstart www-data    
+
+
+# ################################################################################ Basic Tools
+
+# Configure repositories for git-core, etc
+sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ lucid partner"
+sudo apt-get update
+
+# Install some dev basics
+sudo apt-get -y install cvs subversion git-core bzr
+sudo apt-get -y install wget curl
+
 
 # ################################################################################ Drupal sites and Drush
 
-#create folder for websites to live in
+# Create folder for websites to live in
 mkdir ~/websites
 
-# install drush
+# Install drush
 DRUSH_FILE='drush-All-versions-3.0.tar.gz'
 wget http://ftp.drupal.org/files/projects/$DRUSH_FILE
 tar -xzf $DRUSH_FILE
@@ -16,9 +30,10 @@ chmod u+x ~/drush/drush
 sudo ln -s ~/drush/drush /usr/local/bin/drush
 rm $DRUSH_FILE
 
+
 # ################################################################################ Replace localhost/index.html
 
-# add interesting default document for localhost:
+# Add interesting default document for localhost
 sudo rm /var/www/index.html
 sudo chmod 777 /var/www
 cat > /var/www/index.php <<END
@@ -34,6 +49,7 @@ cat > /var/www/index.php <<END
         <li><a href='http://drupalmodules.com/'>DrupalModules.com</a> and <a href='http://drupal.org/project/usage'>Module Usage Statistics</a></li>
         <li><a href='http://drupal.org/project/issues?projects=3060&states=8,13,14'>Drupal Patch Queue</a> and <a href='http://drupal.org/patch/review'>Patch reviewing tips</a></li>
         <li>Configuring <a href='http://wiki.netbeans.org/HowToConfigureXDebug'>xdebug and netbeans</a></li>
+        <li><a href='http://localhost:8080/solr/admin/'>Apache Solr Admin</a></li>
       </ul>
     </td><td>
       <p>Verify phpinfo() below:</p>
@@ -51,9 +67,10 @@ cat > /var/www/index.php <<END
 END
 sudo chmod 755 /var/www
 
+
 # ################################################################################ Command line shortcuts (bash aliases)
 
-#don't sudo...
+# Don't sudo here...
 cat >> .bash_profile <<END
 #   svn_add_all [folder]            - recursive add folders unversioned files (espects svn:ignore and spaces in filenames)
 #   svn_rid_all [folder]            - recursive svn-deletes missing files (deleted by user, but not svn-deleted)
@@ -88,17 +105,12 @@ alias copy='cp'
 alias del='rm'
 END
 
+
 # ################################################################################ Shared folder
 
-# setup shared folders between virtualbox host and virtualbox guest
-# don't use .bash_rc, mount happens every time bash is run.
-#  sudo mount -t vboxfs shared /mnt/shared
-# don't use fstab, error happens during boot.  Could try noauto?
-#  echo "shared /mnt/shared vboxsf uid=1000,gid=1000" | sudo tee -a /etc/fstab > /dev/null
-# Can't use simple sudo because >> doesn't get sudo'd.
-# Finally got this to work with rc.local.  Note difference between shared and vbox-shared.  That's important.
+# Setup shared folders between virtualbox host and virtualbox guest
+# Note difference between shared and vbox-shared.  That's important.  Requires reboot
 sudo sed -i 's/# By default this script does nothing./mount -t vboxsf -o uid=1000,gid=1000 shared \/mnt\/vbox-shared/g'     /etc/rc.local
-# reboot for effect
 sudo mkdir /mnt/vbox-shared
 sudo chmod 777 /mnt/vbox-shared
 cat > /mnt/vbox-shared/readme.txt <<END
@@ -151,6 +163,7 @@ ln -s ~/websites ~/Desktop/websites
 ln -s /mnt/vbox-shared ~/Desktop/vbox-shared
 #ln -s ~/quickstart/scripts ~/Desktop/scripts
 
+
 # ################################################################################ Log Files
 
 LOGS=~/websites/logs
@@ -159,7 +172,7 @@ mkdir $LOGS
 # Apache error logs are configured in the VirtualHosts section of each website (defaults from apache2.conf)
 sudo touch /var/log/apache-error.log
 ln -s /var/log/apache2/error.log                $LOGS/apache-error.log
-# this file catches any unconfigured log info for virtualhosts
+# This file catches any unconfigured log info for virtualhosts
 sudo touch /var/log/apache2/other_vhosts_access.log
 ln -s /var/log/apache2/other_vhosts_access.log  $LOGS/apache-access.log
 # php error logs are configured in php.ini  (changed in install-2-lamp.sh)
@@ -183,4 +196,7 @@ ln -s /etc/php5/cli/php.ini          $CONFIGS/php-cli.ini
 ln -s /etc/mysql/my.cnf              $CONFIGS/mysql.cnf
 ln -s /etc/hosts                     $CONFIGS/hosts
 ln -s /etc/apache2/sites-enabled/    $CONFIGS/apache-sites-enabled
+
+cd ~
+df -h -T > quickstart-size-end.txt
 
