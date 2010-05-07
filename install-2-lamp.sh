@@ -15,7 +15,7 @@ deb-src http://security.ubuntu.com/ubuntu karmic-security main restricted univer
 " | sudo tee -a /etc/apt/sources.list.d/karmic.list > /dev/null
 
 # "Pin" PHP to karmic repositories
-PHP_PACKAGES="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql libapache2-mod-php5 php-pear"
+PHP_PACKAGES="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql libapache2-mod-php5 php-pear php5-imap"
 echo '' | sudo tee -a /etc/apt/preferences.d/php-karmic > /dev/null
 for i in $PHP_PACKAGES ; do echo "Package: $i
 Pin: version 5.2.*
