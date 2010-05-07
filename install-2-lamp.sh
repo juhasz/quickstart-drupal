@@ -3,7 +3,7 @@
 # install LAMP
 zenity --info --text="Set all passwords to 'quickstart'.  Select 'apache' to configure.  Click 'yes' to phpmyadmin."
 
-# php 5.3 doesn't work for Drupal and Aegir.  Downgrade to 5.2 from Karmic (Ubuntu 9.10).
+# php 5.3 doesn't work for Drupal and Aegir.  Downgrade to 5.2 by using LAMP packages from Karmic (Ubuntu 9.10).
 #   enable Karmic repositories
 echo "# needed sources for php5.2:
 deb http://archive.ubuntu.com/ubuntu      karmic          main restricted universe multiverse
@@ -15,15 +15,13 @@ deb-src http://security.ubuntu.com/ubuntu karmic-security main restricted univer
 " | sudo tee -a /etc/apt/sources.list.d/karmic.list > /dev/null
 
 #   "Pin" PHP to karmic repositories
-PHP_PACKAGES="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql libapache2-mod-php5 php-pear php5-xdebug php-apc phpmyadmin libapache2-mod-php5"
-echo '' | sudo tee -a /etc/apt/preferences.d/php5  # blank file
-for i in $PHP_PACKAGES ; do echo "Package: $i
+LAMP_PACKAGES="apache2 apache2-threaded-dev mysql-server php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql libapache2-mod-php5 php-pear php5-xdebug php-apc phpmyadmin libapache2-mod-php5"
+for i in $LAMP_PACKAGES ; do echo "Package: $i
 Pin: release a=karmic
-Pin-Priority: 991
-" | sudo tee -a /etc/apt/preferences.d/php5 > /dev/null; done
+Pin-Priority: 1001
+" | sudo tee -a /etc/apt/preferences.d/lamp-karmic > /dev/null; done
 sudo aptitude update
-sudo aptitude -y install apache2 apache2-threaded-dev mysql-server 
-sudo aptitude -y -t karmic install $PHP_PACKAGES
+sudo aptitude -y install $PHP_PACKAGES
 
 # configure Apache - enable rewrite, disable unneeded
 sudo a2enmod rewrite
@@ -43,7 +41,7 @@ echo "xdebug.remote_enable=on
 xdebug.remote_handler=dbgp
 xdebug.remote_host=localhost
 xdebug.remote_port=9000
-" | sudo tee -a /etc/php5/conf.d/xdebug.ini > /dev/nul
+" | sudo tee -a /etc/php5/conf.d/xdebug.ini > /dev/null
 
 # fix comment bug that will show warning on command line.
 sudo sed -i 's/# /\/\/ /g'            /etc/php5/cli/conf.d/mcrypt.ini
