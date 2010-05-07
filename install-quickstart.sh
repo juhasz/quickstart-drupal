@@ -12,12 +12,12 @@
 
 cd ~
 
-bash ~/quickstart/quickstart-1-prep.sh
-bash ~/quickstart/quickstart-2-slim.sh
-bash ~/quickstart/quickstart-3-lamp.sh
-bash ~/quickstart/quickstart-4-ides.sh
-bash ~/quickstart/quickstart-5-browsers.sh
-bash ~/quickstart/quickstart-6-devenv.sh
+bash -x ~/quickstart/quickstart-1-prep.sh
+bash -x ~/quickstart/quickstart-2-slim.sh
+bash -x ~/quickstart/quickstart-3-lamp.sh
+bash -x ~/quickstart/quickstart-4-ides.sh
+bash -x ~/quickstart/quickstart-5-browsers.sh
+bash -x ~/quickstart/quickstart-6-devenv.sh
 # Show manual config steps
 gedit ~/quickstart/quickstart-7-manualconfig.txt &
 # Show documentation on use

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Install java - ?mb
+# Install java - 100mb
 sudo apt-get -y install default-jre
 
-# Download and install netbeans - ?mb
+# Download and install netbeans - 100mb
 NETBEANS_URL="http://services.netbeans.org/bouncer/index.php?product=netbeans-6.8-ml-php&os=linux"
 sudo apt-get -y install wget
 cd ~/Desktop
@@ -14,7 +14,7 @@ bash ./netbeans.sh
 rm netbeans.sh
 cd ~
 
-# Download and install eclipse - About 512 mb
+# Download and install eclipse - About 420 mb
 sudo add-apt-repository ppa:yogarine/eclipse/ubuntu && sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive aptitude -yq install eclipse eclipse-pdt eclipse-plugin-cvs eclipse-subclipse
 

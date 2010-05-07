@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Install LAMP
-zenity --info --text="Set all passwords to 'quickstart'.  Select 'apache' to configure.  Click 'yes' to phpmyadmin."
 
 PIN_PHP="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql libapache2-mod-php5 php-pear php5-imap"
 PIN_OTHER="php5-xdebug php-apc libapache2-svn"
@@ -35,6 +34,7 @@ Pin: version 1.6.5*
 Pin-Priority: 1001
 " | sudo tee -a /etc/apt/preferences.d/php-karmic > /dev/null
 sudo apt-get update
+zenity --info --text="Set all passwords to 'quickstart'.  Select 'apache' to configure.  Click 'yes' to phpmyadmin."
 sudo apt-get -y install apache2 apache2-threaded-dev mysql-server phpmyadmin $PIN_PHP $PIN_OTHER
 # aptitude hold php.  Aptitude doesn't listen to pinning of apt.  This should prevent 'aptitude safe-upgrade' overwriting php 5.2 with 5.3
 sudo aptitude update
@@ -75,10 +75,13 @@ xdebug.remote_port=9000
 sudo sed -i 's/# /\/\/ /g'            /etc/php5/cli/conf.d/mcrypt.ini
 # Install upload progress (warning in D7)
 sudo pecl -q install uploadprogress 
-echo "extension=apc.so" | sudo tee -a /etc/php5/apache2/conf.d/apc.ini
+
+
+# ###### Apache SOLR
+sudo apt-get -y install solr-common solr-tomcat
 
 
 # ###### Restart web server
 sudo service mysql restart
 sudo service apache2 graceful
-
+sudo 
