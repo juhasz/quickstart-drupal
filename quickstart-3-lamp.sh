@@ -75,13 +75,14 @@ xdebug.remote_port=9000
 sudo sed -i 's/# /\/\/ /g'            /etc/php5/cli/conf.d/mcrypt.ini
 # Install upload progress (warning in D7)
 sudo pecl -q install uploadprogress 
+echo "extension=uploadprogress.so" | sudo tee /etc/php5/apache2/conf.d/uploadprogress.ini > /dev/null
 
 
-# ###### Apache SOLR
+# ###### Apache SOLR - 183mb
 sudo apt-get -y install solr-common solr-tomcat
 
 
 # ###### Restart web server
 sudo service mysql restart
 sudo service apache2 graceful
-sudo 
+

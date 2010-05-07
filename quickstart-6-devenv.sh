@@ -54,9 +54,10 @@ cat > /var/www/index.php <<END
     </td><td>
       <p>Verify phpinfo() below:</p>
       <ul>
-        <li>xdebug, apc are On</li>
+        <li>xdebug, apc, imap, uploadprogress are On</li>
         <li>magic_quotes_gpc, short_open_tag are Off</li>
         <li>max_execution_time = 300s</li>
+        <li>upload_max_filesize size is 10m</li>
         <li>memory_limit is 64m</li>
       </ul>
     </td>

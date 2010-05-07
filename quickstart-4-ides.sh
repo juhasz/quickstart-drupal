@@ -14,14 +14,14 @@ bash ./netbeans.sh
 rm netbeans.sh
 cd ~
 
-# Download and install eclipse - About 420 mb
+# Download and install eclipse - About 341 mb
 sudo add-apt-repository ppa:yogarine/eclipse/ubuntu && sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive aptitude -yq install eclipse eclipse-pdt eclipse-plugin-cvs eclipse-subclipse
 
-# Install graphics editors - weights about 120mb
+# Install graphics editors - weights about 54mb
 sudo apt-get -y install gimp
 
-# Install graphical version control - weighs about 70mb
+# Install graphical version control - weighs about 83mb
 sudo add-apt-repository ppa:rabbitvcs/ppa && sudo apt-get update
 sudo apt-get -y install rabbitvcs-nautilus
 sudo killall nautilus

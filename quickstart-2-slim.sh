@@ -115,14 +115,16 @@ sudo aptitude remove --purge eog #graphic viewer
 
 # Finish up
 sudo aptitude -y safe-upgrade  # upgrade whats left
+# 30mb
+sudo apt-get autoremove
 # 104mb - Remove orphan packages - do a couple times
-sudo deborphan	--guess-all # display them to user
+sudo deborphan --guess-all # display them to user
 sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge   
-sudo deborphan	--guess-all # display them to user
+sudo deborphan --guess-all # display them to user
 sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge   
-sudo deborphan	--guess-all # display them to user
+sudo deborphan --guess-all # display them to user
 sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge   
-sudo deborphan	--guess-all # display them to user
+sudo deborphan --guess-all # display them to user
 sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge   
 # Clean out downloaded packages
 sudo aptitude clean
