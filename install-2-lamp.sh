@@ -24,9 +24,9 @@ Pin: release a=karmic
 Pin-Priority: 991
 " | sudo tee -a /etc/apt/preferences.d/php5 > /dev/null; done
 sudo aptitude update
-
-sudo aptitude -y install apache2 apache2-threaded-dev mysql-server
+sudo aptitude -y install apache2 apache2-threaded-dev mysql-server 
 sudo aptitude -y -t karmic install $PHP_PACKAGES
+sudo aptitude -y install libapache2-mod-php5
 
 # configure Apache - enable rewrite, disable unneeded
 sudo a2enmod rewrite
