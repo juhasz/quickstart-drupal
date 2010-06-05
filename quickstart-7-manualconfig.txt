@@ -4,14 +4,17 @@ Here are some manual tweaks I've done to bittorrent image that you may find usef
   - System -> Preferences -> uncheck "Activate...", uncheck "Lock..."
 
 2) Auto login.  Host computer takes care of security.
-  - System -> Administration -> Login Screen -> Unlock -> Uncheck "Play...", Select "Log in as..."
+  - System -> Administration -> Login Screen -> Unlock -> Uncheck "Play...", Select "Log in as...", uncheck "Allow"
 
 3) Install security updates automatically.  No sense in skipping this, or doing it manually.
-  - System -> Administration -> Software Sources -> "Updates" Tab -> Select "Install security..."
+  - System -> Administration -> Software Sources
+     -> "Updates" Tab -> Select "Install security...", "Show new distribution..." -> "Normal releases"
+     -> "Statistics" Tab -> check "Submit statistical information"
 
-4) Added links to top toolbar:
-  - Terminal (command line prompt).  It's the black box with a >
-  - Chrome browser
+4) Added links to top toolbar (right-click -> Add to Panel...):
+  - App Launcher -> Accessories -> Terminal (command line prompt).  It's the black box with a >
+  - App Launcher -> Accessories -> Gedit (gui text editor)
+  - App Launcher -> Accessories -> Chrome browser
   - System Monitor
 
 5) Firefox 3.6 removed the ability to command-line install extensions.  
@@ -31,3 +34,17 @@ Here are some manual tweaks I've done to bittorrent image that you may find usef
   What about?
       - FirePHP (php log messages to firebug) - http://www.firephp.org/  ?
       - Drupal for Firebug?
+
+6) Configure Gedit
+  - Start Gedit (click paper/pencil on top toolbar)
+  - Edit -> Preferences 
+    - View Tab:
+      - uncheck "Enable text wrapping"
+      - check "Display line numbers"
+      - check "Highlight matching bracket"
+    - Editor Tab:
+      - Tab width -> 2
+      - Check "Insert spaces instead of tabs"
+      - Check "Enable automatic indentation"
+      - Check "Autosave every 10 minutes"
+     

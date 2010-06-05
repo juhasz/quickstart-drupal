@@ -5,7 +5,6 @@ cd ~
 # Make quickstart a user of group www-data
 sudo adduser quickstart www-data    
 
-
 # ################################################################################ Basic Tools
 
 # Configure repositories for git-core, etc
@@ -30,6 +29,14 @@ chmod u+x ~/drush/drush
 sudo ln -s ~/drush/drush /usr/local/bin/drush
 rm $DRUSH_FILE
 
+# Install drush make and drush provision
+DRUSH_MAKE_VERSION=6.x-2.0-beta6
+AEGIR_VERSION=0.4-alpha7
+drush dl drush_make-$DRUSH_MAKE_VERSION --destination=~/.drush
+git clone git://git.aegirproject.org/provision ~/.drush/provision
+
+# Install drush quickstart
+ln -s ~/quickstart/drush ~/.drush/quickstart
 
 # ################################################################################ Replace localhost/index.html
 
@@ -100,6 +107,9 @@ alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
 
+# search in files and directories
+search () { grep -rHinC0 "$*" .; }
+
 # throw window users a bone
 alias dir='dir --color=auto'
 alias copy='cp'
@@ -162,8 +172,6 @@ chmod 755 ~/Desktop/gnome-terminal.desktop
 
 ln -s ~/websites ~/Desktop/websites
 ln -s /mnt/vbox-shared ~/Desktop/vbox-shared
-#ln -s ~/quickstart/scripts ~/Desktop/scripts
-
 
 # ################################################################################ Log Files
 
@@ -187,17 +195,28 @@ sudo touch /var/log/mysql/mysql-slow.log        $LOGS/mysql-slow.log
 
 # ################################################################################ Config Files
 
+# Make quickstart a user of group root to edit config files
+sudo adduser quickstart root    
 CONFIGS=~/websites/config
 mkdir $CONFIGS
+sudo chmod -R g+w /etc/apache2
 ln -s /etc/apache2/apache2.conf      $CONFIGS/apache2.conf
-ln -s /etc/apache2/apache2.conf      $CONFIGS/httpd.conf
-ln -s /etc/apache2/apache2.conf      $CONFIGS/ports.conf
+ln -s /etc/apache2/httpd.conf        $CONFIGS/httpd.conf
+ln -s /etc/apache2/ports.conf        $CONFIGS/ports.conf
+ln -s /etc/apache2/sites-enabled/    $CONFIGS/apache-sites-enabled
+sudo chmod -R g+w /etc/php5
 ln -s /etc/php5/apache2/php.ini      $CONFIGS/php-apache.ini
 ln -s /etc/php5/cli/php.ini          $CONFIGS/php-cli.ini
+sudo chmod -R g+w /etc/mysql
 ln -s /etc/mysql/my.cnf              $CONFIGS/mysql.cnf
+sudo chmod g+w /etc/hosts
 ln -s /etc/hosts                     $CONFIGS/hosts
-ln -s /etc/apache2/sites-enabled/    $CONFIGS/apache-sites-enabled
 
 cd ~
 df -h -T > ~/quickstart/quickstart-size-end.txt
 
+
+# ################################################################################ Config Files
+
+# no sudo needed to restart apache
+echo 'quickstart ALL=NOPASSWD: /usr/sbin/apache2ctl' | sudo tee -a /etc/sudoers > /dev/null
