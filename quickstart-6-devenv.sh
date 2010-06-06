@@ -30,9 +30,7 @@ sudo ln -s ~/drush/drush /usr/local/bin/drush
 rm $DRUSH_FILE
 
 # Install drush make and drush provision
-DRUSH_MAKE_VERSION=6.x-2.0-beta6
-AEGIR_VERSION=0.4-alpha7
-drush dl drush_make-$DRUSH_MAKE_VERSION --destination=~/.drush
+drush dl drush_make --destination=/home/quickstart/.drush
 git clone git://git.aegirproject.org/provision ~/.drush/provision
 
 # Install drush quickstart

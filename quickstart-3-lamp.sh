@@ -48,6 +48,34 @@ sudo a2dismod cgi
 sudo a2dismod autoindex
 # Enable SSL
 sudo ln /etc/apache2/sites-available/default-ssl /etc/apache2/sites-enabled/default-ssl
+# Fix ssl for easier virtual hosting.
+echo "NameVirtualHost *:80
+Listen 80
+<IfModule mod_ssl.c>
+    NameVirtualHost *:443
+    Listen 443
+</IfModule>
+" | sudo tee /etc/apache2/ports.conf
+echo "<IfModule mod_ssl.c>
+<VirtualHost *:443>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www
+  <Directory />
+    Options FollowSymLinks
+    AllowOverride None
+  </Directory>
+  <Directory /var/www/>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride None
+    Order allow,deny
+    allow from all
+  </Directory>
+  SSLEngine on
+  SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
+  SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+</VirtualHost>
+</IfModule>
+" | sudo tee /etc/apache2/sites-enabled/default-ssl
 
 
 # ###### MYSQL
@@ -62,7 +90,8 @@ sudo sed -i 's/short_open_tag = On/short_open_tag = Off/g'         /etc/php5/apa
 sudo sed -i 's/max_execution_time = 30/max_execution_time = 300/g' /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
 sudo sed -i 's/memory_limit = 16M/memory_limit = 64M/g'            /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
 sudo sed -i 's/memory_limit = 32M/memory_limit = 64M/g'            /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
-sudo sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 10M/g'                 /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
+sudo sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 50M/g'                 /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
+sudo sed -i 's/post_max_size = 8M/post_max_size = 50M/g'                             /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
 sudo sed -i 's/;error_log = filename/error_log = \/var\/log\/php-error.log/g'        /etc/php5/apache2/php.ini /etc/php5/cli/php.ini # php 5.2
 sudo sed -i 's/;error_log = php_errors.log/error_log = \/var\/log\/php-error.log/g'  /etc/php5/apache2/php.ini /etc/php5/cli/php.ini # php 5.3
 # Configure xdebug
