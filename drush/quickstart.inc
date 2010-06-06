@@ -58,7 +58,7 @@ define('APACHE_TEMPLATE', "
   DocumentRoot #CODEPATH#
   <Directory #CODEPATH#>
     Options Indexes FollowSymLinks MultiViews
-    AllowOverride None
+    AllowOverride All
     Order allow,deny
     allow from all
   </Directory>
@@ -70,7 +70,7 @@ define('APACHE_TEMPLATE', "
     DocumentRoot #CODEPATH#
     <Directory #CODEPATH#>
       Options Indexes FollowSymLinks MultiViews
-      AllowOverride None
+      AllowOverride All
       Order allow,deny
       allow from all
     </Directory>
@@ -167,6 +167,8 @@ function quickstart_create_code($domain, $params) {
   }
 
   drush_backend_invoke("make $makefile $codepath");
+  quickstart_shell_exec("chown quickstart:www-data -R $codepath");
+  quickstart_shell_exec("chmod g+w -R $codepath");
 }
 function quickstart_destroy_code($domain, $params) {
   $codepath = $params['codepath'];
@@ -190,11 +192,20 @@ function quickstart_status_code($domain, $params) {
 function quickstart_create_install($domain, $params) {
   $profile = $params['profile'];
   $database = str_replace('.','_',$domain);
-  $dbuser = $params['dbuser'];
-  $dbpassword = $params['dbpassword'];
   $codepath = $params['codepath'];
+  
+  $str=implode("\n",file("$codepath/sites/default/default.settings.php"));
+  $fp=fopen("$codepath/sites/default/settings.php",'w');
+//  $str=str_replace('mysql://username:password@localhost/databasename',"mysql://$database:$database@localhost/$database",$str);
+  fwrite($fp,$str,strlen($str));
 
-  drush_backend_invoke("provision-install $domain --profile=$profile --master_db_user=$dbuser --master_db_passwd=$dbpassword --db_type=mysql --db_host=localhost --root=$codepath");
+  quickstart_shell_exec("chown quickstart:www-data -R $codepath");
+  quickstart_shell_exec("chmod g+w -R $codepath");
+
+  quickstart_shell_exec("firefox http://$domain");
+
+  // Provision has it's own plan that is incompatible with quickstart.  D7 includes it's own command line installer.
+  //drush_backend_invoke("provision-install $domain --profile=$profile --master_db_user=$dbuser --master_db_passwd=$dbpassword --db_type=mysql --db_host=localhost --root=$codepath");
 }
 function quickstart_destroy_install($domain, $params) {
   // drop and create database and user.

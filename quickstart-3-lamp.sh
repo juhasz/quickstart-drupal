@@ -40,22 +40,33 @@ sudo apt-get -y install apache2 apache2-threaded-dev mysql-server phpmyadmin $PI
 sudo aptitude update
 sudo aptitude hold $PIN_PHP $PIN_OTHER
 
+zenity --info --text="Choose 'internet' configuration"
+sudo apt-get -y install postfix
 
 # ###### APACHE
 sudo a2enmod ssl
 sudo a2enmod rewrite
 sudo a2dismod cgi
 sudo a2dismod autoindex
-# Enable SSL
+# configure default site
+echo "<VirtualHost *:80>
+	DocumentRoot /var/www
+	<Directory /var/www/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	</Directory>
+</VirtualHost>" | sudo tee /etc/apache2/sites-enabled/000-default
+# Default ssl site
 sudo ln /etc/apache2/sites-available/default-ssl /etc/apache2/sites-enabled/default-ssl
-# Fix ssl for easier virtual hosting.
+# Fix ssl for easier virtual hosting
 echo "NameVirtualHost *:80
 Listen 80
 <IfModule mod_ssl.c>
     NameVirtualHost *:443
     Listen 443
-</IfModule>
-" | sudo tee /etc/apache2/ports.conf
+</IfModule>" | sudo tee /etc/apache2/ports.conf
 echo "<IfModule mod_ssl.c>
 <VirtualHost *:443>
   ServerAdmin webmaster@localhost
@@ -74,8 +85,7 @@ echo "<IfModule mod_ssl.c>
   SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
   SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
 </VirtualHost>
-</IfModule>
-" | sudo tee /etc/apache2/sites-enabled/default-ssl
+</IfModule>" | sudo tee /etc/apache2/sites-enabled/default-ssl
 
 
 # ###### MYSQL

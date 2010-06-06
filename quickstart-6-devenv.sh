@@ -16,11 +16,37 @@ sudo apt-get -y install cvs subversion git-core bzr
 sudo apt-get -y install wget curl
 
 
-# ################################################################################ Drupal sites and Drush
+# ################################################################################ Drupal sites
 
 # Create folder for websites to live in
 mkdir ~/websites
 
+echo "This is where Quickstart websites go.
+
+Quickstart include some commandline scripts to automate site installation.
+
+To create a site (dns, apache, code, database, and install):
+This will do all the downloads and configurations
+
+  1) Start a terminal (top left, click the black box with a >)
+
+  2) Paste in this command (don't include the $)
+    $ drush quickstart-create all --domain=newsite.dev
+         or 
+    $ drush qc all --domain=newsite.dev
+
+To delete a site:
+  $ drush quickstart-delete all --domain=newsite.dev
+         or 
+  $ drush qd all --domain=newsite.dev
+
+For more information:
+  $ drush help quickstart-create
+  $ drush help quickstart-delete
+  Or goto http://drupal.org/node/819398" > ~/websites/readme.txt
+
+
+# ################################################################################ Drush
 # Install drush
 DRUSH_FILE='drush-All-versions-3.0.tar.gz'
 wget http://ftp.drupal.org/files/projects/$DRUSH_FILE
@@ -29,13 +55,14 @@ chmod u+x ~/drush/drush
 sudo ln -s ~/drush/drush /usr/local/bin/drush
 rm $DRUSH_FILE
 
-# Install drush make and drush provision
+# Install drush make
 mkdir ~/.drush
 drush dl drush_make --destination=/home/quickstart/.drush
-git clone git://git.aegirproject.org/provision ~/.drush/provision
+# git clone git://git.aegirproject.org/provision ~/.drush/provision
 
 # Install drush quickstart
 ln -s ~/quickstart/drush ~/.drush/quickstart
+drush quickstart-setup
 
 # ################################################################################ Replace localhost/index.html
 
@@ -205,5 +232,8 @@ ln -s /etc/hosts                     $CONFIGS/hosts
 
 cd ~
 df -h -T > ~/quickstart/quickstart-size-end.txt
+
+# ################################################################################ Restart apache
+echo "quickstart ALL=NOPASSWD: /usr/sbin/apache2ctl" | tee -a /etc/sudoers > /dev/null
 
 

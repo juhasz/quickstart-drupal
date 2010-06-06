@@ -37,27 +37,18 @@ function quickstart_drush_command() {
                   'domain' => 'Required.  Domain name of new site.  Use this to reference site with other commands.  Becomes dns, dbname, dbuser, dbpass, site-name, and kitchen-sink',
                   'codepath' => 'Default.  Path to drupal code.  Defaults to "~/websites/[domain]"',
                   'makefile' => 'Default.  Path to drupal make file.  Defaults to "~/websites/default.make"',
-                  'profile' => 'Default.  Name of profile to install.  Defaults to "expert"',
+                  'profile' => 'Default.  Name of profile to install.  Defaults to "default"',
                   'patch' => 'Optional.  URL to a patch to apply before install.  Only used with "all" or "code"',
           ),
           'examples' => array(
-                  '-- Create site in one command: setup dns, apache, create db, download d6 (with dev modules), run installer, open in firefox',
-                  'drush quickstart-create all --domain=example1.dev',
-                  '',
-                  '-- Same as above, but specify path, use d7 (with dev modules), use basic profile, and apply patch from drupal.org',
-                  'drush quickstart-create all --domain=example2.dev --codepath=/path/to/drupal --makefile=~/quickstart/d7dev.make --profile=basic --patch=http://drupal.org/path/to/file.patch',
-                  '',
-                  '-- Create site in steps:',
-                  ' - dns (/etc/hosts) to point example.dev and www.example.dev to 127.0.0.1',
-                  'drush quickstart-create dns --domain=example.dev',
-                  ' - apache (/etc/apache2/sites-enabled/), to serve for example.dev and www.example.dev',
-                  'drush quickstart-create apache --domain=example.dev --codepath=/path/to/drupal',
-                  ' - database (mysql), create database and user.  Assumes user:pass = root:quickstart',
-                  'drush quickstart-create database --domain=example.dev',
-                  ' - code (drush: make), create database and user.  Assumes user:pass = root:quickstart',
-                  'drush quickstart-create code --domain=example.dev --codepath=/path/to/drupal --makefile=/path/to/drupal.make --patch=http://example.com/path/to/patch',
-                  ' - code (drush: site-install), create database and user.  Assumes user:pass = root:quickstart',
-                  'drush quickstart-create install --domain=example.dev --codepath=/path/to/drupal --profile=expert',
+                  'Create site in one command: setup dns, apache, create db, download d6, run installer, open in firefox' => 'drush quickstart-create all --domain=example1.dev',
+                  'Simplest format' => 'drush qc all --domain=example.dev',
+                  'Complete format' => 'drush quickstart-create all --domain=example2.dev --codepath=/path/to/drupal --makefile=~/quickstart/d7dev.make --profile=basic --patch=http://drupal.org/path/to/file.patch',
+                  'Create DNS (/etc/hosts)' => 'drush quickstart-create dns --domain=example.dev',
+                  'Create Apache (/etc/apache2/sites-enabled/)' => 'drush quickstart-create apache --domain=example.dev --codepath=/path/to/drupal',
+                  'Create Database (mysql db and user)' => 'drush quickstart-create database --domain=example.dev',
+                  'Create Code (download and patch)' =>'drush quickstart-create code --domain=example.dev --codepath=/path/to/drupal --makefile=/path/to/drupal.make --patch=http://example.com/path/to/patch',
+                  'Open Firefox to start install' => 'drush quickstart-create install --domain=example.dev --codepath=/path/to/drupal --profile=default',
           ),
           'aliases' => array('qc'),
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
@@ -73,25 +64,19 @@ function quickstart_drush_command() {
                   'codepath' => 'Path to drupal code.  Defaults to ~/websites/[domain]',
           ),
           'examples' => array(
-                  '## Destroy site in one command:',
-                  'drush quickstart-destroy all --domain=example.dev',
-                  '',
-                  '## Create a site in steps:',
-                  '# dns (/etc/hosts)',
-                  'drush quickstart-destroy dns --domain=example.dev --codepath=/path/to/drupal',
-                  '# apache (/etc/apache2/sites-enabled/)',
-                  'drush quickstart-destroy apache --domain=example.dev',
-                  '# database (mysql), drop database and user.  Assumes user:pass = root:quickstart',
-                  'drush quickstart-destroy database --domain=example.dev',
-                  '# code (drush: make and site-install), create database and user.  Assumes user:pass = root:quickstart',
-                  'drush quickstart-destroy code --domain=example.dev --codepath=/path/to/drupal',
+                  'Simplest format' => 'drush qd all --domain=example.dev',
+                  'Complete format' => 'drush quickstart-destroy all --domain=example.dev --codepath=/path/to/drupal',
+                  'Destroy DNS (/etc/hosts)' => 'drush quickstart-destroy dns --domain=example.dev',
+                  'Destroy Apache (/etc/apache2/sites-enabled/)' => 'drush quickstart-destroy apache --domain=example.dev',
+                  'Destroy Database (mysql db and user)' => 'drush quickstart-destroy database --domain=example.dev',
+                  'Destroy Code and files (~/webistes/<domain>)' => 'drush quickstart-destroy code --domain=example.dev --codepath=/path/to/drupal',
           ),
           'aliases' => array('qd'),
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
   );
-
+/*
   $items['quickstart-backup'] = array(
-          'description' => "Backup a quickstart development website (" . implode(', ', quickstart_arg_list()) . ").",
+          'description' => "NOT IMPLEMENTED YET.  Backup a quickstart development website (" . implode(', ', quickstart_arg_list()) . ").",
           'arguments' => array(
                   'what' => 'What to backup: [all|' . implode('|', quickstart_arg_list()) . ']',
           ),
@@ -101,25 +86,13 @@ function quickstart_drush_command() {
                   'backupfile' => 'Path to backup file (.tgz format).  Defaults to ~/websites/backups/[domain].[currentdatetime]',
           ),
           'examples' => array(
-                  '## Backup site in one command:',
-                  'drush quickstart-backup all --domain=example.dev --backupfile=~/saveme',
-                  '',
-                  '## Backup site in steps:',
-                  '# dns (/etc/hosts).  (nothing to do)',
-                  'drush quickstart-backup dns --domain=example.dev',
-                  '# apache (/etc/apache2/sites-enabled/)',
-                  'drush quickstart-backup apache --domain=example.dev',
-                  '# database (mysqldump).  Assumes user:pass = root:quickstart',
-                  'drush quickstart-backup database --domain=example.dev',
-                  '# code (drush: make and site-install), create database and user.  Assumes user:pass = root:quickstart',
-                  'drush quickstart-backup code --domain=example.dev --codepath=/path/to/drupal',
           ),
           'aliases' => array('qb'),
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
   );
 
   $items['quickstart-restore'] = array(
-          'description' => "Restore a quickstart development website (" . implode(', ', quickstart_arg_list()) . ").",
+          'description' => "NOT IMPLEMENTED YET.  Restore a quickstart development website (" . implode(', ', quickstart_arg_list()) . ").",
           'arguments' => array(
                   'what' => 'What to restore: [all|' . implode('|', quickstart_arg_list()) . ']',
           ),
@@ -130,25 +103,13 @@ function quickstart_drush_command() {
                   'overwrite' => 'Should we overwrite existing apache/db/code?  Defaults to false',
           ),
           'examples' => array(
-                  '## Restore site in one command:',
-                  'drush quickstart-restore all --domain=example.dev --overwrite=true --bakcupfile=~/websites/backups/example.dev.2010-05-15blahblah',
-                  '',
-                  '## Restore site in steps:',
-                  '# dns (/etc/hosts)',
-                  'drush quickstart-restore dns --domain=example.dev',
-                  '# apache (/etc/apache2/sites-enabled/)',
-                  'drush quickstart-restore apache --domain=example.dev',
-                  '# database (mysql), create database and user.  Assumes user:pass = root:quickstart',
-                  'drush quickstart-restore database --domain=example.dev',
-                  '# code (drush: make and site-install), create database and user.  Assumes user:pass = root:quickstart',
-                  'drush quickstart-restore code --domain=example.dev --codepath=/path/to/drupal',
           ),
           'aliases' => array('qr'),
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
   );
 
   $items['quickstart-status'] = array(
-          'description' => "Check status of a quickstart development website (" . implode(', ', quickstart_arg_list()) . ").",
+          'description' => "NOT IMPLEMENTED YET.  Check status of a quickstart development website (" . implode(', ', quickstart_arg_list()) . ").",
           'arguments' => array(
                   'what' => 'What to status: [all|' . implode('|', quickstart_arg_list()) . ']',
           ),
@@ -157,23 +118,11 @@ function quickstart_drush_command() {
                   'codepath' => 'Path to drupal code.  Defaults to ~/websites/[domain]',
           ),
           'examples' => array(
-                  '## Restore site in one command:',
-                  'drush quickstart-restore all --domain=example.dev',
-                  '',
-                  '## Status a site in steps:',
-                  '# dns (/etc/hosts)',
-                  'drush quickstart-status dns --domain=example.dev',
-                  '# apache (/etc/apache2/sites-enabled/)',
-                  'drush quickstart-status apache --domain=example.dev',
-                  '# database (mysql), create database and user.  Assumes user:pass = root:quickstart',
-                  'drush quickstart-status database --domain=example.dev',
-                  '# code (drush: make and site-install), create database and user.  Assumes user:pass = root:quickstart',
-                  'drush quickstart-status code --domain=example.dev --codepath=/path/to/drupal',
           ),
           'aliases' => array('qs'),
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
   );
-
+*/
   $items['quickstart-setup'] = array(
           'description' => "Configures a system to use quickstart drush commands.  Run as root.",
           'examples' => array(
@@ -224,11 +173,14 @@ function quickstart_params($required) {
   $ret['profile'] = drush_get_option('profile');
   $ret['patch'] = drush_get_option('patch');
 
+  $ret['dbuser'] = 'root';
+  $ret['dbpassword'] = 'quickstart';
+
   // set defaults
   if (empty($ret['codepath'])) $ret['codepath'] = quickstart_fixpath("~/websites/" . $ret['domain']);
   if (empty($ret['overwrite'])) $ret['overwrite'] = "false";
   if (empty($ret['makefile'])) $ret['makefile'] = quickstart_fixpath("~/websites/default.make");
-  if (empty($ret['profile'])) $ret['profile'] = "expert";
+  if (empty($ret['profile'])) $ret['profile'] = "default";
   if (empty($ret['backupfile'])) $ret['backupfile'] = quickstart_fixpath("~/websites/backups/" . $ret['domain']);  // process differently in backup and restore
 
   // check required
@@ -241,21 +193,12 @@ function quickstart_params($required) {
   return $ret;
 }
 
-/*
- * Implementation of drush_hook_COMMAND_validate().
-*/
-function drush_quickstart_setup_validate() {
-  $name = posix_getpwuid(posix_geteuid());
-  if ($name['name'] !== 'root') {
-    return drush_set_error('RUN_AS_ROOT', dt('Run as root please.'));
-  }
-}
-
 /**
  * Drush callbacks
  */
 
 function drush_quickstart_setup() {
+  /* This has already been taken care of during install-quickstart.sh
   quickstart_shell_exec('useradd -G www-data quickstart');  // add quickstart to www-data (probably already done)
   quickstart_shell_exec('chown root:www-data /etc/hosts');  // allow access to hosts file
   quickstart_shell_exec('chmod g+w /etc/hosts');
@@ -268,6 +211,7 @@ function drush_quickstart_setup() {
   quickstart_shell_exec('echo "quickstart ALL=NOPASSWD: /usr/sbin/apache2ctl" | tee -a /etc/sudoers > /dev/null');  // allow restarting apache
   quickstart_shell_exec('chown root:www-data /etc/ssl/private');  // fix apache restart error for SSL
   quickstart_shell_exec('chmod -R g+r /etc/ssl/private');
+  */
   quickstart_shell_exec('mv ~/.drush/quickstart/*.make ~/websites'); // make templates.  Use mv so path doesn't get confused, and so don't acidentally overwrite work if run again.
 
 }
