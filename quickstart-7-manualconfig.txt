@@ -1,5 +1,10 @@
 Here are some manual tweaks I've done to bittorrent image that you may find useful:
 
+0) During the install process, most likely a new Linux kernal was installed.  
+  - Reboot
+  - Update the Virtualbox Guest Additions to get the mouse to work again
+    - http://drupal.org/node/788994
+
 1) Disable screensaver.  Host computer takes care of this, just an annoyance to login.
   - System -> Preferences -> uncheck "Activate...", uncheck "Lock..."
 
