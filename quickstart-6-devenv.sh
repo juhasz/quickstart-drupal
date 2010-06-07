@@ -7,9 +7,9 @@ sudo adduser quickstart www-data
 
 # ################################################################################ Basic Tools
 
-# Configure repositories for git-core, etc
-sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ lucid partner"
-sudo apt-get update
+# Configure repositories for git-core, etc - cruft?
+# sudo add-apt-repository "deb http://archive.canonical.com/ubuntu/ lucid partner" 
+# sudo apt-get update
 
 # Install some dev basics
 sudo apt-get -y install cvs subversion git-core bzr
