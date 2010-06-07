@@ -202,6 +202,8 @@ function quickstart_create_install($domain, $params) {
   quickstart_shell_exec("chown quickstart:www-data -R $codepath");
   quickstart_shell_exec("chmod g+w -R $codepath");
 
+  quickstart_shell_exec("zenity --info --text=\"Drupal installer will now start.\n  dbuser, password, and database are: $database\n  After finishing the installer, run this command to get rid of settings.php warning:\n     chmod g-w $codepath/sites/default/settings.php\"");
+
   quickstart_shell_exec("firefox http://$domain");
 
   // Provision has it's own plan that is incompatible with quickstart.  D7 includes it's own command line installer.

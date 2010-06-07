@@ -22,6 +22,25 @@ Here are some manual tweaks I've done to bittorrent image that you may find usef
   - App Launcher -> Accessories -> Gedit (gui text editor)
   - System Monitor
 
+6) Configure Gedit
+  - Start Gedit (click paper/pencil on top toolbar)
+  - Edit -> Preferences 
+    - View Tab:
+      - uncheck "Enable text wrapping"
+      - check "Display line numbers"
+      - check "Highlight current line"
+      - check "Display right margin"
+      - check "Highlight matching bracket"
+
+    - Editor Tab:
+      - Tab width -> 2
+      - Check "Insert spaces instead of tabs"
+      - Check "Enable automatic indentation"
+      - Check "Autosave every 10 minutes"
+
+9) Set terminal scrolling to unlimited: 
+   Terminal -> Edit... -> Profiles -> Edit (Default) -> Scrolling -> check unlimited
+
 5) Firefox 3.6 removed the ability to command-line install extensions.  
   - This is the list of Firefox add-ons that come with Quickstart:
     - Firebug HTML/CSS/JS Debugger     - http://getfirebug.com/
@@ -40,25 +59,17 @@ Here are some manual tweaks I've done to bittorrent image that you may find usef
       - FirePHP (php log messages to firebug) - http://www.firephp.org/  ?
       - Drupal for Firebug?
 
-6) Configure Gedit
-  - Start Gedit (click paper/pencil on top toolbar)
-  - Edit -> Preferences 
-    - View Tab:
-      - uncheck "Enable text wrapping"
-      - check "Display line numbers"
-      - check "Highlight current line"
-      - check "Display right margin"
-      - check "Highlight matching bracket"
-
-    - Editor Tab:
-      - Tab width -> 2
-      - Check "Insert spaces instead of tabs"
-      - Check "Enable automatic indentation"
-      - Check "Autosave every 10 minutes"
-
 7) Set firefox and chrome home to http://localhost
 
 8) Open http://localhost/phpmyadmin and login as root/quickstart.  Save password.
 
-9) Shut down quickstart and move vbox menu to top of screen.
+9) Netbeans IDE - auto update
+
+10) Eclipse 
+  - workspace: /home/quickstart/websites -> use as default -> ok
+
+11) Make an example site with drush:
+  $ drush quickstart-create all --domain=example.dev
+
+10) Shut down quickstart and move vbox menu to top of screen.
      
