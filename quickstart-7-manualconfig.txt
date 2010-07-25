@@ -8,6 +8,9 @@ Here are some manual tweaks I've done to bittorrent image that you may find usef
 1) Disable screensaver.  Host computer takes care of this, just an annoyance to login.
   - System -> Preferences -> uncheck "Activate...", uncheck "Lock..."
 
+2) Change theme to "Radiance" - prevents confusion between host and guest ubuntu's
+  - System -> Preferences -> Appearance -> Radiance -> Ok
+
 2) Auto login.  Host computer takes care of security.
   - System -> Administration -> Login Screen -> Unlock -> Uncheck "Play...", Select "Log in as...", uncheck "Allow"
 
@@ -53,6 +56,7 @@ Here are some manual tweaks I've done to bittorrent image that you may find usef
     - FireFTP (FTP Client)             - http://fireftp.mozdev.org/
     - Clear Cache Button               - http://clearcachebutton.mozdev.org/
     - Dummy Lipsum (generate dummy text) - http://sogame.awardspace.com/dummylipsum/
+    - Selenium IDE                     - http://seleniumhq.org/projects/ide/
   - Add Buttons to shortcuts toolbar: clear cache, firebug, fireftp, dummylipsum
 
   What about?
