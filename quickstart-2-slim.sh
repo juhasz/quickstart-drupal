@@ -75,6 +75,9 @@ sudo aptitude remove --purge tangerine-icon-theme gnome-accessibility-themes gno
 sudo aptitude remove --purge xserver-xorg-video-all xserver-xorg-video-apm xserver-xorg-video-ark xserver-xorg-video-ati xserver-xorg-video-chips xserver-xorg-video-cirrus xserver-xorg-video-geode xserver-xorg-video-i128 xserver-xorg-video-i740 xserver-xorg-video-intel xserver-xorg-video-mach64 xserver-xorg-video-mga xserver-xorg-video-neomagic xserver-xorg-video-nv xserver-xorg-video-openchrome xserver-xorg-video-r128 xserver-xorg-video-radeon xserver-xorg-video-rendition xserver-xorg-video-s3 xserver-xorg-video-s3virge xserver-xorg-video-savage xserver-xorg-video-siliconmotion xserver-xorg-video-sis xserver-xorg-video-sisusb xserver-xorg-video-tdfx xserver-xorg-video-trident xserver-xorg-video-tseng xserver-xorg-video-v4l xserver-xorg-video-vmware xserver-xorg-video-voodoo #video drivers
 #   6mb - VNC
 sudo aptitude remove --purge vinagre libgtk-vnc-1.0-0
+#   8mb - Cruft leftover in Ubuntu 10.04
+sudo apt-get -y remove simple-scan gwibber gwibber-service pitivi gnome-media
+
 
 # This is a hack, no way to "undo", not a good idea for non-english speakers.
 #sudo aptitude -y install localepurge # package to delete unnecessary translations.  Select en and en_us packages to keep them.
