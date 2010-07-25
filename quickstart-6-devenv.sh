@@ -233,6 +233,66 @@ ln -s /etc/hosts                     $CONFIGS/hosts
 cd ~
 df -h -T > ~/quickstart/quickstart-size-end.txt
 
+
+# ################################################################################ Email catcher
+
+# Configure email collector
+mkdir /home/quickstart/websites/logs/mail
+sudo set -i 's/;sendmail_path =/sendmail_path=\/home\/quickstart\/quickstart\/sendmail.php/g' /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
+
+
+# ################################################################################ Debugger, Profiler, and webgrind
+
+# Get xdebug 2.1
+cd ~
+mkdir temp
+cd temp
+wget http://www.xdebug.com/files/xdebug-2.1.0.tgz
+tar -xvzf xdebug-2.1.0.tgz
+cd xdebug-2.1.0
+phpize5
+./configure
+make
+sudo cp modules/xdebug.so /usr/lib/php5/20090626+lfs/
+cd ..
+rm -rf temp
+
+# Configure xdebug
+mkdir /home/quickstart/websites/logs/profiler
+echo "xdebug.remote_enable=on
+xdebug.remote_handler=dbgp
+xdebug.remote_host=localhost
+xdebug.remote_port=9000
+xdebug.profiler_enable=0
+xdebug.profiler_enable_trigger=1
+xdebug.profiler_output_dir=/home/quickstart/websites/logs/profiler
+" | sudo tee /etc/php5/conf.d/xdebug.ini > /dev/null
+
+
+# Install a web-based profile viewer
+cd ~/quickstart/websites/logs/profiler
+
+wget -O webgrind.zip http://webgrind.googlecode.com/files/webgrind-release-1.0.zip
+unzip webgrind.zip
+mv webgrind/* .
+rmdir webgrind
+rm webgrind.zip
+
+# Setup Web server
+echo "127.0.0.1 webgrind" | sudo tee -a /etc/hosts
+echo "<VirtualHost *:80>
+	DocumentRoot /home/quickstart/websites/logs/profiler/
+	<Directory /home/quickstart/websites/logs/profiler/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	</Directory>
+</VirtualHost>" | sudo tee /etc/apache2/sites-enabled/000-default
+
+
+
+
 # ################################################################################ Restart apache
 echo "quickstart ALL=NOPASSWD: /usr/sbin/apache2ctl" | tee -a /etc/sudoers > /dev/null
 

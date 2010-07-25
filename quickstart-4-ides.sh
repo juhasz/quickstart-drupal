@@ -26,6 +26,3 @@ sudo add-apt-repository ppa:rabbitvcs/ppa && sudo apt-get update
 sudo apt-get -y install rabbitvcs-nautilus
 sudo killall nautilus
 
-# FIXME
-# http://wiki.netbeans.org/HowToConfigureXDebug
-
