@@ -4,7 +4,7 @@
 sudo apt-get -y install default-jre
 
 # Download and install netbeans - 100mb
-NETBEANS_URL="http://services.netbeans.org/bouncer/index.php?product=netbeans-6.8-ml-php&os=linux"
+NETBEANS_URL="http://download.netbeans.org/netbeans/6.9/final/bundles/netbeans-6.9-ml-php-linux.sh"
 sudo apt-get -y install wget
 cd ~/Desktop
 wget -O netbeans.sh $NETBEANS_URL
