@@ -5,12 +5,17 @@ mkdir /home/quickstart/websites
 # ##### Install LAMP packages
 
 sudo apt-get update
-zenity --info --text="Set all passwords to 'quickstart'.  Select 'apache' to configure.  Click 'yes' to phpmyadmin."
 LAMP_APACHE="apache2 apache2-threaded-dev libapache2-mod-php5 libapache2-svn"
 LAMP_MYSQL="mysql-server"
 LAMP_PHP="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql php-pear php5-imap php5-xdebug php-apc"
 LAMP_TOOLS="phpmyadmin"
-sudo apt-get -y install $LAMP_APACHE $LAMP_MYSQL $LAMP_PHP $LAMP_TOOLS
+sudo apt-get -y install $LAMP_APACHE
+zenity --info --text="Set all passwords to 'quickstart'"
+sudo apt-get -y install $LAMP_MYSQL
+zenity --info --text="Select 'apache' to configure"
+sudo apt-get -y install $LAMP_PHP 
+zenity --info --text="Select 'yes' to phpmyadmin"
+sudo apt-get -y install $LAMP_TOOLS
 
 
 # ###### Configure APACHE
