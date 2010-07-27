@@ -12,9 +12,8 @@ LAMP_TOOLS="phpmyadmin"
 sudo apt-get -y install $LAMP_APACHE
 zenity --info --text="Set all passwords to 'quickstart'"
 sudo apt-get -y install $LAMP_MYSQL
-zenity --info --text="Select 'apache' to configure"
 sudo apt-get -y install $LAMP_PHP 
-zenity --info --text="Select 'yes' to phpmyadmin"
+zenity --info --text="Select 'apache' to configure.  Select 'yes' to phpmyadmin. Set passwords to 'quickstart'"
 sudo apt-get -y install $LAMP_TOOLS
 
 

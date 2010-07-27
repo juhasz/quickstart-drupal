@@ -10,6 +10,8 @@
 # cvs -z6 -d:pserver:anonymous:anonymous@cvs.drupal.org:/cvs/drupal-contrib checkout -d quickstart contributions/modules/quickstart
 # bash ~/quickstart/install-quickstart.sh
 
+zenity --info --text="Turn off the screensaver. System -> Preferences -> Screen Saver -> Uncheck Activate..., uncheck lock..."
+
 cd ~
 
 bash -x ~/quickstart/quickstart-1-prep.sh
