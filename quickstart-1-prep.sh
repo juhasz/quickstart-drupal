@@ -12,10 +12,14 @@ sudo sed -i 's/.local/.alocal/g'     /etc/avahi/avahi-daemon.conf
 # Restart networking
 sudo /etc/init.d/networking restart
 
+
+
 ## Disk size Accounting
 
 # Starting size:
 df -h -T > ~/quickstart/quickstart-size-start.txt
+
+
 
 ## Some configuration
 
@@ -25,3 +29,10 @@ gconftool-2 -s /apps/gnome-screensaver/idle_activation_enabled --type=bool false
 zenity --info --text="Configure auto-login.  Unlock -> 'quickstart' -> Uncheck 'play sound', select 'login as quickstart automatically', uncheck 'Allow x seconds...'"
 gdmsetup
 
+
+
+## Upgrade
+
+# Do this here because update-manager seems to interupt apt
+sudo apt-get -y update
+sudo apt-get -y upgrade
