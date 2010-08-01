@@ -25,4 +25,4 @@ APT::Periodic::AutocleanInterval \"5\";
 APT::Periodic::Unattended-Upgrade \"1\";
 " | sudo tee /etc/apt/apt.conf.d/10periodic
 # setup icons on top of screen
-gconftool-2 --load  config/my-panel-setup.entries
+gconftool-2 --load ~/config/my-panel-setup.entries

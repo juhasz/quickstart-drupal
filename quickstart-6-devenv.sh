@@ -238,7 +238,9 @@ df -h -T > ~/quickstart/quickstart-size-end.txt
 
 # Configure email collector
 mkdir /home/quickstart/websites/logs/mail
-sudo set -i 's/;sendmail_path =/sendmail_path=\/home\/quickstart\/quickstart\/sendmail.php/g' /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
+chmod 666 /home/quickstart/websites/logs/mail
+chmod +x /home/quickstart/quickstart/sendmail.php
+sudo sed -i 's/;sendmail_path =/sendmail_path=\/home\/quickstart\/quickstart\/sendmail.php/g' /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
 
 
 # ################################################################################ Debugger, Profiler, and webgrind
@@ -292,7 +294,8 @@ echo "<VirtualHost *:80>
 
 
 # ################################################################################ Restart apache
-echo "quickstart ALL=NOPASSWD: /usr/sbin/apache2ctl" | tee -a /etc/sudoers > /dev/null
+echo "quickstart ALL=NOPASSWD: /usr/sbin/apache2ctl" | sudo tee -a /etc/sudoers > /dev/null
+sudo apache2ctl restart
 
 
 # ################################################################################ Make example.dev

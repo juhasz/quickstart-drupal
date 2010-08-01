@@ -85,6 +85,7 @@ sudo sed -i 's/;error_log = php_errors.log/error_log = \/var\/log\/php-error.log
 
 # Fix comment bug that will show warning on command line
 sudo sed -i 's/# /\/\/ /g'            /etc/php5/cli/conf.d/mcrypt.ini
+sudo sed -i 's/# /\/\/ /g'            /etc/php5/cli/conf.d/imap.ini
 
 # Install upload progress (warning in D7)
 sudo pecl -q install uploadprogress 

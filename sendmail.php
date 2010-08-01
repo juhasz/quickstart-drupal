@@ -1,7 +1,8 @@
 #!/usr/bin/php
 <?php
-$input = file_get_contents('php://stdin');
-preg_match('|^To: (.*)|', $input, $matches);
-$t = tempnam("/home/quickstart/websites/logs/mail", $matches[1]);
-file_put_contents($t, $input);
-chmod($t, 0644);
+$content = file_get_contents('php://stdin');
+preg_match('|^To: (.*)|', $content, $address);
+$filename = "/home/quickstart/websites/logs/mail/" . date('Y-m-d_H:i:s') . '--' . $address[1] . '.txt'; 
+file_put_contents($filename, $content);
+chmod($filename, 0666);
+?>

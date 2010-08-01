@@ -196,17 +196,17 @@ function quickstart_create_install($domain, $params) {
   
   $str=implode("\n",file("$codepath/sites/default/default.settings.php"));
   $fp=fopen("$codepath/sites/default/settings.php",'w');
-//  $str=str_replace('mysql://username:password@localhost/databasename',"mysql://$database:$database@localhost/$database",$str);
   fwrite($fp,$str,strlen($str));
 
   quickstart_shell_exec("chown quickstart:www-data -R \"$codepath\"");
   quickstart_shell_exec("chmod g+w -R \"$codepath\"");
 
-  quickstart_shell_exec("zenity --info --text=\"Drupal installer will now start.\n  dbuser, password, and database are: $database\n  Return to this window and press ENTER to fix settings.php warning.");
+  quickstart_shell_exec("zenity --info --text=\"Drupal installer will now start.\n  dbuser, password, and database are: $database\n  Return to this window and press ENTER to fix settings.php warning.\"");
 
   quickstart_shell_exec("firefox http://$domain");
 
-  quickstart_shell_exec('echo "Once Drupal installer has completed, press ENTER to protect settings.php and clear the warning"; read -s');
+  quickstart_shell_exec("echo \"  **** Once Drupal installer has completed, **** press ENTER **** to finish\"");
+  quickstart_shell_exec("read this");
 
   quickstart_shell_exec("chmod g-w \"$codepath/sites/default/settings.php\"");
   quickstart_shell_exec("chmod g-w \"$codepath/sites/default\"");
