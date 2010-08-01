@@ -291,9 +291,11 @@ echo "<VirtualHost *:80>
 </VirtualHost>" | sudo tee /etc/apache2/sites-enabled/000-default
 
 
-
-
 # ################################################################################ Restart apache
 echo "quickstart ALL=NOPASSWD: /usr/sbin/apache2ctl" | tee -a /etc/sudoers > /dev/null
 
+
+# ################################################################################ Make example.dev
+cd ~/websites
+drush quickstart-create all --domain=example.dev
 

@@ -1,0 +1,8 @@
+Quickstart has been installed.  To complete the image:
+
+1) Shutdown
+
+2) Export virtual machine
+
+3) Create torrent
+

@@ -20,8 +20,7 @@ bash -x ~/quickstart/quickstart-3-lamp.sh
 bash -x ~/quickstart/quickstart-4-ides.sh
 bash -x ~/quickstart/quickstart-5-browsers.sh
 bash -x ~/quickstart/quickstart-6-devenv.sh
-# Show manual config steps
-gedit ~/quickstart/quickstart-7-manualconfig.txt &
-# Show documentation on use
-firefox http://drupal.org/node/788080 &
+bash -x ~/quickstart/quickstart-7-config.sh
+bash -x ~/quickstart/export-prep.sh
+firefox ~/quickstart/quickstart-8-manualconfig.txt
 
