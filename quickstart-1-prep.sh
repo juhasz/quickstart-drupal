@@ -22,6 +22,6 @@ df -h -T > ~/quickstart/quickstart-size-start.txt
 # turn off screen saver
 gconftool-2 -s /apps/gnome-screensaver/idle_activation_enabled --type=bool false
 # auto-login
-zenity --info --text="Configure auto-login.  Unlock -> 'quickstart' -> Uncheck 'play sound', select 'login as quickstart automatically'"
+zenity --info --text="Configure auto-login.  Unlock -> 'quickstart' -> Uncheck 'play sound', select 'login as quickstart automatically', uncheck 'Allow x seconds...'"
 gdmsetup
 

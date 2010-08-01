@@ -4,7 +4,6 @@ mkdir /home/quickstart/websites
 
 # ##### Install LAMP packages
 
-sudo apt-get update
 LAMP_APACHE="apache2 apache2-threaded-dev libapache2-mod-php5 libapache2-svn"
 LAMP_MYSQL="mysql-server"
 LAMP_PHP="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql php-pear php5-imap php5-xdebug php-apc"
