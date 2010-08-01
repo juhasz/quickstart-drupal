@@ -5,7 +5,6 @@
 # FIXME means there may be more space to save.
 
 # Use aptitude here because it does a better job removing packages
-sudo aptitude update
 sudo aptitude -y install deborphan # Package to find orphan packages
 # 351mb - Open office
 sudo aptitude remove --purge openoffice.org-core openoffice.org-common openoffice.org-writer openoffice.org-calc openoffice.org-math openoffice.org-impress openoffice.org-base-core openoffice.org-draw openoffice.org-emailmerge   openoffice.org-gnome openoffice.org-gtk openoffice.org-help-en-gb openoffice.org-help-en-us openoffice.org-l10n-en-gb openoffice.org-l10n-en-za openoffice.org-style-human openoffice.org-thesaurus-en-au python-uno language-support-writing-en openoffice.org-thesaurus-en-us openoffice.org-hyphenation openoffice.org-hyphenation-en-us openoffice.org-l10n-common language-support-translations-en language-support-en thunderbird-locale-en-gb uno-libs3 ure
@@ -116,8 +115,6 @@ sudo aptitude remove --purge eog #graphic viewer
 #sudo aptitude remove --purge libvisual-0.4-0  gstreamer0.10-plugins-base # audio playback visualization 2mb
 #sudo aptitude remove --purge libtag1c2a #mp3 tags .5mb
 
-# Finish up
-sudo aptitude -y safe-upgrade  # upgrade whats left
 # 30mb
 sudo apt-get autoremove
 # 104mb - Remove orphan packages - do a couple times
@@ -132,9 +129,6 @@ sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge
 # Clean out downloaded packages
 sudo aptitude clean
 sudo apt-get clean
-# Clean up apt cache
-sudo rm /var/lib/apt/lists/*   # approx 44mb -> 12mb compressed
-sudo rm /var/lib/apt/lists/partial/*
 
 # What's installed: look in file whats_installed.txt
 for pkg in `dpkg --list | awk '/ii/ {print $2}'`; do echo -e "`dpkg --status $pkg | grep Installed-Size | awk '{print $2}'` \t\t $pkg" >> pkgs.tmp; done; sort -rg pkgs.tmp > ~/quickstart/whats_installed.txt; rm -f pkgs.tmp;
