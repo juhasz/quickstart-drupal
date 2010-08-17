@@ -205,8 +205,7 @@ function quickstart_create_install($domain, $params) {
 
   quickstart_shell_exec("firefox http://$domain");
 
-  quickstart_shell_exec("echo \"  **** Once Drupal installer has completed, **** press ENTER **** to finish\"");
-  quickstart_shell_exec("read this");
+  quickstart_shell_exec("zenity --info --text=\"**** AFTER INSTALLER HAS COMPLETED ****\n close this dialog to finish\"");
 
   quickstart_shell_exec("chmod g-w \"$codepath/sites/default/settings.php\"");
   quickstart_shell_exec("chmod g-w \"$codepath/sites/default\"");
