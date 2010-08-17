@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# To install Quickstart:
+# To install Quickstart Development Environment:
 #
 # 1) Open a terminal window in the virtual machine (Applications->Accessories->Terminal)
 #

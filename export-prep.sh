@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# dev and server
+
 # Remove unneeded packages
 sudo apt-get autoremove
 sudo deborphan --guess-all # display them to user

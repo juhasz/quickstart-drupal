@@ -4,17 +4,8 @@ cd ~
 
 # Make quickstart a user of group www-data
 sudo adduser quickstart www-data    
-
-# ################################################################################ Basic Tools
-
-# Configure repositories for git-core, etc - cruft?
-# sudo add-apt-repository "deb http://archive.canonical.com/ubuntu/ lucid partner" 
-# sudo apt-get update
-
-# Install some dev basics
-sudo apt-get -y install cvs subversion git-core bzr
-sudo apt-get -y install wget curl
-
+# Make quickstart a user of group root to edit config files
+sudo adduser quickstart root    
 
 # ################################################################################ Drupal sites
 
@@ -185,53 +176,10 @@ chmod 755 ~/Desktop/gnome-terminal.desktop
 ln -s ~/websites ~/Desktop/websites
 ln -s /mnt/vbox-shared ~/Desktop/vbox-shared
 
-# ################################################################################ Log Files
-
-LOGS=~/websites/logs
-mkdir $LOGS
-
-# Apache error logs are configured in the VirtualHosts section of each website (default from apache2.conf)
-sudo touch     /var/log/apache2/error.log
-sudo chmod g+w /var/log/apache2/error.log
-ln -s          /var/log/apache2/error.log                $LOGS/apache-error.log
-# This file catches any unconfigured log info for virtualhosts (default from apache2.conf)
-sudo touch     /var/log/apache2/other_vhosts_access.log
-sudo chmod g+w /var/log/apache2/other_vhosts_access.log
-ln -s          /var/log/apache2/other_vhosts_access.log  $LOGS/apache-access.log
-# php error logs are configured in php.ini  (changed in install-3-lamp.sh)
-sudo touch     /var/log/php-error.log
-sudo chmod g+w /var/log/php-error.log
-ln -s          /var/log/php-error.log                    $LOGS/php-error.log
-# MySQL error and slow query logs (changed in install-2-lamp.sh)
-sudo touch     /var/log/mysql/error.log
-sudo chmod g+w /var/log/mysql/error.log
-ln -s          /var/log/mysql/error.log                  $LOGS/mysql-error.log
-sudo touch     /var/log/mysql/mysql-slow.log
-sudo chmod g+w /var/log/mysql/mysql-slow.log
-ln -s          /var/log/mysql/mysql-slow.log             $LOGS/mysql-slow.log
-
-
-# ################################################################################ Config Files
-
-# Make quickstart a user of group root to edit config files
-sudo adduser quickstart root    
-CONFIGS=~/websites/config
-mkdir $CONFIGS
-sudo chmod -R g+w /etc/apache2
-ln -s /etc/apache2/apache2.conf      $CONFIGS/apache2.conf
-ln -s /etc/apache2/httpd.conf        $CONFIGS/httpd.conf
-ln -s /etc/apache2/ports.conf        $CONFIGS/ports.conf
-ln -s /etc/apache2/sites-enabled/    $CONFIGS/apache-sites-enabled
-sudo chmod -R g+w /etc/php5
-ln -s /etc/php5/apache2/php.ini      $CONFIGS/php-apache.ini
-ln -s /etc/php5/cli/php.ini          $CONFIGS/php-cli.ini
-sudo chmod -R g+w /etc/mysql
-ln -s /etc/mysql/my.cnf              $CONFIGS/mysql.cnf
-sudo chmod g+w /etc/hosts
-ln -s /etc/hosts                     $CONFIGS/hosts
 
 cd ~
 df -h -T > ~/quickstart/quickstart-size-end.txt
+
 
 
 # ################################################################################ Email catcher
@@ -243,7 +191,8 @@ chmod +x /home/quickstart/quickstart/sendmail.php
 sudo sed -i 's/;sendmail_path =/sendmail_path=\/home\/quickstart\/quickstart\/sendmail.php/g' /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
 
 
-# ################################################################################ Debugger, Profiler, and webgrind
+
+# ################################################################################ Debugger/Profiler
 
 # Get xdebug 2.1
 cd ~
@@ -271,7 +220,8 @@ xdebug.profiler_output_dir=/home/quickstart/websites/logs/profiler
 " | sudo tee /etc/php5/conf.d/xdebug.ini > /dev/null
 
 
-# Install a web-based profile viewer
+
+# ################################################################################ Install a web-based profile viewer
 cd ~/quickstart/websites/logs/profiler
 
 wget -O webgrind.zip http://webgrind.googlecode.com/files/webgrind-release-1.0.zip
@@ -293,9 +243,17 @@ echo "<VirtualHost *:80>
 </VirtualHost>" | sudo tee /etc/apache2/sites-enabled/000-default
 
 
+
+# ################################################################################ Apache SOLR - 183mb
+
+sudo apt-get -y install solr-common solr-tomcat
+
+
+
 # ################################################################################ Restart apache
 echo "quickstart ALL=NOPASSWD: /usr/sbin/apache2ctl" | sudo tee -a /etc/sudoers > /dev/null
 sudo apache2ctl restart
+
 
 
 # ################################################################################ Make example.dev
