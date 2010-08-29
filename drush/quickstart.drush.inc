@@ -178,7 +178,11 @@ function quickstart_params($required) {
 
   if (strlen($ret['domain']) > 15) {
     $ret['fail'] = true;
-    drush_print("  '--domain' must be less than 16 characters.", 'error');
+    drush_print("  '--domain' must be less than 16 characters long.", 'error');
+  }
+  if (strlen($ret['domain']) < 1) {
+    $ret['fail'] = true;
+    drush_print("  '--domain' must be at least 1 characters long.", 'error');
   }
 
   // set defaults
