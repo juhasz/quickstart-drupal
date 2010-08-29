@@ -1,5 +1,15 @@
 Quickstart has been installed.  To complete the image:
 
+1) Configure Netbeans and Eclipse xdebug:
+
+NETBEANS: 
+  ???
+
+ECLIPSE:
+  Under Preferences->PHP->Debug, set the default to Xdebug.
+  Preferences->General->Web Browser, add an external web browser (firefox at /usr/bin/firefox) (Note that I deleted my .eclipse to run through this; it's possible that you've already got that set)
+  The only other things I had to do were the setup of a project and debugging for the project, which I don't think you're trying to take care of for people here. (This is from "Create a new project" down at http://drupal.org/node/157609), except that the debugger is xdebug instead of Zend.
+
 1) Shutdown
 
 2) Export virtual machine
