@@ -176,6 +176,11 @@ function quickstart_params($required) {
   $ret['dbuser'] = 'root';
   $ret['dbpassword'] = 'quickstart';
 
+  if (strlen($ret['domain']) > 15) {
+    $ret['fail'] = true;
+    drush_print("  '--domain' must be less than 16 characters.", 'error');
+  }
+
   // set defaults
   if (empty($ret['codepath'])) $ret['codepath'] = quickstart_fixpath("~/websites/" . $ret['domain']);
   if (empty($ret['overwrite'])) $ret['overwrite'] = "false";
@@ -198,22 +203,7 @@ function quickstart_params($required) {
  */
 
 function drush_quickstart_setup() {
-  /* This has already been taken care of during install-quickstart.sh
-  quickstart_shell_exec('useradd -G www-data quickstart');  // add quickstart to www-data (probably already done)
-  quickstart_shell_exec('chown root:www-data /etc/hosts');  // allow access to hosts file
-  quickstart_shell_exec('chmod g+w /etc/hosts');
-  quickstart_shell_exec('chown -R root:www-data /etc/apache2');  // allow access to apache config files
-  quickstart_shell_exec('chmod -R g+w /etc/apache2');
-  quickstart_shell_exec('chown -R root:www-data /etc/mysql');  // allow access to mysql config files
-  quickstart_shell_exec('chmod -R g+w /etc/mysql');
-  quickstart_shell_exec('chown -R root:www-data /etc/php5');  // allow access to php config files
-  quickstart_shell_exec('chmod -R g+w /etc/php5');
-  quickstart_shell_exec('echo "quickstart ALL=NOPASSWD: /usr/sbin/apache2ctl" | tee -a /etc/sudoers > /dev/null');  // allow restarting apache
-  quickstart_shell_exec('chown root:www-data /etc/ssl/private');  // fix apache restart error for SSL
-  quickstart_shell_exec('chmod -R g+r /etc/ssl/private');
-  */
   quickstart_shell_exec('mv ~/.drush/quickstart/*.make ~/websites'); // make templates.  Use mv so path doesn't get confused, and so don't acidentally overwrite work if run again.
-
 }
 
 function drush_quickstart_create() {
