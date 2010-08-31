@@ -9,7 +9,7 @@ sudo apt-get -y install wget
 cd ~/Desktop
 wget -O netbeans.sh $NETBEANS_URL
 chmod +x ./netbeans.sh
-zenity --info --text="The Netbeans PHP installer will start now.  Accept the defaults.  Uncheck 'register' on last screen."
+zenity --info --text="The Netbeans PHP installer will start now.\n1) Accept the defaults.\n2) Uncheck 'register' on last screen."
 bash ./netbeans.sh
 rm netbeans.sh
 cd ~

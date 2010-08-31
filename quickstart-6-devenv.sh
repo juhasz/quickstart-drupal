@@ -138,8 +138,6 @@ If you are seeing this file, then virtualbox's shared folders are not configured
 6) Ok -> Ok -> start Quickstart vm and this file should disappear.  
 7) Test by moving a file in the host computer into the host shared folder.
 END
-zenity --info --text="For shared folders to work, they must be configured in host OS, and guest OS rebooted."
-
 
 # ################################################################################ Desktop shortcuts
 

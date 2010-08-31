@@ -17,10 +17,10 @@ LAMP_MYSQL="mysql-server"
 LAMP_PHP="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql php-pear php5-imap php5-xdebug php-apc"
 LAMP_TOOLS="phpmyadmin"
 sudo apt-get -y install $LAMP_APACHE
-zenity --info --text="Set all passwords to 'quickstart'"
+zenity --info --text="*** Set all passwords to 'quickstart' ***"
 sudo apt-get -y install $LAMP_MYSQL
 sudo apt-get -y install $LAMP_PHP 
-zenity --info --text="Select 'apache' to configure.  Select 'yes' to phpmyadmin. Set passwords to 'quickstart'"
+zenity --info --text="Apache config will start.\n1) Select 'apache' to configure (press space).\n2) Select 'yes' to phpmyadmin.\n3) Set passwords to 'quickstart'"
 sudo apt-get -y install $LAMP_TOOLS
 
 
