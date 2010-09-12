@@ -2,18 +2,20 @@ Quickstart has been installed.  To complete the image:
 
 1) Configure Netbeans and Eclipse xdebug:
 
-NETBEANS: 
-  Install updates (popup)
-  Seems to work ootb
+    NETBEANS: 
+      Install updates (popup)
+      Seems to work ootb
 
-ECLIPSE:
-  Help->Check for updates
-  Window->Preferences->PHP->Debug, set the default to Xdebug.
-  Window->Preferences->General->Web Browser, use external browser (default system web browser)
+    ECLIPSE:
+      Help->Check for updates
+      Window->Preferences->General->Web Browser, use external browser (default system web browser)
+      Window->Preferences->PHP->Debug, set the default to Xdebug.
+ 
+2) INSTALL EXTENSIONS AGAIN  (updating to virtual kernel blew away old copy)
 
-1) Shutdown
+3) Shutdown
 
-2) Export virtual machine
+4) Export virtual machine
 
-3) Create torrent
+5) Create torrent
 

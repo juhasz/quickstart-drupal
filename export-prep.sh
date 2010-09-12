@@ -5,9 +5,9 @@
 # Remove unneeded packages
 sudo apt-get autoremove
 sudo deborphan --guess-all # display them to user
-sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge   
+sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge
 sudo deborphan --guess-all # display them to user
-sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge   
+sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge
 
 # Clean out downloaded packages
 sudo apt-get clean
