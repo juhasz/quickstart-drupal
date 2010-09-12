@@ -39,7 +39,7 @@ For more information:
 
 # ################################################################################ Drush
 # Install drush
-DRUSH_FILE='drush-All-versions-3.0.tar.gz'
+DRUSH_FILE='drush-6.x-3.3.tar.gz'
 wget http://ftp.drupal.org/files/projects/$DRUSH_FILE
 tar -xzf $DRUSH_FILE
 chmod u+x ~/drush/drush
@@ -65,6 +65,7 @@ cat > /var/www/index.php <<END
   <h1>Drupaldev Quickstart:</h1>
     <ul>
       <li><a href='http://localhost/phpmyadmin'>phpmyadmin</a> database editor</li>
+      <li><a href='http://localhost/profiler'>Webgrind profiler</a></li>
       <li><a href='http://drupal.org/node/788080'>Quickstart documentation</li>
       <li><a href='http://drupal.org/node/477684'>Drush</a> command line reference</li>
       <li><a href='http://drupalmodules.com/'>DrupalModules.com</a> and <a href='http://drupal.org/project/usage'>Module Usage Statistics</a></li>
@@ -220,25 +221,20 @@ xdebug.profiler_output_dir=/home/quickstart/websites/logs/profiler
 
 
 # ################################################################################ Install a web-based profile viewer
-cd ~/quickstart/websites/logs/profiler
+cd ~/websites/logs/profiler
 
 wget -O webgrind.zip http://webgrind.googlecode.com/files/webgrind-release-1.0.zip
 unzip webgrind.zip
-mv webgrind/* .
-rmdir webgrind
 rm webgrind.zip
 
 # Setup Web server
 echo "127.0.0.1 webgrind" | sudo tee -a /etc/hosts
-echo "<VirtualHost *:80>
-	DocumentRoot /home/quickstart/websites/logs/profiler/
-	<Directory /home/quickstart/websites/logs/profiler/>
-		Options Indexes FollowSymLinks MultiViews
-		AllowOverride All
-		Order allow,deny
-		allow from all
-	</Directory>
-</VirtualHost>" | sudo tee /etc/apache2/sites-enabled/000-default
+echo "Alias /profiler /home/quickstart/websites/logs/profiler/webgrind
+
+<Directory /home/quickstart/websites/logs/profiler/webgrind>
+  Allow from All
+</Directory>
+" | sudo tee /etc/apache2/conf.d/webgrind
 
 
 
@@ -249,7 +245,6 @@ sudo apt-get -y install solr-common solr-tomcat
 
 
 # ################################################################################ Restart apache
-echo "quickstart ALL=NOPASSWD: /usr/sbin/apache2ctl" | sudo tee -a /etc/sudoers > /dev/null
 sudo apache2ctl restart
 
 
