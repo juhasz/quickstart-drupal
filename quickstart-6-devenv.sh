@@ -209,7 +209,9 @@ rm -rf temp
 
 # Configure xdebug
 mkdir /home/quickstart/websites/logs/profiler
-echo "xdebug.remote_enable=on
+echo "
+zend_extension=/usr/lib/php5/20090626+lfs/xdebug.so
+xdebug.remote_enable=on
 xdebug.remote_handler=dbgp
 xdebug.remote_host=localhost
 xdebug.remote_port=9000

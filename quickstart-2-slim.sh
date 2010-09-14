@@ -141,6 +141,6 @@ df -h -T > ~/quickstart/quickstart-size-slim.txt
 # 3.0gb -> 2.2gb
 
 # To "unslim" try this (untested, and written for 9.04):
-#   sudo aptitude install ubuntu-desktop ubuntu-standard 
-#   sudo aptitude install xserver-xorg-input-all xserver-xorg-video-all nvidia-common
-#   sudo aptitude install ubuntu-restricted-extras
+#   sudo apt-get install ubuntu-desktop ubuntu-standard 
+#   sudo apt-get install xserver-xorg-input-all xserver-xorg-video-all nvidia-common
+#   sudo apt-get install ubuntu-restricted-extras
