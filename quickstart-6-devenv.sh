@@ -185,8 +185,7 @@ df -h -T > ~/quickstart/quickstart-size-end.txt
 
 # Configure email collector
 mkdir /home/quickstart/websites/logs/mail
-chmod 666 /home/quickstart/websites/logs/mail
-chmod +x /home/quickstart/quickstart/sendmail.php
+chmod -R 777 /home/quickstart/websites/logs/mail
 sudo sed -i 's/;sendmail_path =/sendmail_path=\/home\/quickstart\/quickstart\/sendmail.php/g' /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
 
 
@@ -238,7 +237,7 @@ echo "Alias /profiler /home/quickstart/websites/logs/profiler/webgrind
 </Directory>
 " | sudo tee /etc/apache2/conf.d/webgrind
 
-
+chmod -R 777 /home/quickstart/websites/logs/profiler
 
 # ################################################################################ Apache SOLR - 183mb
 
