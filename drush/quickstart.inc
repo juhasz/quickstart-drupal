@@ -93,16 +93,20 @@ function quickstart_create_apache($domain, $params) {
   $str_config = str_replace("#DOMAIN#", $domain, $str_config);
   $str_config = str_replace("#CODEPATH#", $codepath, $str_config);
 
-  $config_handle = fopen("/etc/apache2/sites-enabled/$domain", "w+");
+  $config_handle = fopen("/etc/apache2/sites-available/$domain", "w+");
   fwrite($config_handle, $str_config);
 
+  // enable using script
+  quickstart_shell_exec("sudo a2ensite $domain"); 
+
   // restart apache
-  quickstart_shell_exec("sudo apache2ctl restart"); // hopefully sudoers file negates password check
+  quickstart_shell_exec("sudo apache2ctl restart");
 }
 function quickstart_destroy_apache($domain, $params) {
-  $filename = "/etc/apache2/sites-enabled/$domain";
+  quickstart_shell_exec("sudo a2dissite $domain");
+  $filename = "/etc/apache2/sites-available/$domain";
   if (file_exists($filename)) unlink($filename);  // unlink = delete file
-  quickstart_shell_exec("sudo apache2ctl restart"); // hopefully sudoers file negates password check
+  quickstart_shell_exec("sudo apache2ctl restart");
 }
 function quickstart_backup_apache($domain, $params) {
   // FIXME
