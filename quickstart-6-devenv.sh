@@ -187,6 +187,7 @@ df -h -T > ~/quickstart/quickstart-size-end.txt
 mkdir /home/quickstart/websites/logs/mail
 chmod -R 777 /home/quickstart/websites/logs/mail
 sudo sed -i 's/;sendmail_path =/sendmail_path=\/home\/quickstart\/quickstart\/sendmail.php/g' /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
+chmod +x /home/quickstart/quickstart/sendmail.php 
 
 
 
@@ -229,7 +230,10 @@ unzip webgrind.zip
 rm webgrind.zip
 
 # Setup Web server
-echo "127.0.0.1 webgrind" | sudo tee -a /etc/hosts
+echo "127.0.0.1 webgrind
+
+" | sudo tee -a /etc/hosts
+
 echo "Alias /profiler /home/quickstart/websites/logs/profiler/webgrind
 
 <Directory /home/quickstart/websites/logs/profiler/webgrind>
@@ -249,8 +253,4 @@ sudo apt-get -y install solr-common solr-tomcat
 sudo apache2ctl restart
 
 
-
-# ################################################################################ Make example.dev
-cd ~/websites
-drush quickstart-create all --domain=example.dev
 

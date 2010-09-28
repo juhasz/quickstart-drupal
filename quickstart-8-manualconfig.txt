@@ -4,18 +4,29 @@ Quickstart has been installed.  To complete the image:
 
     NETBEANS: 
       Install updates (popup)
-      Seems to work ootb
+      Tools->Options->General, web browser->Firefox
 
     ECLIPSE:
       Help->Check for updates
-      Window->Preferences->General->Web Browser, use external browser (default system web browser)
+      Window->Preferences->General->Web Browser, use external browser.  Add firefox (/usr/bin/firefox)
       Window->Preferences->PHP->Debug, set the default to Xdebug.
- 
-2) INSTALL EXTENSIONS AGAIN  (updating to virtual kernel blew away old copy)
 
-3) Shutdown
+2) Update firefox plugins 
 
-4) Export virtual machine
+3) Reboot
 
-5) Create torrent
+4) INSTALL EXTENSIONS AGAIN  (updating to virtual kernel blew away old copy)
+
+5) Create test site example.dev
+   cd ~/websites
+   drush quickstart-create all --domain=example.dev
+
+6) Prepare for export:
+   bash -x ~/quickstart/export-prep.sh
+
+7) Shutdown
+
+8) Export virtual machine
+
+9) Create torrent
 
