@@ -17,7 +17,7 @@ Quickstart has been installed.  To complete the image:
 
 4) INSTALL EXTENSIONS AGAIN  (updating to virtual kernel blew away old copy)
 
-5) Create test site example.dev
+5) Create test site example.dev (this seems to need a reboot)
    cd ~/websites
    drush quickstart-create all --domain=example.dev
 
