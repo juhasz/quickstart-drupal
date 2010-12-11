@@ -123,12 +123,6 @@ function quickstart_drush_command() {
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
   );
 */
-  $items['quickstart-setup'] = array(
-          'description' => "Configures a system to use quickstart drush commands.  Run as root.",
-          'examples' => array(
-                  'sudo drush quickstart-setup',
-          ),
-          'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
   );
 
   return $items;
@@ -148,8 +142,6 @@ function quickstart_drush_command() {
  */
 function quickstart_drush_help($section) {
   switch ($section) {
-    case 'drush:quickstart-setup':
-      return dt("Configures a system to use quickstart drush commands.  Use sudo.");
   }
 }
 
@@ -205,10 +197,6 @@ function quickstart_params($required) {
 /**
  * Drush callbacks
  */
-
-function drush_quickstart_setup() {
-  quickstart_shell_exec('mv ~/.drush/quickstart/*.make ~/websites'); // make templates.  Use mv so path doesn't get confused, and so don't acidentally overwrite work if run again.
-}
 
 function drush_quickstart_create() {
 

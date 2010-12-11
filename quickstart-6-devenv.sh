@@ -39,7 +39,8 @@ For more information:
 
 # ################################################################################ Drush
 # Install drush
-DRUSH_FILE='drush-6.x-3.3.tar.gz'
+
+DRUSH_FILE='drush-6.x-4.0-rc3.tar.gz'
 wget http://ftp.drupal.org/files/projects/$DRUSH_FILE
 tar -xzf $DRUSH_FILE
 chmod u+x ~/drush/drush
@@ -49,11 +50,10 @@ rm $DRUSH_FILE
 # Install drush make
 mkdir ~/.drush
 drush dl drush_make --destination=/home/quickstart/.drush
-# git clone git://git.aegirproject.org/provision ~/.drush/provision
 
 # Install drush quickstart
 ln -s ~/quickstart/drush ~/.drush/quickstart
-drush quickstart-setup
+mv ~/.drush/quickstart/*.make ~/websites
 
 # ################################################################################ Replace localhost/index.html
 
