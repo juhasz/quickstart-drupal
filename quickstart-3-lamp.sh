@@ -9,6 +9,9 @@ sudo apt-get -y install cvs subversion git-core bzr
 sudo apt-get -y install wget curl
 
 
+# ##### Install openssh-server
+sudo apt-get -y install openssh-server
+
 
 # ##### Install LAMP packages
 
@@ -145,6 +148,12 @@ ln -s /etc/mysql/my.cnf              $CONFIGS/mysql.cnf
 sudo chmod g+w /etc/hosts
 ln -s /etc/hosts                     $CONFIGS/hosts
 
+echo "This folder contains links (shortcuts) to LAMP configuration files located around 
+quickstart.  To see the links, and where they point to, start a terminal and type:
+
+ll
+
+This will list the files and where they link to." > readme.txt
 
 # ###### Restart web server
 

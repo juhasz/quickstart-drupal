@@ -243,10 +243,6 @@ echo "Alias /profiler /home/quickstart/websites/logs/profiler/webgrind
 
 chmod -R 777 /home/quickstart/websites/logs/profiler
 
-# ################################################################################ Apache SOLR - 183mb
-
-sudo apt-get -y install solr-common solr-tomcat
-
 
 
 # ################################################################################ Restart apache

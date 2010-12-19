@@ -13,7 +13,14 @@ sudo apt-get install -f #this just fixes any dependencies, usually just daemon
 
 mkdir /home/quickstart/hudson
 
-zenity --info --text="Around line 15 change the user to: HUDSON_USER=quickstart and around line 40 change the port to HTTP_PORT=8081"
+sudo /etc/init.d/hudson stop
+# ######################################### Configure
 
-sudo gedit /etc/default/hudson
+sudo sed -i 's/HUDSON_USER=hudson/HUDSON_USER=quickstart/g'     /etc/default/hudson
+sudo sed -i 's/HTTP_PORT=8080/HTTP_PORT=8081/g'       /etc/default/hudson
+sudo sed -i 's/\/var\/lib\/hudson/\/home\/quickstart\/hudson/g'       /etc/default/hudson
 
+sudo /etc/init.d/hudson start
+sleep 3s
+zenity --info --text="*** Opening Husdon ***"
+firefox http://localhost:8081

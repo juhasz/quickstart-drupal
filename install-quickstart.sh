@@ -6,7 +6,7 @@
 #
 # 2) Paste in these three commands: (install cvs, download from drupal.org, run install.sh)
 #
-# sudo aptitude -y install cvs
+# sudo apt-get -y install cvs
 # cvs -z6 -d:pserver:anonymous:anonymous@cvs.drupal.org:/cvs/drupal-contrib checkout -d quickstart contributions/modules/quickstart
 # bash ~/quickstart/install-quickstart.sh
 
