@@ -15,9 +15,13 @@ sudo apt-get -y install openssh-server
 
 # ##### Install LAMP packages
 
-# before we apt-get, let's set some config answers
+# Define package names, and debconf config values.  Keep package names in sync.
+LAMP_APACHE="apache2 apache2-threaded-dev libapache2-mod-php5 libapache2-svn"
+LAMP_MYSQL="mysql-server-5.1"
 echo mysql-server-5.1 mysql-server/root_password        password quickstart | sudo debconf-set-selections
 echo mysql-server-5.1 mysql-server/root_password_again  password quickstart | sudo debconf-set-selections
+LAMP_PHP="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql php-pear php5-imap php5-xdebug php-apc"
+LAMP_TOOLS="phpmyadmin"
 echo phpmyadmin       phpmyadmin/reconfigure-webserver  text     apache2    | sudo debconf-set-selections
 echo phpmyadmin       phpmyadmin/dbconfig-install       boolean  true       | sudo debconf-set-selections
 echo phpmyadmin       phpmyadmin/app-password-confirm   password quickstart | sudo debconf-set-selections
@@ -26,18 +30,8 @@ echo phpmyadmin       phpmyadmin/password-confirm       password quickstart | su
 echo phpmyadmin       phpmyadmin/setup-password         password quickstart | sudo debconf-set-selections
 echo phpmyadmin       phpmyadmin/mysql/app-pass         password quickstart | sudo debconf-set-selections
 
-  
-# Now install the packages.  debconf shouldn't need to ask so many questions
-LAMP_APACHE="apache2 apache2-threaded-dev libapache2-mod-php5 libapache2-svn"
-LAMP_MYSQL="mysql-server"
-LAMP_PHP="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql php-pear php5-imap php5-xdebug php-apc"
-LAMP_TOOLS="phpmyadmin"
-sudo apt-get -y install $LAMP_APACHE
-zenity --info --text="*** Set all passwords to 'quickstart' ***"
-sudo apt-get -y install $LAMP_MYSQL
-sudo apt-get -y install $LAMP_PHP 
-zenity --info --text="Apache config will start.\n1) Select 'apache' to configure (press space).\n2) Select 'yes' to phpmyadmin.\n3) Set passwords to 'quickstart'"
-sudo apt-get -y install $LAMP_TOOLS
+# Now install the packages.  debconf shouldn't need to ask so many questions.
+sudo apt-get -y install $LAMP_APACHE $LAMP_MYSQL $LAMP_PHP $LAMP_TOOLS
 
 
 # ###### Configure APACHE
