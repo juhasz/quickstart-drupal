@@ -18,7 +18,7 @@ zenity --info --text="Firefox profile manager will start.\n1) Delete temp profil
 firefox -ProfileManager
 rm profileFx3{default}.fbu
 
-# Install chrome browser (Webkit (fork of KHTML/Konquerer).  Used by Safari)
+# Install chrome browser (Webkit - fork of KHTML/Konquerer, also used by Safari)
 sudo apt-get -y install chromium-browser flashplugin-nonfree
 sudo ln -s /usr/lib/flashplugin-installer/libflashplayer.so /usr/lib/chromium-browser/plugins/
 

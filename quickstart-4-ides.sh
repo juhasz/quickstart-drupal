@@ -4,7 +4,7 @@
 sudo apt-get -y install default-jre
 
 
-# Download and install netbeans - 100mb
+# Download and install netbeans - 122mb
 NETBEANS_URL="http://download.netbeans.org/netbeans/6.9.1/final/bundles/netbeans-6.9.1-ml-php-linux.sh"
 sudo apt-get -y install wget
 cd ~/Desktop
@@ -16,9 +16,15 @@ rm netbeans.sh
 cd ~
 
 
-# Download and install eclipse - About ? mb
-sudo add-apt-repository ppa:yogarine/eclipse/ubuntu && sudo apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install eclipse eclipse-pdt eclipse-plugin-cvs eclipse-subclipse
+# Download and install eclipse - 167mb
+ECLIPSE_URL="http://mirrors.ibiblio.org/pub/mirrors/eclipse/technology/epp/downloads/release/helios/SR1/eclipse-php-helios-SR1-linux-gtk.tar.gz"
+wget -O eclipse.tar.gz $ECLIPSE_URL
+tar -xvf eclipse.tar.gz
+sudo ln -s /home/quickstart/eclipse/eclipse /usr/bin/eclipse 
+rm eclipse.tar.gz
+# PPA's are a good idea, but about 458mb!
+#sudo add-apt-repository ppa:yogarine/eclipse/ubuntu && sudo apt-get update
+#sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install eclipse eclipse-pdt eclipse-plugin-cvs eclipse-subclipse
 
 
 # Config gedit-2
@@ -37,10 +43,10 @@ sudo apt-get -y install gedit-plugins
 gconftool-2 -s /apps/gnome-terminal/profiles/Default/scrollback_unlimited --type=bool true
 
 
-# Install graphics editors - weights about 54mb
+# Install graphics editors - weights about 25mb
 sudo apt-get -y install gimp
 
-# Install graphical version control - weighs about 83mb
+# Install graphical version control - weighs about 58mb
 sudo add-apt-repository ppa:rabbitvcs/ppa && sudo apt-get update
 sudo apt-get -y install rabbitvcs-nautilus
 sudo killall nautilus
