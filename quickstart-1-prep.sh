@@ -13,12 +13,14 @@ sudo apt-get -y upgrade
 # Removed for 10.10 - http://bugs.launchpad.net/ubuntu/+source/linux/+bug/69224
 #sudo apt-get -y install linux-virtual linux-headers-virtual 
 
-# Install dkms - cause virtualbox recommends it for compiling future guest extensions.
+# Install guest additions - dkms recommended on virtualbox.org for upgrade compatibility
+sudo apt-get -y install build-essential linux-headers-$(uname -r)
 sudo apt-get -y install dkms
+sudo apt-get -y install virtualbox-ose-guest-x11
 
 
 ## Networking fixes
-# Removed for 10.10 - not a problem
+# Removed for 10.10 - not a problem anymore - DELETEME FIXME
 
 # Fix bug where needed to manually dhcp network
 #echo "auto eth0
@@ -40,12 +42,8 @@ df -h -T > ~/quickstart/quickstart-size-start.txt
 # turn off screen saver
 gconftool-2 -s /apps/gnome-screensaver/idle_activation_enabled --type=bool false
 
-# turn off login sounds
+# turn off sounds - first 2 are event sounds (bongos).  last is login sound (hummm) - brutish but works.
 gconftool-2 -s /apps/gdm/simple-greeter/settings-manager-plugins/sound/active --type=bool false
 gconftool-2 -s /gnome/sound/event_sounds --type=bool false
-
-
-
-
-
+sudo mv /usr/share/gnome/autostart/libcanberra-login-sound.desktop /usr/share/gnome/autostart/libcanberra-login-sound.desktop.old
 
