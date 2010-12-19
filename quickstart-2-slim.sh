@@ -3,22 +3,20 @@
 # See also http://benhodge.wordpress.com/2008/02/17/cleaning-up-a-ubuntu-gnulinux-system/
 
 # FIXME means there may be more space to save.
+# Current version removes: ~800g.  With export_prep.sh: ~900g
 
 # 0mb
 sudo apt-get -y autoremove
 
-# Package to find orphan packages
-sudo apt-get -y install deborphan 
-# 0mb - Remove orphan packages - do a couple times
-sudo deborphan --guess-all # display them to user
-sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge   
+# Cleaning utilities
+sudo apt-get -y install deborphan autoclean bleachbit
 
 # 362mb - Open office
 sudo apt-get -y remove --purge openoffice.org-core openoffice.org-common openoffice.org-writer openoffice.org-calc openoffice.org-math \
      openoffice.org-impress openoffice.org-base-core openoffice.org-draw openoffice.org-emailmerge openoffice.org-gnome openoffice.org-gtk \
      openoffice.org-help-en-gb openoffice.org-help-en-us openoffice.org-l10n-en-gb openoffice.org-l10n-en-za openoffice.org-style-human \
      openoffice.org-thesaurus-en-au python-uno language-support-writing-en openoffice.org-thesaurus-en-us openoffice.org-hyphenation \
-     openoffice.org-hyphenation-en-us openoffice.org-l10n-common language-support-en thunderbird-locale-en-gb uno-libs3 ure
+     openoffice.org-hyphenation-en-us openoffice.org-l10n-common language-support-en uno-libs3 ure
 #  18mb - Games
 sudo apt-get -y remove --purge quadrapassel gbrainy aisleriot gnomine gnome-mahjongg gnome-sudoku
 #  12mb - Accessability
@@ -28,36 +26,37 @@ sudo apt-get -y remove --purge xscreensaver-data xscreensaver-gl screensaver-def
 # 144mb - User guide
 sudo apt-get -y remove --purge gnome-user-guide gnome-user-guide-en ubuntu-docs             
 #   3mb - Bluetooth FIXME
-sudo apt-get -y remove --purge gnome-bluetooth gnome-user-share bluez-gnome bluez bluetooth bluez-utils bluez-alsa bluez-gstreamer bluez-cups 
+sudo apt-get -y remove --purge gnome-bluetooth bluez bluez-alsa bluez-gstreamer bluez-cups 
 #  .3mb - Skype clone FIXME (9)
-sudo apt-get -y remove --purge espeak ekiga                                                 
+sudo apt-get -y remove --purge espeak                                                 
 #  23mb - Email FIXME (75)
 sudo apt-get -y remove --purge evolution evolution-common evolution-data-server evolution-exchange evolution-indicator evolution-plugins evolution-webcal evolution-couchdb libevolution
 #   1mb - Spam filter
 sudo apt-get -y remove --purge bogofilter bogofilter-bdb bogofilter-common                  
 #  63mb - Printing FIXME (98)
 sudo apt-get -y remove --purge ubuntu-standard \
-     cups cups-bsd cups-client cups-common cupsddk cupsddk-drivers \
+     cups cups-bsd cups-client cups-common \
      ghostscript ghostscript-x ghostscript-cups \
-     cups-driver-gutenprint hal-cups-utils python-cups \
+     cups-driver-gutenprint python-cups \
      system-config-printer-common system-config-printer-gnome system-config-printer-udev \
-     foo2zjs foomatic-db foomatic-db-engine foomatic-filters foomatic-db-hpijs \
+     foo2zjs foomatic-db-engine foomatic-filters \
      min12xxw openprinting-ppds pnm2ppa pxljr splix hplip-data hplip hpijs libcupsmime1 libcupsdriver1 libgutenprint2 libcupsppdc1
 # 15mb - Scanner drivers
-sudo apt-get -y remove --purge xsane sane-utils xsane-common simple-scan libsane libsane-hpaio
+sudo apt-get -y remove --purge sane-utils simple-scan libsane libsane-hpaio
 #  4mb - Shotwell photo manager
 sudo apt-get -y remove --purge shotwell
 #  3mb - Tomboy notepad
 sudo apt-get -y remove --purge tomboy
 #  28mb - Mono .net layer
-sudo apt-get -y remove --purge ubuntu-mono libart2.0-cil libgconf2.0-cil libglade2.0-cil libglib2.0-cil \
+sudo apt-get -y remove --purge libart2.0-cil libgconf2.0-cil libglade2.0-cil libglib2.0-cil \
   libgmime2.4-cil libgnome-vfs2.0-cil libgnome2.24-cil libgnomepanel2.24-cil libgtk2.0-cil \
   liblaunchpad-integration1.0-cil libmono-addins-gui0.2-cil libmono-addins0.2-cil libmono-cairo2.0-cil \
   libmono-corlib2.0-cil libmono-i18n-west2.0-cil libmono-posix2.0-cil \
   libmono-security2.0-cil libmono-sharpzip2.84-cil libmono-system2.0-cil \
   libndesk-dbus-glib1.0-cil libndesk-dbus1.0-cil mono-2.0-gac mono-gac mono-runtime
+  # don't include ubuntu-mono, or light-themes will go too (ambiance and clearlooks)
 #   8mb - Fancy GUI Compiz (FIXME 15)
-sudo apt-get -y remove --purge compiz compiz-core compiz-gnome compiz-plugins compiz-wrapper compiz-fusion-plugins-main compizconfig-backend-gconf libcompizconfig0 libdecoration0 
+sudo apt-get -y remove --purge compiz compiz-core compiz-gnome compiz-plugins compiz-fusion-plugins-main compizconfig-backend-gconf libcompizconfig0 libdecoration0 
 #   6mb - Example videos and stuff
 sudo apt-get -y remove --purge example-content
 #  43mb - Video drivers
@@ -80,8 +79,12 @@ sudo apt-get -y remove --purge vinagre libgtk-vnc-1.0-0 vino
 sudo apt-get -y remove --purge gwibber gwibber-service telepathy-gabble libtelepathy-glib0
 #   2mb - video editor
 sudo apt-get -y remove --purge pitivi
-#   5mb - Etc.
+#   5mb - Etc
 sudo apt-get -y remove --purge usb-creator-gtk checkbox-gtk ubuntuone-client-gnome jockey-gtk byobu computer-janitor-gtk gnome-dictionary
+#   2mb - Etc Etc
+sudo apt-get -y remove --purge xserver-xorg-input-all xserver-xorg-input-synaptics xserver-xorg-input-wacom #touchpad .5mb
+sudo apt-get -y remove --purge nvidia-96-modaliases nvidia-180-modaliases nvidia-173-modaliases # graphics card detection .1mb
+sudo apt-get -y remove --purge eog #graphic viewer 1.6mb
 
 # This is a hack, no way to "undo", not a good idea for non-english speakers.
 #sudo apt-get -y install localepurge # package to delete unnecessary translations.  Select en and en_us packages to keep them.
@@ -99,10 +102,6 @@ sudo apt-get -y remove --purge usb-creator-gtk checkbox-gtk ubuntuone-client-gno
 #sudo apt-get -y remove --purge ttf-arphic-uming ttf-indic-fonts-core ttf-lao ttf-sazanami-gothic ttf-sazanami-mincho ttf-thai-tlwg ttf-unfonts-core # Thai/korean/chinese/indian/lao fonts
 #   4mb - Doc utils
 #sudo apt-get -y remove --purge gnome-doc-utils
-
-sudo apt-get -y remove --purge xserver-xorg-input-all xserver-xorg-input-synaptics xserver-xorg-input-wacom #touchpad .5mb
-sudo apt-get -y remove --purge nvidia-96-modaliases nvidia-180-modaliases nvidia-173-modaliases # graphics card detection .1mb
-sudo apt-get -y remove --purge eog #graphic viewer 1.6mb
 
 
 # Multi-media Players
