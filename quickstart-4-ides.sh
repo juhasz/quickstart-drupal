@@ -5,7 +5,7 @@ sudo apt-get -y install default-jre
 
 
 # Download and install netbeans - 100mb
-NETBEANS_URL="http://download.netbeans.org/netbeans/6.9/final/bundles/netbeans-6.9-ml-php-linux.sh"
+NETBEANS_URL="http://download.netbeans.org/netbeans/6.9.1/final/bundles/netbeans-6.9.1-ml-php-linux.sh"
 sudo apt-get -y install wget
 cd ~/Desktop
 wget -O netbeans.sh $NETBEANS_URL
@@ -16,7 +16,7 @@ rm netbeans.sh
 cd ~
 
 
-# Download and install eclipse - About 341 mb
+# Download and install eclipse - About ? mb
 sudo add-apt-repository ppa:yogarine/eclipse/ubuntu && sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install eclipse eclipse-pdt eclipse-plugin-cvs eclipse-subclipse
 
@@ -45,4 +45,5 @@ sudo add-apt-repository ppa:rabbitvcs/ppa && sudo apt-get update
 sudo apt-get -y install rabbitvcs-nautilus
 sudo killall nautilus
 
+# Git GUI?
 
