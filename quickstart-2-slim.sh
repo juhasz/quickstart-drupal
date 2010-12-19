@@ -13,7 +13,7 @@ sudo apt-get -y install deborphan
 sudo deborphan --guess-all # display them to user
 sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge   
 
-# 347mb - Open office
+# 362mb - Open office
 sudo apt-get -y remove --purge openoffice.org-core openoffice.org-common openoffice.org-writer openoffice.org-calc openoffice.org-math openoffice.org-impress openoffice.org-base-core openoffice.org-draw openoffice.org-emailmerge   openoffice.org-gnome openoffice.org-gtk openoffice.org-help-en-gb openoffice.org-help-en-us openoffice.org-l10n-en-gb openoffice.org-l10n-en-za openoffice.org-style-human openoffice.org-thesaurus-en-au python-uno language-support-writing-en openoffice.org-thesaurus-en-us openoffice.org-hyphenation openoffice.org-hyphenation-en-us openoffice.org-l10n-common language-support-translations-en language-support-en thunderbird-locale-en-gb uno-libs3 ure
 #  18mb - Games
 sudo apt-get -y remove --purge quadrapassel gbrainy aisleriot gnomine gnome-mahjongg gnome-sudoku
@@ -27,11 +27,11 @@ sudo apt-get -y remove --purge gnome-user-guide gnome-user-guide-en ubuntu-docs
 sudo apt-get -y remove --purge gnome-bluetooth gnome-user-share bluez-gnome bluez bluetooth bluez-utils bluez-alsa bluez-gstreamer bluez-cups 
 #  .3mb - Skype clone FIXME (9)
 sudo apt-get -y remove --purge espeak ekiga                                                 
-#  18mb - Email FIXME (75)
+#  23mb - Email FIXME (75)
 sudo apt-get -y remove --purge evolution evolution-common evolution-data-server evolution-exchange evolution-indicator evolution-plugins evolution-webcal evolution-couchdb libevolution
 #   1mb - Spam filter
 sudo apt-get -y remove --purge bogofilter bogofilter-bdb bogofilter-common                  
-#  55mb - Printing FIXME (98)
+#  63mb - Printing FIXME (98)
 sudo apt-get -y remove --purge ubuntu-standard \
      cups cups-bsd cups-client cups-common cupsddk cupsddk-drivers \
      ghostscript ghostscript-x ghostscript-cups \
@@ -39,13 +39,13 @@ sudo apt-get -y remove --purge ubuntu-standard \
      system-config-printer-common system-config-printer-gnome system-config-printer-udev \
      foo2zjs foomatic-db foomatic-db-engine foomatic-filters foomatic-db-hpijs \
      min12xxw openprinting-ppds pnm2ppa pxljr splix hplip-data hplip hpijs libcupsmime1 libcupsdriver1 libgutenprint2 libcupsppdc1
-#  1mb - Scanner drivers FIXME
+# 15mb - Scanner drivers
 sudo apt-get -y remove --purge xsane sane-utils xsane-common simple-scan libsane libsane-hpaio
 #  4mb - Shotwell photo manager
 sudo apt-get -y remove --purge shotwell
 #  3mb - Tomboy notepad
 sudo apt-get -y remove --purge tomboy
-#  22mb - Mono .net layer
+#  28mb - Mono .net layer
 sudo apt-get -y remove --purge ubuntu-mono libart2.0-cil libgconf2.0-cil libglade2.0-cil libglib2.0-cil \
   libgmime2.4-cil libgnome-vfs2.0-cil libgnome2.24-cil libgnomepanel2.24-cil libgtk2.0-cil \
   liblaunchpad-integration1.0-cil libmono-addins-gui0.2-cil libmono-addins0.2-cil libmono-cairo2.0-cil \
@@ -53,9 +53,9 @@ sudo apt-get -y remove --purge ubuntu-mono libart2.0-cil libgconf2.0-cil libglad
   libmono-security2.0-cil libmono-sharpzip2.84-cil libmono-system2.0-cil \
   libndesk-dbus-glib1.0-cil libndesk-dbus1.0-cil mono-2.0-gac mono-gac mono-runtime
 #   8mb - Fancy GUI Compiz (FIXME 15)
-sudo apt-get -y remove --purge compiz compiz-core compiz-gnome compiz-plugins compiz-wrapper compiz-fusion-plugins-extra compiz-fusion-plugins-main compizconfig-backend-gconf libcompizconfig0 libdecoration0 
+sudo apt-get -y remove --purge compiz compiz-core compiz-gnome compiz-plugins compiz-wrapper compiz-fusion-plugins-main compizconfig-backend-gconf libcompizconfig0 libdecoration0 
 #   6mb - Example videos and stuff
-sudo apt-get -y remove --purge example-content gnome-media
+sudo apt-get -y remove --purge example-content
 #  43mb - Video drivers
 sudo apt-get -y remove --purge nvidia-common libgl1-mesa-dri                                       
 #   8mb - Video Drivers
@@ -69,11 +69,11 @@ sudo apt-get -y remove --purge empathy empathy-common nautilus-sendto-empathy na
 #   5mb - Laptop stuff
 sudo apt-get -y remove --purge gnome-power-manager wireless-tools 
 #   6mb - Desktop theming
-sudo apt-get -y remove --purge gnome-accessibility-themes gnome-themes-selected gnome-themes-ubuntu ubuntu-sounds gnome-games-common 
+sudo apt-get -y remove --purge gnome-accessibility-themes ubuntu-sounds gnome-games-common 
 #   3mb - VNC
 sudo apt-get -y remove --purge vinagre libgtk-vnc-1.0-0 vino
 #   3mb - Chat client
-sudo apt-get -y remove --pruge gwibber gwibber-service 
+sudo apt-get -y remove --purge gwibber gwibber-service telepathy-gabble libtelepathy-glib0
 #   2mb - video editor
 sudo apt-get -y remove --purge pitivi
 #   5mb - Etc.
@@ -124,7 +124,7 @@ sudo apt-get -y remove --purge eog #graphic viewer 1.6mb
 
 # 0mb
 sudo apt-get -y autoremove
-# 84mb - Remove orphan packages - do a couple times
+# 32mb - Remove orphan packages - do a couple times
 sudo deborphan --guess-all # display them to user
 sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge   
 sudo deborphan --guess-all # display them to user
