@@ -14,7 +14,11 @@ sudo deborphan --guess-all # display them to user
 sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge   
 
 # 362mb - Open office
-sudo apt-get -y remove --purge openoffice.org-core openoffice.org-common openoffice.org-writer openoffice.org-calc openoffice.org-math openoffice.org-impress openoffice.org-base-core openoffice.org-draw openoffice.org-emailmerge   openoffice.org-gnome openoffice.org-gtk openoffice.org-help-en-gb openoffice.org-help-en-us openoffice.org-l10n-en-gb openoffice.org-l10n-en-za openoffice.org-style-human openoffice.org-thesaurus-en-au python-uno language-support-writing-en openoffice.org-thesaurus-en-us openoffice.org-hyphenation openoffice.org-hyphenation-en-us openoffice.org-l10n-common language-support-translations-en language-support-en thunderbird-locale-en-gb uno-libs3 ure
+sudo apt-get -y remove --purge openoffice.org-core openoffice.org-common openoffice.org-writer openoffice.org-calc openoffice.org-math \
+     openoffice.org-impress openoffice.org-base-core openoffice.org-draw openoffice.org-emailmerge openoffice.org-gnome openoffice.org-gtk \
+     openoffice.org-help-en-gb openoffice.org-help-en-us openoffice.org-l10n-en-gb openoffice.org-l10n-en-za openoffice.org-style-human \
+     openoffice.org-thesaurus-en-au python-uno language-support-writing-en openoffice.org-thesaurus-en-us openoffice.org-hyphenation \
+     openoffice.org-hyphenation-en-us openoffice.org-l10n-common language-support-en thunderbird-locale-en-gb uno-libs3 ure
 #  18mb - Games
 sudo apt-get -y remove --purge quadrapassel gbrainy aisleriot gnomine gnome-mahjongg gnome-sudoku
 #  12mb - Accessability
