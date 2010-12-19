@@ -176,10 +176,6 @@ ln -s ~/websites ~/Desktop/websites
 ln -s /mnt/vbox-shared ~/Desktop/vbox-shared
 
 
-cd ~
-df -h -T > ~/quickstart/quickstart-size-end.txt
-
-
 
 # ################################################################################ Email catcher
 

@@ -17,3 +17,7 @@ APT::Periodic::Unattended-Upgrade \"1\";
 # setup icons on top of screen
 # created with 
 gconftool-2 --load ~/quickstart/config/my-panel-setup.entries
+
+# final size
+df -h -T > ~/quickstart/quickstart-size-end.txt
+
