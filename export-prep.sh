@@ -11,7 +11,6 @@ sudo deborphan --guess-all | xargs sudo apt-get -y remove --purge
 
 # Clean out downloaded packages
 sudo apt-get clean
-sudo aptitude clean
 
 # Clean up apt cache
 sudo rm /var/lib/apt/lists/*   # 44mb
