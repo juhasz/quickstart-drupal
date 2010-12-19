@@ -15,6 +15,19 @@ sudo apt-get -y install openssh-server
 
 # ##### Install LAMP packages
 
+# before we apt-get, let's set some config answers
+echo mysql-server-5.1 mysql-server/root_password        password quickstart | debconf-set-selections
+echo mysql-server-5.1 mysql-server/root_password_again  password quickstart | debconf-set-selections
+echo phpmyadmin       phpmyadmin/reconfigure-webserver  apache2 | debconf-set-selections
+echo phpmyadmin       phpmyadmin/dbconfig-install       true | debconf-set-selections
+echo phpmyadmin       phpmyadmin/app-password-confirm   password quickstart | debconf-set-selections
+echo phpmyadmin       phpmyadmin/mysql/admin-pass       password quickstart | debconf-set-selections
+echo phpmyadmin       phpmyadmin/password-confirm       password quickstart | debconf-set-selections
+echo phpmyadmin       phpmyadmin/setup-password         password quickstart | debconf-set-selections
+echo phpmyadmin       phpmyadmin/mysql/app-pass         password quickstart | debconf-set-selections
+
+  
+# Now install the packages.  debconf shouldn't need to ask so many questions
 LAMP_APACHE="apache2 apache2-threaded-dev libapache2-mod-php5 libapache2-svn"
 LAMP_MYSQL="mysql-server"
 LAMP_PHP="php5 php5-dev php5-common php5-xsl php5-curl php5-gd php5-pgsql php5-cli php5-mcrypt php5-sqlite php5-mysql php-pear php5-imap php5-xdebug php-apc"

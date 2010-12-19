@@ -86,7 +86,7 @@ sudo apt-get -y remove --purge xserver-xorg-input-all xserver-xorg-input-synapti
 sudo apt-get -y remove --purge nvidia-96-modaliases nvidia-180-modaliases nvidia-173-modaliases # graphics card detection .1mb
 sudo apt-get -y remove --purge eog #graphic viewer 1.6mb
 
-# This is a hack, no way to "undo", not a good idea for non-english speakers.
+#  40mb - This is a hack - no way to "undo", not a good idea for non-english speakers.
 #sudo apt-get -y install localepurge # package to delete unnecessary translations.  Select en and en_us packages to keep them.
 
 # Other opportunities FIXME
