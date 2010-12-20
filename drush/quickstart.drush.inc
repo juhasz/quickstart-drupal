@@ -123,8 +123,7 @@ function quickstart_drush_command() {
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
   );
 */
-  );
-
+dr
   return $items;
 }
 

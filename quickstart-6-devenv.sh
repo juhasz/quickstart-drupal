@@ -183,30 +183,30 @@ ln -s /mnt/vbox-shared ~/Desktop/vbox-shared
 mkdir /home/quickstart/websites/logs/mail
 chmod -R 777 /home/quickstart/websites/logs/mail
 sudo sed -i 's/;sendmail_path =/sendmail_path=\/home\/quickstart\/quickstart\/config\/sendmail.php/g' /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
-chmod +x /home/quickstart/quickstart/sendmail.php 
+chmod +x /home/quickstart/sendmail.php 
 
 
 
 # ################################################################################ Debugger/Profiler
 
-# Get xdebug 2.1
-cd ~
-mkdir temp
-cd temp
-wget http://www.xdebug.com/files/xdebug-2.1.0.tgz
-tar -xvzf xdebug-2.1.0.tgz
-cd xdebug-2.1.0
-phpize5
-./configure
-make
-sudo cp modules/xdebug.so /usr/lib/php5/20090626+lfs/
-cd ..
-rm -rf temp
+# Get xdebug 2.1 - Ubuntu 10.10 php5-xdebug is now 2.1 - commenting this out.
+#cd ~
+#mkdir temp
+#cd temp
+#wget http://www.xdebug.com/files/xdebug-2.1.0.tgz
+#tar -xvzf xdebug-2.1.0.tgz
+#cd xdebug-2.1.0
+#phpize5
+#./configure
+#make
+#sudo cp modules/xdebug.so /usr/lib/php5/20090626+lfs/
+#cd ..
+#rm -rf temp
+# echo ... zend_extension=/usr/lib/php5/20090626+lfs/xdebug.so  > xdebug.ini
 
 # Configure xdebug
 mkdir /home/quickstart/websites/logs/profiler
 echo "
-zend_extension=/usr/lib/php5/20090626+lfs/xdebug.so
 xdebug.remote_enable=on
 xdebug.remote_handler=dbgp
 xdebug.remote_host=localhost
