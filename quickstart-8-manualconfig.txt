@@ -7,8 +7,9 @@ Quickstart has been installed.  To complete the image:
       Tools->Options->General, web browser->Firefox
 
     ECLIPSE:
+      Set workspace to /home/quickstart/websites - use as default
       Help->Check for updates
-      Window->Preferences->General->Web Browser, use external browser.  Add firefox (/usr/bin/firefox)
+      Window->Preferences->General->Web Browser, use external browser.  Add firefox (Firefox, /usr/bin/firefox, %URL%)
       Window->Preferences->PHP->Debug, set the default to Xdebug.
 
 2) Update firefox plugins 
