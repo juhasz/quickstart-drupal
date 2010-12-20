@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# ################################################################################ Apache SOLR - 183mb
+
 # README:
 #
 # This script will install apache tomcat (a java app web server) and apache solr (a java search server)
@@ -20,8 +22,7 @@ Tomcat has been configured with a user 'admin' with password 'admin'
 
 For details on using solr with Drupal, see here: http://drupal.org/project/apachesolr
 "
-#
-# ################################################################################ Apache SOLR - 183mb
+
 
 sudo apt-get -y install tomcat6 tomcat6-admin tomcat6-common tomcat6-user tomcat6-docs tomcat6-examples
 sudo apt-get -y install solr-common solr-tomcat
