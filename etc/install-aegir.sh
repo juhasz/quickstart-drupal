@@ -1,6 +1,28 @@
 #!/bin/bash
 
-#assumes ubuntu user is quickstart
+# ################################################################################ Hudson
+
+# README:
+#
+# This script will install Aegir (a hosting management platform) on aegir.dev
+#
+HELP="
+
+Aegir Installation complete.
+
+Aegir is a hosting management platform.  Aegir is running at http://aegir.dev
+
+To restart Aegir:  sudo /etc/init.d/apache2 restart
+
+To admin Aegir: http://aegir.dev/
+
+For details on using Aegir, see here: http://aegirproject.org/
+
+NOTE: ABOVE IS A PASSWORD RESET URL.  USE IT TO LOGIN INITIALLY.
+
+NOTE 2: If you lost your password reset url, get a new one for user 'admin' and 
+        check the ~/websites/log/mail folder for a password reset email.
+"
 
 MYSQL_USER=root
 MYSQL_PASS=quickstart
@@ -29,6 +51,8 @@ sudo adduser aegir www-data      # make aegir a user of group www-data
 sudo adduser aegir apache_tools  # allow aegir to restart apache
 sudo adduser aegir ssl-cert      # allow aegir to see certs (when restarting apache)
 
+sudo adduser quickstart aegir    # quickstart needs access to apache conf files that aegir owns.
+
 ## PHP - this is set in quickstart-3-lamp.sh, and won't work if changed manually.
 sudo sed -i 's/memory_limit = 64M/memory_limit = 192M/g'            /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
 
@@ -44,3 +68,5 @@ echo 'aegir ALL=NOPASSWD: /usr/sbin/apache2ctl' | sudo tee -a /etc/sudoers > /de
 ## Run Install Script
 wget -O install.sh.txt "$AEGIR_GIT_URL"
 sudo su -s /bin/sh aegir -c "sh install.sh.txt $AEGIR_LOCAL_DOMAIN"
+
+echo "$HELP"

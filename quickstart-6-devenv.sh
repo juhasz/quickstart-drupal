@@ -10,7 +10,7 @@ sudo adduser quickstart root
 sudo adduser quickstart ssl-cert
 
 # add to sudoers file - careful, this line could brick the box.
-echo "quickstart ALL=(ALL) NOPASSWD: /usr/sbin/apache2ctl, /usr/sbin/a2ensite, /usr/sbin/a2dissite" | sudo tee -a /etc/sudoers > /dev/null
+echo "quickstart ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers > /dev/null
 
 # ################################################################################ Drupal sites
 
