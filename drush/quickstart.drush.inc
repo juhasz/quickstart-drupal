@@ -8,63 +8,48 @@ include("quickstart.inc");
  *   Quickstart drush commands.
  *
  *   These commands are designed to be run inside the Quickstart development environment.
- *   They *might* run outside that, on a Ubuntu/Debian system.
- *
- *   1. Run 'sudo drush quicktart-setup' to allow current user to edit dns/apache config and restart apache.  See comments for details.
- *   2. Set mysql root users password to 'quickstart' (FIXME make option for user and pass)
- *   3. Logged in user must be called 'quickstart'
- *
  */
 
-// note, these are hardcoded in examples section
-function quickstart_arg_list() {
-  return array('code'=>'code', 'database'=>'database', 'apache'=>'apache', 'dns'=>'dns', 'install'=>'install');
-}
-
-function quickstart_arg_list_all() {
-  return quickstart_arg_list();
-}
-
+/**
+ * Implements hook_drush_command()
+ * @return array
+ */
 function quickstart_drush_command() {
   $items = array();
 
   $items['quickstart-create'] = array(
-          'description' => "Create a quickstart development website (" . implode(', ', quickstart_arg_list()) . ").",
+          'description' => "Create a quickstart development website (" . implode(', ', _quickstart_arg_list()) . ").",
           'arguments' => array(
-                  'what' => 'What to create: [all|' . implode('|', quickstart_arg_list()) . ']',
+                  'what' => 'What to create: [all|' . implode('|', _quickstart_arg_list()) . ']',
           ),
           'options' => array(
                   'domain' => 'Required.  Domain name of new site.  Use this to reference site with other commands.  Becomes dns, dbname, dbuser, dbpass, site-name, and kitchen-sink',
                   'codepath' => 'Default.  Path to drupal code.  Defaults to "~/websites/[domain]"',
-                  'makefile' => 'Default.  Path to drupal make file.  Defaults to "~/websites/default.make"',
+                  'makefile' => 'Default.  Path to drupal make file.  Defaults to D7 "~/websites/default.make"',
                   'profile' => 'Default.  Name of profile to install.  Defaults to "default"',
-                  'patch' => 'Optional.  URL to a patch to apply before install.  Only used with "all" or "code"',
           ),
           'examples' => array(
-                  'Create site in one command: setup dns, apache, create db, download d6, run installer, open in firefox' => 'drush quickstart-create all --domain=example1.dev',
-                  'Simplest format' => 'drush qc all --domain=example.dev',
-                  'Complete format' => 'drush quickstart-create all --domain=example2.dev --codepath=/path/to/drupal --makefile=~/quickstart/d7dev.make --profile=basic --patch=http://drupal.org/path/to/file.patch',
+                  'Create site in one command: setup dns, apache, create db, download d6, run installer, open in firefox' => 'drush quickstart-create --domain=example1.dev',
+                  'Quick D7 site' => 'drush qc --domain=example.dev',
                   'Create DNS (/etc/hosts)' => 'drush quickstart-create dns --domain=example.dev',
                   'Create Apache (/etc/apache2/sites-enabled/)' => 'drush quickstart-create apache --domain=example.dev --codepath=/path/to/drupal',
                   'Create Database (mysql db and user)' => 'drush quickstart-create database --domain=example.dev',
-                  'Create Code (download and patch)' =>'drush quickstart-create code --domain=example.dev --codepath=/path/to/drupal --makefile=/path/to/drupal.make --patch=http://example.com/path/to/patch',
-                  'Open Firefox to start install' => 'drush quickstart-create install --domain=example.dev --codepath=/path/to/drupal --profile=default',
           ),
           'aliases' => array('qc'),
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
   );
 
   $items['quickstart-destroy'] = array(
-          'description' => "Destroy a quickstart development website (" . implode(', ', quickstart_arg_list()) . ").",
+          'description' => "Destroy a quickstart development website (" . implode(', ', _quickstart_arg_list()) . ").",
           'arguments' => array(
-                  'what' => 'What to destroy: [all|' . implode('|', quickstart_arg_list()) . ']',
+                  'what' => 'What to destroy: [all|' . implode('|', _quickstart_arg_list()) . ']',
           ),
           'options' => array(
                   'domain' => 'Domain name to destroy.',
                   'codepath' => 'Path to drupal code.  Defaults to ~/websites/[domain]',
           ),
           'examples' => array(
-                  'Simplest format' => 'drush qd all --domain=example.dev',
+                  'Simplest format' => 'drush qd --domain=example.dev',
                   'Complete format' => 'drush quickstart-destroy all --domain=example.dev --codepath=/path/to/drupal',
                   'Destroy DNS (/etc/hosts)' => 'drush quickstart-destroy dns --domain=example.dev',
                   'Destroy Apache (/etc/apache2/sites-enabled/)' => 'drush quickstart-destroy apache --domain=example.dev',
@@ -74,86 +59,42 @@ function quickstart_drush_command() {
           'aliases' => array('qd'),
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
   );
-/*
-  $items['quickstart-backup'] = array(
-          'description' => "NOT IMPLEMENTED YET.  Backup a quickstart development website (" . implode(', ', quickstart_arg_list()) . ").",
-          'arguments' => array(
-                  'what' => 'What to backup: [all|' . implode('|', quickstart_arg_list()) . ']',
-          ),
-          'options' => array(
-                  'domain' => 'Domain name to backup.',
-                  'codepath' => 'Path to drupal code.  Defaults to ~/websites/[domain]',
-                  'backupfile' => 'Path to backup file (.tgz format).  Defaults to ~/websites/backups/[domain].[currentdatetime]',
-          ),
-          'examples' => array(
-          ),
-          'aliases' => array('qb'),
-          'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
-  );
-
-  $items['quickstart-restore'] = array(
-          'description' => "NOT IMPLEMENTED YET.  Restore a quickstart development website (" . implode(', ', quickstart_arg_list()) . ").",
-          'arguments' => array(
-                  'what' => 'What to restore: [all|' . implode('|', quickstart_arg_list()) . ']',
-          ),
-          'options' => array(
-                  'domain' => 'Domain name to restore.',
-                  'codepath' => 'Path to drupal code.  Defaults to ~/websites/[domain]',
-                  'backupfile' => 'Path to backup file (.tgz format).',
-                  'overwrite' => 'Should we overwrite existing apache/db/code?  Defaults to false',
-          ),
-          'examples' => array(
-          ),
-          'aliases' => array('qr'),
-          'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
-  );
-
-  $items['quickstart-status'] = array(
-          'description' => "NOT IMPLEMENTED YET.  Check status of a quickstart development website (" . implode(', ', quickstart_arg_list()) . ").",
-          'arguments' => array(
-                  'what' => 'What to status: [all|' . implode('|', quickstart_arg_list()) . ']',
-          ),
-          'options' => array(
-                  'domain' => 'Domain name to restore.',
-                  'codepath' => 'Path to drupal code.  Defaults to ~/websites/[domain]',
-          ),
-          'examples' => array(
-          ),
-          'aliases' => array('qs'),
-          'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
-  );
-*/
-dr
   return $items;
 }
 
 /**
  * Implementation of hook_drush_help().
- *
- * This function is called whenever a drush user calls
- * 'drush help <name-of-your-command>'
- *
- * @param
- *   A string with the help section (prepend with 'drush:')
- *
- * @return
- *   A string with the help text for your command.
  */
 function quickstart_drush_help($section) {
   switch ($section) {
   }
 }
 
-function quickstart_params($required) {
+/**
+ * Simple helper function to keep all the arguments in a list.
+ * @return <type>
+ */
+function _quickstart_arg_list() {
+  return array('code'=>'code', 'database'=>'database', 'apache'=>'apache', 'dns'=>'dns', 'install'=>'install');
+}
+
+/**
+ * Helper function to check input parameters
+ * @param  $required any parameters that are required
+ * @return array  if $ret['fail'] is true, then check failed, and an error was logged.
+ */
+function _quickstart_params($required) {
 
   // check arguments
   $ret = drush_get_arguments();
-  if (count($ret)==1) {
-    $ret['fail'] = true;
-    drush_print("  Argument required.  One or several of: " . implode(', ', quickstart_arg_list()));
-  }
 
-  if(array_search("all", $ret)) $ret = quickstart_arg_list_all();
+  if (count($ret)==1) {
+    $ret = array("all");
+  }
+  
+  if(array_search("all", $ret)!==false) {
+    $ret = _quickstart_arg_list();
+  }
 
   // get options
   $ret['domain'] = drush_get_option('domain');
@@ -169,11 +110,11 @@ function quickstart_params($required) {
 
   if (strlen($ret['domain']) > 15) {
     $ret['fail'] = true;
-    drush_print("  '--domain' must be less than 16 characters long.", 'error');
+    drush_log("  '--domain' must be less than 16 characters long.", 'error');
   }
   if (strlen($ret['domain']) < 1) {
     $ret['fail'] = true;
-    drush_print("  '--domain' must be at least 1 characters long.", 'error');
+    drush_log("  '--domain' must be at least 1 characters long.", 'error');
   }
 
   // set defaults
@@ -187,48 +128,53 @@ function quickstart_params($required) {
   foreach($required as $require) {
     if (empty($ret[$require])) {
       $ret['fail'] = true;
-      drush_print("  '--$require' is a required option for this command.", 'error');
+      drush_log("  '--$require' is a required option for this command.", 'error');
     }
   }
   return $ret;
 }
 
 /**
- * Drush callbacks
+ * Drush callbackfunction for 'drush quickstart-create'.
+ *
+ * This function goes step-by-step in creating the new site.
+ *
+ * @reurn true on success
  */
-
 function drush_quickstart_create() {
 
-  $params = quickstart_params(array('domain'));
+  $params = _quickstart_params(array('domain'));
   if (isset($params['fail'])) return drush_set_error(0, dt('Bad parameters.  Try "drush help quickstart-create"'));
   $domain = $params['domain'];
+
+  $domain_ = str_replace('.','_',$domain);
 
   try {
     // can you say "object orientation..."
     if (array_search("database", $params)) {
-      drush_log('Creating database [domain] ...');
+      drush_log("Creating database: $domain_", 'ok');
       quickstart_create_database($domain, $params);
-      drush_log('... database done.');
+      drush_log(' ', 'ok');
     }
     if (array_search("code", $params)) {
-      drush_log('Creating code ...');
+      drush_log('Downloading code (this could take a minute, check network activity) ...', 'ok');
       quickstart_create_code($domain, $params);
-      drush_log('... code done.');
+      drush_log(' ', 'ok');
     }
     if (array_search("apache", $params)) {
-      drush_log('Creating apache config (/etc/apache2/sites-enabled/[domain]) ...');
+      drush_log("Creating apache config (/etc/apache2/sites-enabled/$domain)", 'ok');
       quickstart_create_apache($domain, $params);
-      drush_log('... apache config done.');
+      drush_log(' ', 'ok');
     }
     if (array_search("dns", $params)) {
-      drush_log('Creating dns config (/etc/hosts) ...');
+      drush_log('Creating dns config (/etc/hosts) ...', 'ok');
       quickstart_create_dns($domain, $params);
-      drush_log('... dns config done.');
+      drush_log(' ', 'ok');
     }
     if (array_search("install", $params)) {
-      drush_log('Running installer ...');
+      drush_log('Running installer ...', 'ok');
       quickstart_create_install($domain, $params);
-      drush_log('... installer done.');
+      drush_log(' ', 'ok');
     }
   } catch (Exception $e) {
     $message = $e->getMessage();
@@ -240,38 +186,45 @@ function drush_quickstart_create() {
   return true;
 }
 
+/**
+ * Drush callback function for 'drush quickstart-destroy'
+ *
+ * Works step-by-step to destroy the site.
+ *
+ * @return true on success
+ */
 function drush_quickstart_destroy() {
 
-  $params = quickstart_params(array('domain'));
+  $params = _quickstart_params(array('domain'));
   if (isset($params['fail'])) return drush_set_error(0, dt('Bad parameters.  Try "drush help quickstart-destroy"'));
   $domain = $params['domain'];
 
   try {
     // can you say "object orientation..."
     if (array_search("install", $params)) {
-      drush_log('Destroying installation ...');
+      drush_log('Destroying installation ...', 'ok');
       quickstart_destroy_install($domain, $params);
-      drush_log('... installation done.');
+      drush_log('... installation done.', 'ok');
     }
     if (array_search("code", $params)) {
-      drush_log('Destroying code ...');
+      drush_log('Destroying code ...', 'ok');
       quickstart_destroy_code($domain, $params);
-      drush_log('... code done.');
+      drush_log('... code done.', 'ok');
     }
     if (array_search("database", $params)) {
-      drush_log('Destroying database [domain] ...');
+      drush_log('Destroying database [domain] ...', 'ok');
       quickstart_destroy_database($domain, $params);
-      drush_log('... database done.');
+      drush_log('... database done.', 'ok');
     }
     if (array_search("apache", $params)) {
-      drush_log("Destroying apache config (/etc/apache2/sites-enabled/$domain) ...");
+      drush_log("Destroying apache config (/etc/apache2/sites-enabled/$domain) ...", 'ok');
       quickstart_destroy_apache($domain, $params);
-      drush_log('... apache config done.');
+      drush_log('... apache config done.', 'ok');
     }
     if (array_search("dns", $params)) {
-      drush_log('Destroying dns config (/etc/hosts) ...');
+      drush_log('Destroying dns config (/etc/hosts) ...', 'ok');
       quickstart_destroy_dns($domain, $params);
-      drush_log('... dns config done.');
+      drush_log('... dns config done.', 'ok');
     }
   } catch (Exception $e) {
     $message = $e->getMessage();

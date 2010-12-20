@@ -1,8 +1,20 @@
 <?php
+/**
+ * This is an include file.  These are the "callback" functions that drush
+ * uses to get the job done.  See quickstart.drush.inc for the definition of
+ * the commands.
+ * 
+ * @file
+ */
 
-// Note: for shell commands: 0=success, non-zero=error code
-
+/**
+ * Helper function for executing shell commands.  Throws exceptions on error.
+ *
+ * @param <type> $cmd the command to run
+ * @param <type> $throwexception throw exception on error?
+ */
 function quickstart_shell_exec($cmd, $throwexception=true) {
+  // Note: for shell commands: 0=success, non-zero=error code
   $ret = drush_shell_exec($cmd);
   if ($throwexception && !$ret) {
     $msg = "Command returned unexpected result: $cmd";
@@ -14,11 +26,21 @@ function quickstart_shell_exec($cmd, $throwexception=true) {
   }
 }
 
+/**
+ * Helper function for running SQL on a local mysql database.
+ *
+ * @param <type> $sql
+ */
 function quickstart_mysql_exec($sql) {
   quickstart_shell_exec("echo \"$sql\" | mysql -uroot -pquickstart");
 }
 
-
+/**
+ * Helper function for dereferencing paths.
+ *
+ * @param <type> $pathin
+ * @return <type>
+ */
 function quickstart_fixpath($pathin) {
   // fix ~'s
   $homedir = "/home/" . exec('whoami');
@@ -27,30 +49,34 @@ function quickstart_fixpath($pathin) {
   return $pathout;
 }
 
-// DNS functions here.  Just manipulate /etc/hosts file.
-
+/**
+ * Create the DNS.  Edits /etc/hosts on local machine.
+ * Entries in file are marked with #quickstart
+ *
+ * @param <type> $domain the domain to DNS
+ * @param <type> $params
+ */
 function quickstart_create_dns($domain, $params) {
   // FIXME detect duplicates
   quickstart_shell_exec("echo '127.0.0.1 $domain #quickstart' >> /etc/hosts");
 }
+
+/**
+ * Destroy the DNS.  Edit /etc/hosts file on local machine
+ *
+ * @param <type> $domain
+ * @param <type> $params
+ */
 function quickstart_destroy_dns($domain, $params) {
   quickstart_shell_exec("sed \"/ $domain .*#quickstart/d\" /etc/hosts > ~/hosts.tmp");
   quickstart_shell_exec("cat ~/hosts.tmp > /etc/hosts");
   quickstart_shell_exec("rm ~/hosts.tmp");
 }
-function quickstart_backup_dns($domain, $params) {
-  // nothing to do
-}
-function quickstart_restore_dns($domain, $params) {
-  // recreate to restore
-  return quickstart_create_dns($domain, $params);
-}
-function quickstart_status_dns($domain, $params) {
-  // FIXME verify in file
-}
 
-// APACHE functions here
 
+/**
+ * This is the virtual hosts template file for the apache functions.
+ */
 define('APACHE_TEMPLATE', "
 <VirtualHost *:80>
   ServerName #DOMAIN#
@@ -80,6 +106,14 @@ define('APACHE_TEMPLATE', "
   </VirtualHost>
 </IfModule>");
 
+/**
+ * Configure apache virtualhost file using the template.
+ * Files put in /etc/apache2/sites-available/$domain, then a2ensite'd
+ * Runs: apache2ctl restart
+ *
+ * @param <type> $domain
+ * @param <type> $params 'codepath'
+ */
 function quickstart_create_apache($domain, $params) {
   // get codepath and make sure it exists.
   $codepath = $params['codepath'];
@@ -97,64 +131,74 @@ function quickstart_create_apache($domain, $params) {
   fwrite($config_handle, $str_config);
 
   // enable using script
-  quickstart_shell_exec("sudo a2ensite $domain"); 
+  quickstart_shell_exec("a2ensite $domain"); 
 
   // restart apache
-  quickstart_shell_exec("sudo apache2ctl restart");
+  quickstart_shell_exec("apache2ctl restart");
 }
+
+/**
+ * Destroy the apache virtual hosts config. a2dissite, then rm file.
+ * Runs: apache2ctl restart
+ *
+ * @param <type> $domain
+ * @param <type> $params
+ */
 function quickstart_destroy_apache($domain, $params) {
-  quickstart_shell_exec("sudo a2dissite $domain");
+  quickstart_shell_exec("a2dissite $domain");
   $filename = "/etc/apache2/sites-available/$domain";
   if (file_exists($filename)) unlink($filename);  // unlink = delete file
-  quickstart_shell_exec("sudo apache2ctl restart");
-}
-function quickstart_backup_apache($domain, $params) {
-  // FIXME
-}
-function quickstart_restore_apache($domain, $params) {
-  // FIXME
-}
-function quickstart_status_apache($domain, $params) {
-  // FIXME
+  quickstart_shell_exec("apache2ctl restart");
 }
 
-// Database functions here
-
-// We create the user with the GRANT statement, instead of CREATE USER, because it can be run twice without deleting.
+/**
+ * These define SQL commands to run on database
+ */
 define('DATABASE_CREATE', "
 GRANT USAGE ON *.* TO #DOMAIN#@localhost IDENTIFIED BY '#DOMAIN#' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
 CREATE DATABASE IF NOT EXISTS #DOMAIN#;
 GRANT ALL PRIVILEGES ON #DOMAIN#.* TO #DOMAIN#@localhost;
 FLUSH PRIVILEGES;");
-// We GRANT before DROP USER to make sure there is something to drop.  USAGE is synonym for 'no priveledges'.
+/**
+ * We GRANT before DROP USER to make sure there is something to drop.  USAGE is synonym for 'no priveledges'.
+ */
 define('DATABASE_DESTROY', "
 GRANT USAGE ON *.* TO #DOMAIN#@localhost;
 DROP USER #DOMAIN#@localhost;
 DROP DATABASE IF EXISTS #DOMAIN#;
 FLUSH PRIVILEGES;");
 
+/**
+ * Create the database.  Runs SQL.  Replaces .'s with _'s in domain name
+ * to get the database name, database username, and password.
+ *
+ * @param <type> $domain
+ * @param <type> $params
+ */
 function quickstart_create_database($domain, $params) {
   $domain = str_replace('.','_',$domain);
   $sql = str_replace("#DOMAIN#", $domain, DATABASE_CREATE);
   quickstart_mysql_exec($sql);
 }
+/**
+ * Destroys the database using SQL.
+ *
+ * @param <type> $domain
+ * @param <type> $params
+ */
 function quickstart_destroy_database($domain, $params) {
   $domain = str_replace('.','_',$domain);
   $sql = str_replace("#DOMAIN#", $domain, DATABASE_DESTROY);
   quickstart_mysql_exec($sql);
 }
-function quickstart_backup_database($domain, $params) {
-  $domain = str_replace('.','_',$domain); // FIXME
-}
-function quickstart_restore_database($domain, $params) {
-  $domain = str_replace('.','_',$domain); // FIXME
-}
-function quickstart_status_database($domain, $params) {
-  $domain = str_replace('.','_',$domain); // FIXME
-}
 
-// Code functions here
-
+/**
+ * Download the code using drush make.  
+ * If path already exists, moves it to path.old.
+ * 
+ * @param <type> $domain
+ * @param <type> $params 'codepath' 'makefile'
+ */
 function quickstart_create_code($domain, $params) {
 
   $codepath = $params['codepath'];
@@ -167,32 +211,37 @@ function quickstart_create_code($domain, $params) {
   if (!file_exists($makefile)) {
     // try to find makefile in ~/websites folder
     $makefile = quickstart_fixpath("~/websites/$makefile");
-    if (!file_exists($makefile)) throw new Exception("Makefile ". $params['makefile'] ." not found.");
+    if (!file_exists($makefile)) throw new Exception("Makefile ". $makefile ." not found.");
   }
 
   drush_backend_invoke("make $makefile $codepath");
   quickstart_shell_exec("chown quickstart:www-data -R $codepath");
   quickstart_shell_exec("chmod g+w -R $codepath");
 }
+
+/**
+ * Deletes the sites files using rm -rf.  Also path.old.
+ *
+ * @param <type> $domain
+ * @param <type> $params 'codepath'
+ */
 function quickstart_destroy_code($domain, $params) {
   $codepath = $params['codepath'];
   // only delete a web folder.  "drush qd --codepath=/" would be bad.
-  if (!file_exists($codepath . '/index.php')) throw new Exception("No index.php found.  Aborting...");
+  if (!file_exists($codepath . '/index.php')) {
+      drush_log('No index.php found.  Aborting deletion of files...', 'warning');
+      return;
+  }
   quickstart_shell_exec("rm -rf $codepath");
   quickstart_shell_exec("rm -rf $codepath.old");
 }
-function quickstart_backup_code($domain, $params) {
-  // FIXME
-}
-function quickstart_restore_code($domain, $params) {
-  // FIXME
-}
-function quickstart_status_code($domain, $params) {
-  // FIXME
-}
 
-// Install functions here
-
+/**
+ * Install the site.  D6 and D7 versions.
+ *
+ * @param <type> $domain
+ * @param <type> $params
+ */
 function quickstart_create_install($domain, $params) {
   $profile = $params['profile'];
   $database = str_replace('.','_',$domain);
@@ -217,23 +266,32 @@ function quickstart_create_install($domain, $params) {
   // Provision has it's own plan that is incompatible with quickstart.  D7 includes it's own command line installer.
   //drush_backend_invoke("provision-install $domain --profile=$profile --master_db_user=$dbuser --master_db_passwd=$dbpassword --db_type=mysql --db_host=localhost --root=$codepath");
 }
+
+/**
+ * Return site to situation where "drush qc install --domain=site.dev" could
+ * be re-run successfully.
+ *
+ * @param <type> $domain
+ * @param <type> $params 'codepath'
+ */
 function quickstart_destroy_install($domain, $params) {
+  // only delete a web folder.  "drush qd --codepath=/" would be bad.
+  $codepath = $params['codepath'];
+  if (!file_exists($codepath . '/index.php')) {
+      drush_log('No index.php found.  Aborting un-install of site...', 'warning');
+      return;
+  }
+
   // drop and create database and user.
   quickstart_destroy_database($domain, $params);
   quickstart_create_database($domain, $params);
+
   // delete settings.php file
+  quickstart_shell_exec("rm -rf $codepath/sites/all/default/settings.php");
 
   // delete files folder
+  quickstart_shell_exec("rm -rf $codepath/sites/all/default/files");
   
-}
-function quickstart_backup_install($domain, $params) {
-  // FIXME
-}
-function quickstart_restore_install($domain, $params) {
-  // FIXME
-}
-function quickstart_status_install($domain, $params) {
-  // FIXME
 }
 
 ?>
