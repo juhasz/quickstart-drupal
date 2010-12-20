@@ -183,7 +183,7 @@ ln -s /mnt/vbox-shared ~/Desktop/vbox-shared
 mkdir /home/quickstart/websites/logs/mail
 chmod -R 777 /home/quickstart/websites/logs/mail
 sudo sed -i 's/;sendmail_path =/sendmail_path=\/home\/quickstart\/quickstart\/config\/sendmail.php/g' /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
-chmod +x /home/quickstart/sendmail.php 
+chmod +x /home/quickstart/quickstart/config/sendmail.php 
 
 
 

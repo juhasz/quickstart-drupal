@@ -15,7 +15,8 @@ APT::Periodic::Unattended-Upgrade \"1\";
 " | sudo tee /etc/apt/apt.conf.d/10periodic
 
 # setup icons on top of screen
-# created with 
+sudo apt-get -y install netspeed
+# created with: gconftool-2 --dump /apps/panel > my-panel-setup.entries
 gconftool-2 --load ~/quickstart/config/my-panel-setup.entries
 
 # final size
