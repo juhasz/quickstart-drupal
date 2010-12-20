@@ -131,10 +131,10 @@ function quickstart_create_apache($domain, $params) {
   fwrite($config_handle, $str_config);
 
   // enable using script
-  quickstart_shell_exec("a2ensite $domain"); 
+  quickstart_shell_exec("sudo a2ensite $domain"); 
 
   // restart apache
-  quickstart_shell_exec("apache2ctl restart");
+  quickstart_shell_exec("sudo apache2ctl restart");
 }
 
 /**
@@ -145,10 +145,10 @@ function quickstart_create_apache($domain, $params) {
  * @param <type> $params
  */
 function quickstart_destroy_apache($domain, $params) {
-  quickstart_shell_exec("a2dissite $domain");
+  quickstart_shell_exec("sudo a2dissite $domain");
   $filename = "/etc/apache2/sites-available/$domain";
   if (file_exists($filename)) unlink($filename);  // unlink = delete file
-  quickstart_shell_exec("apache2ctl restart");
+  quickstart_shell_exec("sudo apache2ctl restart");
 }
 
 /**
