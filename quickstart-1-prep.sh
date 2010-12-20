@@ -1,7 +1,14 @@
 #!/bin/bash
 
-zenity --info --text="This process requires some manual steps.  Popups like this one will give instructions to help the process.  This script shouldn't be run more than once."
+zenity --info --text="These install scripts take several hours.
 
+Towards the end, the process requires some manual steps, guided by popups like this.
+
+This script shouldn't be run more than once."
+
+## The last password you'll ever need.
+# add to sudoers file - careful, this line could brick the box.
+echo "quickstart ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers > /dev/null
 
 ## Upgrade
 

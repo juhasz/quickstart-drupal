@@ -22,6 +22,8 @@ NOTE: ABOVE IS A PASSWORD RESET URL.  USE IT TO LOGIN INITIALLY.
 
 NOTE 2: If you lost your password reset url, get a new one for user 'admin' and 
         check the ~/websites/log/mail folder for a password reset email.
+        
+RESTART OR RELOGIN for apache2ctl to work.
 "
 
 MYSQL_USER=root
@@ -48,10 +50,7 @@ sudo apt-get install -y sudo rsync git unzip
 # make aegir user
 sudo adduser --system --group --home /var/aegir aegir
 sudo adduser aegir www-data      # make aegir a user of group www-data
-sudo adduser aegir apache_tools  # allow aegir to restart apache
 sudo adduser aegir ssl-cert      # allow aegir to see certs (when restarting apache)
-
-sudo adduser quickstart aegir    # quickstart needs access to apache conf files that aegir owns.
 
 ## PHP - this is set in quickstart-3-lamp.sh, and won't work if changed manually.
 sudo sed -i 's/memory_limit = 64M/memory_limit = 192M/g'            /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
