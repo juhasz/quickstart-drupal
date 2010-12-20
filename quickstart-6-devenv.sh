@@ -192,7 +192,7 @@ chmod +x /home/quickstart/quickstart/config/sendmail.php
 
 
 
-# ################################################################################ Debugger/Profiler
+# ################################################################################ XDebug Debugger/Profiler
 
 # Get xdebug 2.1 - Ubuntu 10.10 php5-xdebug is now 2.1 - commenting this out.
 #cd ~
@@ -223,6 +223,26 @@ xdebug.profiler_output_dir=/home/quickstart/websites/logs/profiler
 
 
 
+# ################################################################################ XHProf profiler (Devel Module)
+# Adapted from: http://techportal.ibuildings.com/2009/12/01/profiling-with-xhprof/
+
+wget http://pecl.php.net/get/xhprof-0.9.2.tgz
+tar xvf xhprof-0.9.2.tgz
+cd ./xhprof-0.9.2/extension/
+phpize
+./configure
+make
+sudo make install
+
+echo < END
+[xhprof]
+extension=xhprof.so
+xhprof.output_dir="/home/quickstart/websites/logs/profiler"
+END | sudo tee /etc/php5/conf.d/xhprof.ini > /dev/null
+
+sudo apache2ctl restart
+
+
 # ################################################################################ Install a web-based profile viewer
 cd ~/websites/logs/profiler
 
@@ -240,7 +260,7 @@ echo "Alias /profiler /home/quickstart/websites/logs/profiler/webgrind
 <Directory /home/quickstart/websites/logs/profiler/webgrind>
   Allow from All
 </Directory>
-" | sudo tee /etc/apache2/conf.d/webgrind
+" | sudo tee /etc/apache2/conf.d/webgrind > /dev/null
 
 chmod -R 777 /home/quickstart/websites/logs/profiler
 

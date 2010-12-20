@@ -50,7 +50,7 @@ cd ~/Desktop
 wget -O netbeans.sh $NETBEANS_URL
 chmod +x ./netbeans.sh
 zenity --info --text="The Netbeans PHP installer will start now.\n1) Accept the defaults.\n2) Uncheck 'register' on last screen."
-bash ./netbeans.sh
+bash ./netbeans.sh --silent
 rm netbeans.sh
 cd ~
 

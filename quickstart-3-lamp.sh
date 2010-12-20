@@ -49,7 +49,7 @@ echo "<VirtualHost *:80>
 		Order allow,deny
 		allow from all
 	</Directory>
-</VirtualHost>" | sudo tee /etc/apache2/sites-available/000-default
+</VirtualHost>" | sudo tee /etc/apache2/sites-available/000-default  > /dev/null
 sudo a2ensite 000-default
 
 # Fix ssl for easier virtual hosting
@@ -78,7 +78,7 @@ echo "<IfModule mod_ssl.c>
   SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
   SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
 </VirtualHost>
-</IfModule>" | sudo tee /etc/apache2/sites-available/default-ssl
+</IfModule>" | sudo tee /etc/apache2/sites-available/default-ssl > /dev/null
 sudo a2ensite default-ssl
 
 
@@ -90,7 +90,7 @@ sudo sed -i 's/#long_query_time/long_query_time/g'            /etc/mysql/my.cnf
 
 
 # ################################################################################ Configure PHP
-
+# FIXME haven't checked for unnecessary code since 9.10
 # sudo sed -i 's/find_this/replace_with_this/g' infile1 infile2 etc
 sudo sed -i 's/magic_quotes_gpc = On/magic_quotes_gpc = Off/g'     /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
 sudo sed -i 's/short_open_tag = On/short_open_tag = Off/g'         /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
