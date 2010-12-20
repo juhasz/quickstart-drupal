@@ -18,6 +18,7 @@ APT::Periodic::Unattended-Upgrade \"1\";
 sudo apt-get -y install netspeed
 # created with: gconftool-2 --dump /apps/panel > my-panel-setup.entries
 gconftool-2 --load ~/quickstart/config/my-panel-setup.entries
+killall gnome-panel
 
 # final size
 df -h -T > ~/quickstart/quickstart-size-end.txt
