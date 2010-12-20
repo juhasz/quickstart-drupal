@@ -194,22 +194,7 @@ chmod +x /home/quickstart/quickstart/config/sendmail.php
 
 # ################################################################################ XDebug Debugger/Profiler
 
-# Get xdebug 2.1 - Ubuntu 10.10 php5-xdebug is now 2.1 - commenting this out.
-#cd ~
-#mkdir temp
-#cd temp
-#wget http://www.xdebug.com/files/xdebug-2.1.0.tgz
-#tar -xvzf xdebug-2.1.0.tgz
-#cd xdebug-2.1.0
-#phpize5
-#./configure
-#make
-#sudo cp modules/xdebug.so /usr/lib/php5/20090626+lfs/
-#cd ..
-#rm -rf temp
-# echo ... zend_extension=/usr/lib/php5/20090626+lfs/xdebug.so  > xdebug.ini
-
-# Configure xdebug
+# Configure xdebug - installed 2.1 from apt
 mkdir /home/quickstart/websites/logs/profiler
 echo "
 xdebug.remote_enable=on
@@ -219,7 +204,7 @@ xdebug.remote_port=9000
 xdebug.profiler_enable=0
 xdebug.profiler_enable_trigger=1
 xdebug.profiler_output_dir=/home/quickstart/websites/logs/profiler
-" | sudo tee /etc/php5/conf.d/xdebug.ini > /dev/null
+" | sudo tee -a /etc/php5/conf.d/xdebug.ini > /dev/null
 
 
 
