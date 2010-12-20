@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd ~
+
 ## Install java - 100mb
 sudo apt-get -y install default-jre
 
@@ -45,13 +47,8 @@ rm eclipse.tar.gz
 # Download and install netbeans - 122mb
 # do this last - it has a GUI :-)
 NETBEANS_URL="http://download.netbeans.org/netbeans/6.9.1/final/bundles/netbeans-6.9.1-ml-php-linux.sh"
-sudo apt-get -y install wget
-cd ~/Desktop
 wget -O netbeans.sh $NETBEANS_URL
 chmod +x ./netbeans.sh
-zenity --info --text="The Netbeans PHP installer will start now.\n1) Accept the defaults.\n2) Uncheck 'register' on last screen."
 bash ./netbeans.sh --silent
 rm netbeans.sh
-cd ~
-
 
