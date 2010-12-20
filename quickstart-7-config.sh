@@ -12,7 +12,7 @@ APT::Periodic::Update-Package-Lists \"1\";
 APT::Periodic::Download-Upgradeable-Packages \"1\";
 APT::Periodic::AutocleanInterval \"5\";
 APT::Periodic::Unattended-Upgrade \"1\";
-" | sudo tee /etc/apt/apt.conf.d/10periodic
+" | sudo tee /etc/apt/apt.conf.d/10periodic > /dev/null
 
 # setup icons on top of screen
 sudo apt-get -y install netspeed

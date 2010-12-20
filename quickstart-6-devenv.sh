@@ -10,7 +10,7 @@ sudo adduser quickstart root
 sudo adduser quickstart ssl-cert
 
 # add to sudoers file - careful, this line could brick the box.
-echo "quickstart ALL=(ALL) NOPASSWD: /usr/sbin/apache2ctl, /usr/sbin/a2ensite, /usr/sbin/a2dissite" | sudo tee -a /etc/sudoers
+echo "quickstart ALL=(ALL) NOPASSWD: /usr/sbin/apache2ctl, /usr/sbin/a2ensite, /usr/sbin/a2dissite" | sudo tee -a /etc/sudoers > /dev/null
 
 # ################################################################################ Drupal sites
 
@@ -253,7 +253,7 @@ rm webgrind.zip
 # Setup Web server
 echo "127.0.0.1 webgrind
 
-" | sudo tee -a /etc/hosts
+" | sudo tee -a /etc/hosts > /dev/null
 
 echo "Alias /profiler /home/quickstart/websites/logs/profiler/webgrind
 

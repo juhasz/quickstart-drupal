@@ -24,7 +24,7 @@ sudo apt-get -y install virtualbox-ose-guest-x11
 
 # Fix bug where needed to manually dhcp network
 #echo "auto eth0
-#iface eth0 inet dhcp" | sudo tee -a /etc/network/interfaces
+#iface eth0 inet dhcp" | sudo tee -a /etc/network/interfaces > /dev/null
 # Fix bug with Avahi and .local - http://drupal.org/node/822542 - don't completely understand this.  This is for bridged networking?
 #sudo sed -i 's/.local/.alocal/g'     /etc/avahi/avahi-daemon.conf
 # Restart networking

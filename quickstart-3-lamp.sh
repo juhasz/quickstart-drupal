@@ -58,7 +58,7 @@ Listen 80
 <IfModule mod_ssl.c>
     NameVirtualHost *:443
     Listen 443
-</IfModule>" | sudo tee /etc/apache2/ports.conf
+</IfModule>" | sudo tee /etc/apache2/ports.conf > /dev/null
 
 echo "<IfModule mod_ssl.c>
 <VirtualHost *:443>
