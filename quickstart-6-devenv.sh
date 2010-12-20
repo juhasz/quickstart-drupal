@@ -6,6 +6,11 @@ cd ~
 sudo adduser quickstart www-data    
 # Make quickstart a user of group root to edit config files
 sudo adduser quickstart root    
+# Add to ssl-cert so apache restart can read cert file
+sudo adduser quickstart ssl-cert
+
+# add to sudoers file - careful, this line could brick the box.
+echo "quickstart ALL=(ALL) NOPASSWD: /usr/sbin/apache2ctl, /usr/sbin/a2ensite, /usr/sbin/a2dissite" | sudo tee -a /etc/sudoers
 
 # ################################################################################ Drupal sites
 
