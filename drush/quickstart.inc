@@ -243,10 +243,66 @@ function quickstart_destroy_code($domain, $params) {
  * @param <type> $params
  */
 function quickstart_create_install($domain, $params) {
+  $makefile = $params['makefile'];
+  
+  // do some housekeeping
+
+  // detect the drupal version from the make file.
+  $dversion = 'unknown';
+
+  $str=implode("\n",file($makefile));
+
+  if (search_file($makefile, 'core = 6.x')) {
+    $dversion = 'd6';
+  }
+  if (search_file($makefile, 'core = 7.x')) {
+    $dversion = 'd7';
+  }
+
+  // now install the sucker !
+  switch ($dversion) {
+    'd7':
+      return quickstart_create_install_D7($domain, $params);
+    'd6':
+      return quickstart_create_install_D6($domain, $params);
+    'd6-manual':
+    default: 
+      return quickstart_create_install_D6_manual($domain, $params);
+}
+
+/**
+ * Install a D7 site, using core 'drush site-install' command
+ */
+function quickstart_create_install_D7($domain, $params) {
+}
+ 
+/**
+ * Install a D6 site, using contrib 'drush site-install6' command.  
+ * Project: http://drupal.org/project/drush_site_install6
+ * setup during quickstart-6-devenv.sh
+ */
+function quickstart_create_install_D6($domain, $params) {
   $profile = $params['profile'];
   $database = str_replace('.','_',$domain);
   $codepath = $params['codepath'];
   
+  // copy default.settings.php to settings.php
+  $str=implode("\n",file("$codepath/sites/default/default.settings.php"));
+  $fp=fopen("$codepath/sites/default/settings.php",'w');
+  fwrite($fp,$str,strlen($str));
+
+  
+}
+
+/** 
+ * Install site manually.  This code isn't used anymore.
+ */
+function quickstart_create_install_D6_manual($domain, $params) {
+  $profile = $params['profile'];
+  $database = str_replace('.','_',$domain);
+  $codepath = $params['codepath'];
+  
+  // copy default.settings.php to settings.php
   $str=implode("\n",file("$codepath/sites/default/default.settings.php"));
   $fp=fopen("$codepath/sites/default/settings.php",'w');
   fwrite($fp,$str,strlen($str));
@@ -262,9 +318,6 @@ function quickstart_create_install($domain, $params) {
 
   quickstart_shell_exec("chmod g-w \"$codepath/sites/default/settings.php\"");
   quickstart_shell_exec("chmod g-w \"$codepath/sites/default\"");
-
-  // Provision has it's own plan that is incompatible with quickstart.  D7 includes it's own command line installer.
-  //drush_backend_invoke("provision-install $domain --profile=$profile --master_db_user=$dbuser --master_db_passwd=$dbpassword --db_type=mysql --db_host=localhost --root=$codepath");
 }
 
 /**

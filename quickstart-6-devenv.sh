@@ -50,6 +50,7 @@ rm $DRUSH_FILE
 # Install drush make
 mkdir ~/.drush
 drush dl drush_make --destination=/home/quickstart/.drush
+drush dl drush_site_install6 --destination=/home/quickstart/.drush
 
 # Install drush quickstart
 ln -s ~/quickstart/drush ~/.drush/quickstart
