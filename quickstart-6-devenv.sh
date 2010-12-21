@@ -53,7 +53,7 @@ drush dl drush_make --destination=/home/quickstart/.drush
 
 # Install drush quickstart
 ln -s ~/quickstart/drush ~/.drush/quickstart
-mv ~/.drush/quickstart/*.make ~/websites
+mv ~/quickstart/makefiles/*.make ~/websites
 
 # ################################################################################ Replace localhost/index.html
 
