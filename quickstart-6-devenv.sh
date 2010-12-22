@@ -40,7 +40,7 @@ For more information:
 # ################################################################################ Drush
 # Install drush
 
-DRUSH_FILE='drush-6.x-4.0-rc3.tar.gz'
+DRUSH_FILE='drush-All-Versions-HEAD.tar.gz'
 wget http://ftp.drupal.org/files/projects/$DRUSH_FILE
 tar -xzf $DRUSH_FILE
 chmod u+x ~/drush/drush

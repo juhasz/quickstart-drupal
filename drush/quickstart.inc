@@ -3,7 +3,12 @@
  * This is an include file.  These are the "callback" functions that drush
  * uses to get the job done.  See quickstart.drush.inc for the definition of
  * the commands.
- * 
+ *
+ * Example make file for d7 http://drupal.org/node/852412
+ *
+ * site-install issues:
+ *  - http://drupal.org/node/992928 - Drupal Core
+ *  - http://drupal.org/node/983914 - Drush
  * @file
  */
 
@@ -152,12 +157,12 @@ function quickstart_destroy_apache($domain, $params) {
 }
 
 /**
- * These define SQL commands to run on database
+ * These define SQL commands to run on database.  CREATE USER causes trouble.  Note GRANT ALL ON *.* for site-install
  */
 define('DATABASE_CREATE', "
 GRANT USAGE ON *.* TO #DOMAIN#@localhost IDENTIFIED BY '#DOMAIN#' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
 CREATE DATABASE IF NOT EXISTS #DOMAIN#;
-GRANT ALL PRIVILEGES ON #DOMAIN#.* TO #DOMAIN#@localhost;
+GRANT ALL PRIVILEGES ON *.* TO #DOMAIN#@localhost;
 FLUSH PRIVILEGES;");
 /**
  * We GRANT before DROP USER to make sure there is something to drop.  USAGE is synonym for 'no priveledges'.
