@@ -31,8 +31,8 @@ function quickstart_shell_exec($cmd, $throwexception=true) {
  *
  * @param <type> $sql
  */
-function quickstart_mysql_exec($sql) {
-  quickstart_shell_exec("echo \"$sql\" | mysql -uroot -pquickstart");
+function quickstart_mysql_exec($sql, $dbuser, $dbpassword) {
+  quickstart_shell_exec("echo \"$sql\" | mysql -u$dbuser -p$dbpassword");
 }
 
 /**
@@ -176,9 +176,12 @@ FLUSH PRIVILEGES;");
  * @param <type> $params
  */
 function quickstart_create_database($domain, $params) {
-  $domain = str_replace('.','_',$domain);
-  $sql = str_replace("#DOMAIN#", $domain, DATABASE_CREATE);
-  quickstart_mysql_exec($sql);
+  $dbuser = $params['dbuser'];
+  $dbpassword = $params['dbpassword'];
+  $domain_ = $params['domain_'];
+
+  $sql = str_replace("#DOMAIN#", $domain_, DATABASE_CREATE);
+  quickstart_mysql_exec($sql, $dbuser, $dbpassword);
 }
 /**
  * Destroys the database using SQL.
@@ -187,9 +190,12 @@ function quickstart_create_database($domain, $params) {
  * @param <type> $params
  */
 function quickstart_destroy_database($domain, $params) {
-  $domain = str_replace('.','_',$domain);
-  $sql = str_replace("#DOMAIN#", $domain, DATABASE_DESTROY);
-  quickstart_mysql_exec($sql);
+  $dbuser = $params['dbuser'];
+  $dbpassword = $params['dbpassword'];
+  $domain_ = $params['domain_'];
+
+  $sql = str_replace("#DOMAIN#", $domain_, DATABASE_DESTROY);
+  quickstart_mysql_exec($sql, $dbuser, $dbpassword);
 }
 
 /**
@@ -200,7 +206,6 @@ function quickstart_destroy_database($domain, $params) {
  * @param <type> $params 'codepath' 'makefile'
  */
 function quickstart_create_code($domain, $params) {
-
   $codepath = $params['codepath'];
   $makefile = $params['makefile'];
 
@@ -214,7 +219,7 @@ function quickstart_create_code($domain, $params) {
     if (!file_exists($makefile)) throw new Exception("Makefile ". $makefile ." not found.");
   }
 
-  drush_backend_invoke("make $makefile $codepath");
+  drush_backend_invoke("make --prepare-install $makefile $codepath");
   quickstart_shell_exec("chown quickstart:www-data -R $codepath");
   quickstart_shell_exec("chmod g+w -R $codepath");
 }
@@ -233,7 +238,6 @@ function quickstart_destroy_code($domain, $params) {
       return;
   }
   quickstart_shell_exec("rm -rf $codepath");
-  quickstart_shell_exec("rm -rf $codepath.old");
 }
 
 /**
@@ -243,37 +247,50 @@ function quickstart_destroy_code($domain, $params) {
  * @param <type> $params
  */
 function quickstart_create_install($domain, $params) {
-  $makefile = $params['makefile'];
-  
-  // do some housekeeping
-
-  // detect the drupal version from the make file.
+  // detect the drupal version from the CHANGELOG.txt file.
   $dversion = 'unknown';
+  $changelog = $params['codepath'] . '/CHANGELOG.txt';
 
-  $str=implode("\n",file($makefile));
-
-  if (search_file($makefile, 'core = 6.x')) {
+  // load make file into string
+  $str=file_get_contents($changelog);
+  if ( preg_match("/^Drupal 6./m", $str) ) {
     $dversion = 'd6';
   }
-  if (search_file($makefile, 'core = 7.x')) {
+  // regex magic.
+  if ( preg_match("/^Drupal 7./m", $str) ) {
     $dversion = 'd7';
   }
-
-  // now install the sucker !
+  // Nuff foreplay, let's install this sucker!
   switch ($dversion) {
-    'd7':
+    case 'd7':
       return quickstart_create_install_D7($domain, $params);
-    'd6':
+    case 'd6':
       return quickstart_create_install_D6($domain, $params);
-    'd6-manual':
     default: 
       return quickstart_create_install_D6_manual($domain, $params);
+  }
 }
 
 /**
  * Install a D7 site, using core 'drush site-install' command
  */
 function quickstart_create_install_D7($domain, $params) {
+  //drush_backend_invoke
+  print("site-install"
+                          . " --root=" . $params['codepath']
+                          . " --db-url=" . $params['db-url']
+                          . " --db-prefix=" . $params['db-prefix']
+                          . " --account-name=" . $params['account-name']
+                          . " --account-pass=" . $params['account-pass']
+                          . " --account-mail=" . $params['account-mail']
+                          . " --locale=" . $params['locale']
+                          . " --clean-url=" . $params['clean-url']
+                          . " --site-name=" . $params['site-name']
+                          . " --site-mail=" . $params['site-mail']
+                          . " --sites-subdir=" . $params['sites-subdir']
+                          . " --dbuser=" . $params['dbuser']
+                          . " --dbpassword=" . $params['dbpassword']
+          );
 }
  
 /**
@@ -282,35 +299,47 @@ function quickstart_create_install_D7($domain, $params) {
  * setup during quickstart-6-devenv.sh
  */
 function quickstart_create_install_D6($domain, $params) {
-  $profile = $params['profile'];
-  $database = str_replace('.','_',$domain);
   $codepath = $params['codepath'];
+  $sites_subdir = $params['sites-subdir'];
   
-  // copy default.settings.php to settings.php
-  $str=implode("\n",file("$codepath/sites/default/default.settings.php"));
-  $fp=fopen("$codepath/sites/default/settings.php",'w');
-  fwrite($fp,$str,strlen($str));
+  // copy default.settings.php to settings.php and change URL and prefix
+  $str = file_get_contents("$codepath/sites/default/default.settings.php");
+  $str = str_replace("\$db_url = 'mysql://username:password@localhost/databasename'",
+          $params['db-url'],
+          $str);
+  $str = str_replace("\$db_prefix = ''",
+          $params['db-prefix'],
+          $str);
+  file_put_contents("$codepath/sites/$sites_subdir/settings.php",$str);
 
-  
+  drush_backend_invoke("site-install6 " . $params['profile']
+                          . " --root=" . $params['codepath']
+                          . " --db-url=" . $params['db-url']
+                          . " --db-prefix=" . $params['db-prefix']
+                          . " --account-name=" . $params['account-name']
+                          . " --account-pass=" . $params['account-pass']
+                          . " --account-mail=" . $params['account-mail']
+                          . " --locale=" . $params['locale']
+                          . " --clean-url=" . $params['clean-url']
+                          . " --site-name=" . $params['site-name']
+                          . " --site-mail=" . $params['site-mail']
+                          . " --sites-subdir=" . $params['sites-subdir']
+          );
+
+  return true;
 }
 
 /** 
- * Install site manually.  This code isn't used anymore.
+ * Install site manually.  This code shouldn't be used anymore.
  */
 function quickstart_create_install_D6_manual($domain, $params) {
-  $profile = $params['profile'];
-  $database = str_replace('.','_',$domain);
+  $domain_ = $params['domain_'];
   $codepath = $params['codepath'];
   
-  // copy default.settings.php to settings.php
-  $str=implode("\n",file("$codepath/sites/default/default.settings.php"));
-  $fp=fopen("$codepath/sites/default/settings.php",'w');
-  fwrite($fp,$str,strlen($str));
-
   quickstart_shell_exec("chown quickstart:www-data -R \"$codepath\"");
   quickstart_shell_exec("chmod g+w -R \"$codepath\"");
 
-  quickstart_shell_exec("zenity --info --text=\"Drupal installer will now start.\n  dbuser, password, and database are: $database\n  Return to this window and press ENTER to fix settings.php warning.\"");
+  quickstart_shell_exec("zenity --info --text=\"Drupal installer will now start.\n  dbuser, password, and database are: $domain_\n  Return to this window and press ENTER to fix settings.php warning.\"");
 
   quickstart_shell_exec("firefox http://$domain");
 
@@ -340,11 +369,8 @@ function quickstart_destroy_install($domain, $params) {
   quickstart_create_database($domain, $params);
 
   // delete settings.php file
-  quickstart_shell_exec("rm -rf $codepath/sites/all/default/settings.php");
+  quickstart_shell_exec("rm -f $codepath/sites/all/default/settings.php");
 
   // delete files folder
   quickstart_shell_exec("rm -rf $codepath/sites/all/default/files");
-  
 }
-
-?>

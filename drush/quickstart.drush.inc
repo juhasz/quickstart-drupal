@@ -11,6 +11,14 @@ include("quickstart.inc");
  */
 
 /**
+ * Simple helper function to keep all the arguments in a list.
+ * @return <type>
+ */
+function _quickstart_arg_list() {
+  return array('code'=>'code', 'database'=>'database', 'apache'=>'apache', 'dns'=>'dns', 'install'=>'install');
+}
+
+/**
  * Implements hook_drush_command()
  * @return array
  */
@@ -20,20 +28,34 @@ function quickstart_drush_command() {
   $items['quickstart-create'] = array(
           'description' => "Create a quickstart development website (" . implode(', ', _quickstart_arg_list()) . ").",
           'arguments' => array(
-                  'what' => 'What to create: [all|' . implode('|', _quickstart_arg_list()) . ']',
+                  'what' => 'Optional. One or more items to create: [' . implode('|', _quickstart_arg_list()) . '|all] Defaults to "all"',
           ),
           'options' => array(
-                  'domain' => 'Required.  Domain name of new site.  Use this to reference site with other commands.  Becomes dns, dbname, dbuser, dbpass, site-name, and kitchen-sink',
-                  'codepath' => 'Default.  Path to drupal code.  Defaults to "~/websites/[domain]"',
-                  'makefile' => 'Default.  Path to drupal make file.  Defaults to D7 "~/websites/default.make"',
-                  'profile' => 'Default.  Name of profile to install.  Defaults to "default"',
+                  'domain'       => 'Required (all).  Domain name of new site.  Use this to reference site with other commands.  Becomes dns, dbname, dbuser, dbpass, site-name, and kitchen-sink',
+                  'dbuser'       => 'Optional (db).  Root mysql user.  Defaults to "root"',
+                  'dbpassword'   => 'Optional (db).  Root mysql password.  Defaults to "quickstart"',
+                  'codepath'     => 'Optional (apache,code,install).  Path to drupal code.  Defaults to "~/websites/[domain]"',
+                  'makefile'     => 'Optional (code).  Path to drupal make file.  Defaults to D7 "~/websites/default.make"',
+                  'profile'      => 'Optional (install).  Name of profile to install.  Defaults to "default"',
+                  'db-url'       => 'Optional (install).  DB url.  Defaults to "mysql://[domain]]:[domain]@localhost/[domain]" (replace . with _ in [domian])',
+                  'db-prefix'    => 'Optional (install).  DB table prefix.  Defaults to ""',
+                  'account-name' => 'Optional (install).  Name of user 1.  Defaults to "admin"',
+                  'account-pass' => 'Optional (install).  Password user 1.  Defaults to "admin"',
+                  'account-mail' => 'Optional (install).  Email of user 1.  Defaults to "admin@[domain]"',
+                  'locale'       => 'Optional (install).  Installation profile.  Defaults to "en"',
+                  'clean-url'    => 'Optional (install).  Enable clean-urls?  Defaults to "1"',
+                  'site-name'    => 'Optional (install).  Site name.  Defaults to "[domain]"',
+                  'site-mail'    => 'Optional (install).  Site default email.  Defaults to "info@[domain]"',
+                  'sites-subdir' => 'Optional (install).  Dir in /sites folder.  Defaults to "default"',
           ),
           'examples' => array(
-                  'Create site in one command: setup dns, apache, create db, download d6, run installer, open in firefox' => 'drush quickstart-create --domain=example1.dev',
-                  'Quick D7 site' => 'drush qc --domain=example.dev',
-                  'Create DNS (/etc/hosts)' => 'drush quickstart-create dns --domain=example.dev',
-                  'Create Apache (/etc/apache2/sites-enabled/)' => 'drush quickstart-create apache --domain=example.dev --codepath=/path/to/drupal',
-                  'Create Database (mysql db and user)' => 'drush quickstart-create database --domain=example.dev',
+                  'Create D7 site in one command: setup dns, apache, create db, download d6, run installer, open in firefox' => 'drush quickstart-create --domain=example1.dev',
+                  'Quick D6 site' => 'drush qc --domain=example2.dev --makefile=d6.make',
+                  'Just DNS (/etc/hosts)' => 'drush quickstart-create dns --domain=example.dev',
+                  'Just apache (/etc/apache2/sites-enabled/)' => 'drush quickstart-create apache --domain=example.dev --codepath=/path/to/drupal',
+                  'Just database (mysql)' => 'drush quickstart-create database --domain=example.dev',
+                  'Just code (drush make)' => 'drush quickstart-create code --domain=example.dev',
+                  'Just install (or quick reinstall)' => 'drush quickstart-create install --domain=example.dev',
           ),
           'aliases' => array('qc'),
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
@@ -42,7 +64,7 @@ function quickstart_drush_command() {
   $items['quickstart-destroy'] = array(
           'description' => "Destroy a quickstart development website (" . implode(', ', _quickstart_arg_list()) . ").",
           'arguments' => array(
-                  'what' => 'What to destroy: [all|' . implode('|', _quickstart_arg_list()) . ']',
+                  'what' => 'Optional. One or more items to destroy: [' . implode('|', _quickstart_arg_list()) . '|all] Defaults to "all"',
           ),
           'options' => array(
                   'domain' => 'Domain name to destroy.',
@@ -51,10 +73,11 @@ function quickstart_drush_command() {
           'examples' => array(
                   'Simplest format' => 'drush qd --domain=example.dev',
                   'Complete format' => 'drush quickstart-destroy all --domain=example.dev --codepath=/path/to/drupal',
-                  'Destroy DNS (/etc/hosts)' => 'drush quickstart-destroy dns --domain=example.dev',
-                  'Destroy Apache (/etc/apache2/sites-enabled/)' => 'drush quickstart-destroy apache --domain=example.dev',
-                  'Destroy Database (mysql db and user)' => 'drush quickstart-destroy database --domain=example.dev',
-                  'Destroy Code and files (~/webistes/<domain>)' => 'drush quickstart-destroy code --domain=example.dev --codepath=/path/to/drupal',
+                  'Remove DNS (/etc/hosts)' => 'drush quickstart-destroy dns --domain=example.dev',
+                  'Remove Apache (/etc/apache2/sites-enabled/)' => 'drush quickstart-destroy apache --domain=example.dev',
+                  'Drop Database (mysql db and user)' => 'drush quickstart-destroy database --domain=example.dev',
+                  'Delete code and files (~/webistes/<domain>)' => 'drush quickstart-destroy code --domain=example.dev --codepath=/path/to/drupal',
+                  'Reset for reinstall (~/webistes/<domain>)' => 'drush quickstart-destroy install --domain=example.dev --codepath=/path/to/drupal',
           ),
           'aliases' => array('qd'),
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
@@ -71,60 +94,67 @@ function quickstart_drush_help($section) {
 }
 
 /**
- * Simple helper function to keep all the arguments in a list.
- * @return <type>
- */
-function _quickstart_arg_list() {
-  return array('code'=>'code', 'database'=>'database', 'apache'=>'apache', 'dns'=>'dns', 'install'=>'install');
-}
-
-/**
  * Helper function to check input parameters
  * @param  $required any parameters that are required
  * @return array  if $ret['fail'] is true, then check failed, and an error was logged.
  */
 function _quickstart_params($required) {
-
   // check arguments
-  $ret = drush_get_arguments();
+  $commands = drush_get_arguments();
+  $options = drush_get_context('options');
+  $ret = array();
 
-  if (count($ret)==1) {
-    $ret = array("all");
+  // Commands
+
+  // what steps do we take: "" -> "all" -> all our setup steps.
+  if (count($commands)==1) {
+    $commands = array("all");
   }
-  
-  if(array_search("all", $ret)!==false) {
-    $ret = _quickstart_arg_list();
+  if(array_search("all", $commands)!==false) {
+    $commands = _quickstart_arg_list();
   }
 
-  // get options
-  $ret['domain'] = drush_get_option('domain');
-  $ret['codepath'] = drush_get_option('codepath');
-  $ret['backupfile'] = drush_get_option('backupfile');
-  $ret['overwrite'] = drush_get_option('overwrite');
-  $ret['makefile'] = drush_get_option('makefile');
-  $ret['profile'] = drush_get_option('profile');
-  $ret['patch'] = drush_get_option('patch');
+  // Options
 
-  $ret['dbuser'] = 'root';
-  $ret['dbpassword'] = 'quickstart';
-
-  if (strlen($ret['domain']) > 15) {
+  // Domain always required
+  if (strlen($options['domain']) > 15) {
     $ret['fail'] = true;
     drush_log("  '--domain' must be less than 16 characters long.", 'error');
   }
-  if (strlen($ret['domain']) < 1) {
+  if (strlen($options['domain']) < 1) {
     $ret['fail'] = true;
     drush_log("  '--domain' must be at least 1 characters long.", 'error');
   }
+  $options['domain'] = str_replace('/', '', $options['domain']);
+  
+  // defaults
+  $defaults['domain_'] = $domain_ = str_replace('.','_',$options['domain']);
+  // database
+  $defaults['dbuser'] = 'root';
+  $defaults['dbpassword'] = 'quickstart';
+  // apache, code, install
+  $defaults['codepath'] = quickstart_fixpath("~/websites/" . $options['domain']);
+  // code, install (check version)
+  $defaults['makefile'] = quickstart_fixpath("~/websites/default.make");
+  // install
+  $defaults['profile'] = 'default';
+  $defaults['db-url'] = "mysql://$domain_:$domain_@localhost/$domain_";
+  $defaults['db-prefix'] = '';
+  $defaults['account-name'] = 'admin';
+  $defaults['account-pass'] = 'admin';
+  $defaults['account-mail'] = 'admin@'.$options['domain'];
+  $defaults['locale'] = 'en';
+  $defaults['clean-url'] = '1';
+  $defaults['site-name'] = $options['domain'];
+  $defaults['site-mail'] = 'info@'.$options['domain'];
+  $defaults['sites-subdir'] = 'default';
 
-  // set defaults
-  if (empty($ret['codepath'])) $ret['codepath'] = quickstart_fixpath("~/websites/" . $ret['domain']);
-  if (empty($ret['overwrite'])) $ret['overwrite'] = "false";
-  if (empty($ret['makefile'])) $ret['makefile'] = quickstart_fixpath("~/websites/default.make");
-  if (empty($ret['profile'])) $ret['profile'] = "default";
-  if (empty($ret['backupfile'])) $ret['backupfile'] = quickstart_fixpath("~/websites/backups/" . $ret['domain']);  // process differently in backup and restore
+  // Merge it all together - 2nd array overwrites first.
+  $ret = array_merge($commands, $ret);
+  $ret = array_merge($defaults, $ret);
+  $ret = array_merge($options, $ret);
 
-  // check required
+  // Check required
   foreach($required as $require) {
     if (empty($ret[$require])) {
       $ret['fail'] = true;
@@ -142,7 +172,6 @@ function _quickstart_params($required) {
  * @reurn true on success
  */
 function drush_quickstart_create() {
-
   $params = _quickstart_params(array('domain'));
   if (isset($params['fail'])) return drush_set_error(0, dt('Bad parameters.  Try "drush help quickstart-create"'));
   $domain = $params['domain'];
@@ -151,6 +180,11 @@ function drush_quickstart_create() {
 
   try {
     // can you say "object orientation..."
+    if (array_search("dns", $params)) {
+      drush_log('Creating dns config (/etc/hosts) ...', 'ok');
+      quickstart_create_dns($domain, $params);
+      drush_log(' ', 'ok');
+    }
     if (array_search("database", $params)) {
       drush_log("Creating database: $domain_", 'ok');
       quickstart_create_database($domain, $params);
@@ -161,14 +195,9 @@ function drush_quickstart_create() {
       quickstart_create_code($domain, $params);
       drush_log(' ', 'ok');
     }
-    if (array_search("apache", $params)) {
+    if (array_search("apache", $params)) {  // apache after code to handle mkdir
       drush_log("Creating apache config (/etc/apache2/sites-enabled/$domain)", 'ok');
       quickstart_create_apache($domain, $params);
-      drush_log(' ', 'ok');
-    }
-    if (array_search("dns", $params)) {
-      drush_log('Creating dns config (/etc/hosts) ...', 'ok');
-      quickstart_create_dns($domain, $params);
       drush_log(' ', 'ok');
     }
     if (array_search("install", $params)) {
@@ -200,7 +229,6 @@ function drush_quickstart_destroy() {
   $domain = $params['domain'];
 
   try {
-    // can you say "object orientation..."
     if (array_search("install", $params)) {
       drush_log('Destroying installation ...', 'ok');
       quickstart_destroy_install($domain, $params);
@@ -235,4 +263,3 @@ function drush_quickstart_destroy() {
   drush_log("Command completed successfully.", "success");
   return true;
 }
-
