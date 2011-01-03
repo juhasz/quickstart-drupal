@@ -16,6 +16,20 @@ APT::Periodic::Unattended-Upgrade \"1\";
 
 # setup icons on top of screen
 sudo apt-get -y install netspeed
+echo "#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon[en_US]=/home/quickstart/eclipse/icon.xpm
+Name[en_US]=Eclipse
+Exec=/home/quickstart/eclipse/eclipse
+Comment[en_US]=IDE
+Name=Eclipse
+Comment=IDE
+Icon=/home/quickstart/eclipse/icon.xpm
+" | tee /home/quickstart/.gnome2/panel2.d/default/launchers/eclipse.desktop > /dev/null
 # created with: gconftool-2 --dump /apps/panel > my-panel-setup.entries
 gconftool-2 --load ~/quickstart/config/my-panel-setup.entries
 killall gnome-panel
