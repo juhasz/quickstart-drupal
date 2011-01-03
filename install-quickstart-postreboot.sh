@@ -10,15 +10,14 @@
 # cvs -z6 -d:pserver:anonymous:anonymous@cvs.drupal.org:/cvs/drupal-contrib checkout -d quickstart contributions/modules/quickstart
 # bash ~/quickstart/install-quickstart.sh
 
+
+# Undo reboot script
+
+sudo sed -i 's/bash -x ~\/quickstart\/install-quickstart-postreboot.sh/# quickstart was here/g' ~/.profile
+
 cd ~
 
-bash -x ~/quickstart/quickstart-1-prep.sh
-bash -x ~/quickstart/quickstart-2-slim.sh
-bash -x ~/quickstart/quickstart-3-lamp.sh
-bash -x ~/quickstart/quickstart-4-ides.sh
-
-# setup reboot
-echo "gnome-terminal -x bash -c \"~/quickstart/install-quickstart-postreboot.sh\" &" >> ~/.profile
-echo "*** REBOOTING ***"
-sleep 1
-sudo reboot now
+bash -x ~/quickstart/quickstart-5-browsers.sh
+bash -x ~/quickstart/quickstart-6-devenv.sh
+bash -x ~/quickstart/quickstart-7-config.sh
+firefox ~/quickstart/quickstart-8-manualconfig.txt

@@ -18,20 +18,12 @@ Quickstart has been installed.  To complete the image:
 
 2) Update firefox plugins 
 
-3) Reboot
-
-4) INSTALL EXTENSIONS AGAIN  (updating to virtual kernel blew away old copy)
-
-5) Create test site example.dev (this seems to need a reboot)
-   cd ~/websites
-   drush quickstart-create all --domain=example.dev
-
-6) Prepare for export:
+3) Prepare for export:
    bash -x ~/quickstart/export-prep.sh
 
-7) Shutdown
+4) Shutdown
 
-8) Export virtual machine
+5) Export virtual machine
 
-9) Create torrent
+6) Create torrent
 

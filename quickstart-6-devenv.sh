@@ -245,10 +245,10 @@ echo "Alias /profiler /home/quickstart/websites/logs/profiler/webgrind
 
 chmod -R 777 /home/quickstart/websites/logs/profiler
 
-
-
 # ################################################################################ Restart apache
 sudo apache2ctl restart
 
-
+# ################################################################################ Create example site.
+cd ~/websites
+drush qc --domain=example.dev
 
