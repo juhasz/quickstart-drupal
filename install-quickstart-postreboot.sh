@@ -13,7 +13,7 @@
 
 # Undo reboot script
 
-sudo sed -i 's/bash -x ~\/quickstart\/install-quickstart-postreboot.sh/# quickstart was here/g' ~/.profile
+sudo sed -i 's/gnome-terminal -x bash -c "~\/quickstart\/install-quickstart-postreboot.sh" &/# quickstart was here/g' ~/.profile
 
 cd ~
 
