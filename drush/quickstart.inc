@@ -220,7 +220,7 @@ function quickstart_create_code($domain, $params) {
   }
   if (!file_exists($makefile)) {
     // try to find makefile in ~/websites folder
-    $makefile = quickstart_fixpath("~/websites/$makefile");
+    $makefile = quickstart_fixpath("$makefile");
     if (!file_exists($makefile)) throw new Exception("Makefile ". $makefile ." not found.");
   }
 

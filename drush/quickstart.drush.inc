@@ -101,7 +101,7 @@ function quickstart_drush_help($section) {
 function _quickstart_params($required) {
   // check arguments
   $commands = drush_get_arguments();
-  $options = drush_get_context('options');
+  $options = drush_get_context('cli');
   $ret = array();
 
   // Commands
