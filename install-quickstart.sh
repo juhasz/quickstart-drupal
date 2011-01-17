@@ -21,7 +21,7 @@ function reboot {
 cd ~
 
 # Undo any previous reboot script
-sed -i 's/gnome-terminal -x bash -c/# deleteme. see install-quickstart.sh /g' ~/.profile
+sed -i 's/gnome-terminal -x bash -c/# deleteme /g' ~/.profile
 
 # this switch statement handles reboots.
 case "$1" in
