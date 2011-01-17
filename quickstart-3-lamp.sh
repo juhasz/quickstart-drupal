@@ -160,7 +160,7 @@ quickstart.  To see the links, and where they point to, start a terminal and typ
 
 ll
 
-This will list the files and where they link to." > readme.txt
+This will list the files and where they link to." > $CONFIGS/README.txt
 
 # ###### Restart web server
 

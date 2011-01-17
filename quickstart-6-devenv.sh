@@ -34,13 +34,16 @@ To delete a site:
 For more information:
   $ drush help quickstart-create
   $ drush help quickstart-delete
-  Or goto http://drupal.org/node/819398" > ~/websites/readme.txt
+  Or goto http://drupal.org/node/819398" > ~/websites/README.txt
 
 
 # ################################################################################ Drush
 # Install drush
 
-DRUSH_FILE='drush-All-Versions-4.1.tar.gz'
+DRUSH_FILE='drush-All-versions-4.1.tar.gz'
+DRUSH_MAKE='drush_make-6.x-2.0-beta11'
+DRUSH_SITE_INSTALL6='drush_site_install-6-6.x-1.0'
+
 wget http://ftp.drupal.org/files/projects/$DRUSH_FILE
 tar -xzf $DRUSH_FILE
 chmod u+x ~/drush/drush
@@ -49,12 +52,12 @@ rm $DRUSH_FILE
 
 # Install drush make
 mkdir ~/.drush
-drush dl drush_make --destination=/home/quickstart/.drush
-drush dl drush_site_install6 --destination=/home/quickstart/.drush
+drush dl $DRUSH_MAKE --destination=/home/quickstart/.drush
+drush dl $DRUSH_SITE_INSTALL6 --destination=/home/quickstart/.drush
 
 # Install drush quickstart
 ln -s ~/quickstart/drush ~/.drush/quickstart
-mv ~/quickstart/makefiles/*.make ~/websites
+cp ~/quickstart/make_templates/*.make ~/websites
 
 # ################################################################################ Replace localhost/index.html
 
@@ -202,7 +205,8 @@ extension=xhprof.so
 xhprof.output_dir="/home/quickstart/websites/logs/profiler"
 END | sudo tee /etc/php5/conf.d/xhprof.ini > /dev/null
 
-
+rm  xhprof-0.9.2.tgz
+rm -rf  xhprof-0.9.2
 sudo apache2ctl restart
 
 
