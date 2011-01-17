@@ -82,6 +82,22 @@ function quickstart_drush_command() {
           'aliases' => array('qd'),
           'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
   );
+
+  $items['quickstart-fixperms'] = array(
+          'description' => "Fix permissions for a quickstart development website.",
+          'arguments' => array(
+          ),
+          'options' => array(
+                  'domain' => 'Domain name to destroy.',
+                  'codepath' => 'Path to drupal code.  Defaults to ~/websites/[domain]',
+          ),
+          'examples' => array(
+                  'Simplest format' => 'drush qf --domain=example.dev',
+                  'Use different codepath' => 'drush quickstart-fixperms --domain=example.dev --codepath=/path/to/drupal',
+          ),
+          'aliases' => array('qf'),
+          'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
+  );
   return $items;
 }
 
@@ -165,6 +181,24 @@ function _quickstart_params($required) {
 }
 
 /**
+ * Drush callbackfunction for 'drush quickstart-fixperms'.
+ *
+ * This function fixes permissions for a drupal site.
+ *
+ * @reurn true on success
+ */
+function drush_quickstart_fixperms() {
+  $params = _quickstart_params(array('domain'));
+  if (isset($params['fail'])) return drush_set_error(0, dt('Bad parameters.  Try "drush help quickstart-fixperms"'));
+
+  $codepath = $params['codepath'];
+
+  quickstart_shell_exec("sudo chown -R quickstart:www-data $codepath");
+  quickstart_shell_exec("sudo chmod -R u=rwX,g=rX,a= $codepath");
+  quickstart_shell_exec("sudo find $codepath/sites -type d -name files -exec chmod -R ug=rwX,a= '{}' \;");  // find directories named "files" and run chmod on them.
+}
+
+/**
  * Drush callbackfunction for 'drush quickstart-create'.
  *
  * This function goes step-by-step in creating the new site.
@@ -179,7 +213,6 @@ function drush_quickstart_create() {
   $domain_ = str_replace('.','_',$domain);
 
   try {
-    // can you say "object orientation..."
     if (array_search("dns", $params)) {
       drush_log('Creating dns config (/etc/hosts) ...', 'ok');
       quickstart_create_dns($domain, $params);
