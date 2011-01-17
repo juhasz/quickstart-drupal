@@ -10,7 +10,7 @@
 # cvs -z6 -d:pserver:anonymous:anonymous@cvs.drupal.org:/cvs/drupal-contrib checkout -d quickstart contributions/modules/quickstart
 # bash ~/quickstart/install-quickstart.sh
 
-read -p "Press any key to continue"
+read -p "Press any key to continue $1"
 
 function reboot {
   echo "gnome-terminal -x bash -c \"~/quickstart/install-quickstart.sh $1\" &" >> ~/.profile
@@ -23,7 +23,7 @@ function reboot {
 cd ~
 
 # Undo any previous reboot script
-sudo sed -i 's/gnome-terminal -x bash -c "~\/quickstart\/install-quickstart.sh" &/# deleteme. see install-quickstart.sh /g' ~/.profile
+sed -i 's/gnome-terminal -x bash -c/# deleteme. see install-quickstart.sh /g' ~/.profile
 
 # this switch statement handles reboots.
 case "$1" in
