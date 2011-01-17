@@ -12,7 +12,8 @@ Quickstart has been installed.  To complete the image:
     ECLIPSE:
       Set workspace to /home/quickstart/websites - use as default
       Help->Check for updates
-      Window->Preferences->General->Web Browser, use external browser.  Add firefox (Firefox, /usr/bin/firefox, %URL%)
+      Window->Preferences->General->Web Browser, use external browser. 
+       Add firefox (Firefox, /usr/bin/firefox, %URL%)
                          ->PHP->Debug, set the default to Xdebug.
                          ->General->Editors->Text Editors.  Displayed tab width: 2, Check insert spaces for tabs
 
