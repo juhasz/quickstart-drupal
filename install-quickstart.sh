@@ -10,8 +10,6 @@
 # cvs -z6 -d:pserver:anonymous:anonymous@cvs.drupal.org:/cvs/drupal-contrib checkout -d quickstart contributions/modules/quickstart
 # bash ~/quickstart/install-quickstart.sh
 
-read -p "Press any key to continue $1"
-
 function reboot {
   echo "gnome-terminal -x bash -c \"~/quickstart/install-quickstart.sh $1\" &" >> ~/.profile
   echo "*** REBOOTING ***"
