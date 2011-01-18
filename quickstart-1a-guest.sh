@@ -5,12 +5,12 @@
 
 # Install virtual kernel.  Better performance.
 # Removed for 10.10 - http://bugs.launchpad.net/ubuntu/+source/linux/+bug/69224
-#sudo apt-get -y install linux-virtual linux-headers-virtual 
+#sudo apt-get -yq install linux-virtual linux-headers-virtual 
 
 # dkms recommended on virtualbox.org for upgrade compatibility
-sudo apt-get -y install build-essential linux-headers-$(uname -r)
-sudo apt-get -y install dkms
-sudo apt-get -y install virtualbox-ose-guest-x11
+sudo apt-get -yq install build-essential linux-headers-$(uname -r)
+sudo apt-get -yq install dkms
+sudo apt-get -yq install virtualbox-ose-guest-x11
 
 ## Shared folders
 

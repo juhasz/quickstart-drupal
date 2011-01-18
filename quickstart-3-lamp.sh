@@ -5,12 +5,12 @@ mkdir ~/websites
 
 
 # ##### Install some basics
-sudo apt-get -y install cvs subversion git-core bzr
-sudo apt-get -y install wget curl
+sudo apt-get -yq install cvs subversion git-core bzr
+sudo apt-get -yq install wget curl
 
 
 # ##### Install openssh-server
-sudo apt-get -y install openssh-server
+sudo apt-get -yq install openssh-server
 
 
 # ##### Install LAMP packages
@@ -31,7 +31,7 @@ echo phpmyadmin       phpmyadmin/setup-password         password quickstart | su
 echo phpmyadmin       phpmyadmin/mysql/app-pass         password quickstart | sudo debconf-set-selections
 
 # Now install the packages.  debconf shouldn't need to ask so many questions.
-sudo apt-get -y install $LAMP_APACHE $LAMP_MYSQL $LAMP_PHP $LAMP_TOOLS
+sudo apt-get -yq install $LAMP_APACHE $LAMP_MYSQL $LAMP_PHP $LAMP_TOOLS
 
 
 # ###### Configure APACHE

@@ -12,7 +12,7 @@
 
 function reboot {
   echo "gnome-terminal -x bash -c \"~/quickstart/install-quickstart.sh $1\" &" >> ~/.profile
-  echo "*** REBOOTING ***"
+  echo "*** REBOOTING ***" | tee -a ~/quickstart/quickstart-install.log
   sleep 2
   sudo reboot now
   exit

@@ -15,7 +15,7 @@ APT::Periodic::Unattended-Upgrade \"1\";
 " | sudo tee /etc/apt/apt.conf.d/10periodic > /dev/null
 
 # setup icons on top of screen
-sudo apt-get -y install netspeed
+sudo apt-get -yq install netspeed
 echo "#!/usr/bin/env xdg-open
 
 [Desktop Entry]

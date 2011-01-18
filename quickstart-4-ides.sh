@@ -3,7 +3,7 @@
 cd ~
 
 ## Install java - 100mb
-sudo apt-get -y install default-jre
+sudo apt-get -yq install default-jre
 
 
 ## Basic editors
@@ -18,18 +18,18 @@ gconftool-2 -s /apps/gedit-2/preferences/editor/wrap_mode/wrap_mode --type=strin
 gconftool-2 -s /apps/gedit-2/preferences/editor/tabs/insert_spaces --type=bool true
 gconftool-2 -s /apps/gedit-2/preferences/editor/tabs/tabs_size --type=integer 2
 gconftool-2 -s /apps/gedit-2/preferences/editor/save/auto_save --type=bool true
-sudo apt-get -y install gedit-plugins
+sudo apt-get -yq install gedit-plugins
 
 # gnome terminal
 gconftool-2 -s /apps/gnome-terminal/profiles/Default/scrollback_unlimited --type=bool true
 
 # Install graphical version control - weighs about 58mb
 sudo add-apt-repository ppa:rabbitvcs/ppa && sudo apt-get update
-sudo apt-get -y install rabbitvcs-nautilus
+sudo apt-get -yq install rabbitvcs-nautilus
 sudo killall nautilus
 
 # Install graphics editors - weights about 25mb
-sudo apt-get -y install gimp
+sudo apt-get -yq install gimp
 
 
 ## GUI IDE's
@@ -42,7 +42,7 @@ sudo ln -s /home/quickstart/eclipse/eclipse /usr/bin/eclipse
 rm eclipse.tar.gz
 # PPA's are a good idea, but about 458mb!
 #sudo add-apt-repository ppa:yogarine/eclipse/ubuntu && sudo apt-get update
-#sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install eclipse eclipse-pdt eclipse-plugin-cvs eclipse-subclipse
+#sudo DEBIAN_FRONTEND=noninteractive apt-get -yqq install eclipse eclipse-pdt eclipse-plugin-cvs eclipse-subclipse
 
 # Download and install netbeans - 122mb
 # do this last - it has a GUI :-)

@@ -4,12 +4,12 @@
 
 
 # Install chrome browser (Webkit - fork of KHTML/Konquerer, also used by Safari)
-sudo apt-get -y install chromium-browser flashplugin-nonfree
+sudo apt-get -yq install chromium-browser flashplugin-nonfree
 sudo ln -s /usr/lib/flashplugin-installer/libflashplayer.so /usr/lib/chromium-browser/plugins/
 
 
 # Install firefox browser (gecko)
-sudo apt-get -y install firefox flashplugin-nonfree
+sudo apt-get -yq install firefox flashplugin-nonfree
 
 cd ~
 wget -nv http://www.michaelcole.com/sites/default/files/Quickstart.fbu
