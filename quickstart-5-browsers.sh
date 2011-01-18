@@ -12,7 +12,7 @@ sudo ln -s /usr/lib/flashplugin-installer/libflashplayer.so /usr/lib/chromium-br
 sudo apt-get -y install firefox flashplugin-nonfree
 
 cd ~
-wget http://www.michaelcole.com/sites/default/files/Quickstart.fbu
+wget -nv http://www.michaelcole.com/sites/default/files/Quickstart.fbu
 mv Quickstart.fbu profileFx3{default}.fbu
 
 zenity --info --text="Firefox will start (creating default profile).\n\nPlease CLOSE FIREFOX. " &

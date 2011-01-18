@@ -44,7 +44,7 @@ DRUSH_FILE='drush-All-versions-4.1.tar.gz'
 DRUSH_MAKE='drush_make-6.x-2.0-beta11'
 DRUSH_SITE_INSTALL6='drush_site_install6-6.x-1.0'
 
-wget http://ftp.drupal.org/files/projects/$DRUSH_FILE
+wget -nv http://ftp.drupal.org/files/projects/$DRUSH_FILE
 tar -xzf $DRUSH_FILE
 chmod u+x ~/drush/drush
 sudo ln -s ~/drush/drush /usr/local/bin/drush
@@ -191,7 +191,7 @@ xdebug.profiler_output_dir=/home/quickstart/websites/logs/profiler
 # ################################################################################ XHProf profiler (Devel Module)
 # Adapted from: http://techportal.ibuildings.com/2009/12/01/profiling-with-xhprof/
 
-wget http://pecl.php.net/get/xhprof-0.9.2.tgz
+wget -nv http://pecl.php.net/get/xhprof-0.9.2.tgz
 tar xvf xhprof-0.9.2.tgz
 cd ./xhprof-0.9.2/extension/
 phpize
@@ -213,7 +213,7 @@ sudo apache2ctl restart
 # ################################################################################ Install a web-based profile viewer
 cd ~/websites/logs/profiler
 
-wget -O webgrind.zip http://webgrind.googlecode.com/files/webgrind-release-1.0.zip
+wget -nv -O webgrind.zip http://webgrind.googlecode.com/files/webgrind-release-1.0.zip
 unzip webgrind.zip
 rm webgrind.zip
 

@@ -36,7 +36,7 @@ sudo apt-get -y install gimp
 
 # Download and install eclipse - 167mb
 ECLIPSE_URL="http://mirrors.ibiblio.org/pub/mirrors/eclipse/technology/epp/downloads/release/helios/SR1/eclipse-php-helios-SR1-linux-gtk.tar.gz"
-wget -O eclipse.tar.gz $ECLIPSE_URL
+wget -nv -O eclipse.tar.gz $ECLIPSE_URL
 tar -xvf eclipse.tar.gz
 sudo ln -s /home/quickstart/eclipse/eclipse /usr/bin/eclipse 
 rm eclipse.tar.gz
@@ -47,7 +47,7 @@ rm eclipse.tar.gz
 # Download and install netbeans - 122mb
 # do this last - it has a GUI :-)
 NETBEANS_URL="http://download.netbeans.org/netbeans/6.9.1/final/bundles/netbeans-6.9.1-ml-php-linux.sh"
-wget -O netbeans.sh $NETBEANS_URL
+wget -nv -O netbeans.sh $NETBEANS_URL
 chmod +x ./netbeans.sh
 bash ./netbeans.sh --silent
 rm netbeans.sh
