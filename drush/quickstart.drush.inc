@@ -133,15 +133,20 @@ function _quickstart_params($required) {
   // Options
 
   // Domain always required
+  // remove /'s
+  $options['domain'] = str_replace('/', '', $options['domain']);
   if (strlen($options['domain']) > 15) {
     $ret['fail'] = true;
-    drush_log("  '--domain' must be less than 16 characters long.", 'error');
+    drush_log("  '--domain' must be less than 16 characters long, for mysql user name to work.", 'error');
   }
-  if (strlen($options['domain']) < 1) {
+  if (strlen($options['domain']) < 3) {
     $ret['fail'] = true;
-    drush_log("  '--domain' must be at least 1 characters long.", 'error');
+    drush_log("  '--domain' must be at least 3 characters long.", 'error');
   }
-  $options['domain'] = str_replace('/', '', $options['domain']);
+  if (strpos($options['domain'], '.')===false) {
+    $ret['fail'] = true;
+    drush_log("  '--domain' must include a . for drupal installer to work.", 'error');
+  }
   
   // defaults
   $defaults['domain_'] = $domain_ = str_replace('.','_',$options['domain']);
@@ -166,9 +171,9 @@ function _quickstart_params($required) {
   $defaults['sites-subdir'] = 'default';
 
   // Merge it all together - 2nd array overwrites first.
-  $ret = array_merge($commands, $ret);
-  $ret = array_merge($defaults, $ret);
-  $ret = array_merge($options, $ret);
+  $ret = array_merge($ret, $commands);
+  $ret = array_merge($ret, $defaults);
+  $ret = array_merge($ret, $options);
 
   // Check required
   foreach($required as $require) {
@@ -234,7 +239,7 @@ function drush_quickstart_create() {
       drush_log(' ', 'ok');
     }
     if (array_search("install", $params)) {
-      drush_log('Running installer ...', 'ok');
+      drush_log('Running installer ... (this could take a minute, check process activity) ...', 'ok');
       quickstart_create_install($domain, $params);
       drush_log(' ', 'ok');
     }

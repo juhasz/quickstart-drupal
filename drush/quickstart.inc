@@ -268,40 +268,43 @@ function quickstart_create_install($domain, $params) {
   // Nuff foreplay, let's install this sucker!
   switch ($dversion) {
     case 'd7':
-      return quickstart_create_install_D7($domain, $params);
+      die("WRONG TURN!");
+      quickstart_create_install_D7($domain, $params);
+      break;
     case 'd6':
-      return quickstart_create_install_D6($domain, $params);
+      quickstart_create_install_D6($domain, $params);
+      break;
     default: 
-      return quickstart_create_install_D6_manual($domain, $params);
+      quickstart_create_install_D6_manual($domain, $params);
+      break;
   }
+  drush_log("\nAdmin user:  ".$params['account-name']."\nAdmin password: ".$params['account-pass'], 'ok');
 }
 
 /**
  * Install a D7 site, using core 'drush site-install' command
  */
 function quickstart_create_install_D7($domain, $params) {
-  //drush_backend_invoke
-  print("site-install"
-                          . " --root=" . $params['codepath']
-                          . " --db-url=" . $params['db-url']
-                          . " --db-prefix=" . $params['db-prefix']
-                          . " --account-name=" . $params['account-name']
-                          . " --account-pass=" . $params['account-pass']
-                          . " --account-mail=" . $params['account-mail']
-                          . " --locale=" . $params['locale']
-                          . " --clean-url=" . $params['clean-url']
-                          . " --site-name=" . $params['site-name']
-                          . " --site-mail=" . $params['site-mail']
-                          . " --sites-subdir=" . $params['sites-subdir']
-                          . " --dbuser=" . $params['dbuser']
-                          . " --dbpassword=" . $params['dbpassword']
-          );
+  drush_backend_invoke("site-install"
+      . " --root=" . $params['codepath']
+      . " --db-url=" . $params['db-url']
+      . " --db-prefix=" . $params['db-prefix']
+      . " --account-name=" . $params['account-name']
+      . " --account-pass=" . $params['account-pass']
+      . " --account-mail=" . $params['account-mail']
+      . " --locale=" . $params['locale']
+      . " --clean-url=" . $params['clean-url']
+      . " --site-name=" . $params['site-name']
+      . " --site-mail=" . $params['site-mail']
+      . " --sites-subdir=" . $params['sites-subdir']
+      . " --dbuser=" . $params['dbuser']
+      . " --dbpassword=" . $params['dbpassword']
+  );
 }
  
 /**
  * Install a D6 site, using contrib 'drush site-install6' command.  
  * Project: http://drupal.org/project/drush_site_install6
- * setup during quickstart-6-devenv.sh
  */
 function quickstart_create_install_D6($domain, $params) {
   $codepath = $params['codepath'];
@@ -309,7 +312,7 @@ function quickstart_create_install_D6($domain, $params) {
   
   // copy default.settings.php to settings.php and change URL and prefix
   $str = file_get_contents("$codepath/sites/default/default.settings.php");
-  $str = str_replace("\$db_url = 'mysql://username:password@localhost/databasename'",
+  $str = str_replace("mysql://username:password@localhost/databasename",
           $params['db-url'],
           $str);
   $str = str_replace("\$db_prefix = ''",
@@ -335,7 +338,7 @@ function quickstart_create_install_D6($domain, $params) {
 }
 
 /** 
- * Install site manually.  This code shouldn't be used anymore.
+ * Install site manually.  This code shouldn't be used anymore if site-install6 is available
  */
 function quickstart_create_install_D6_manual($domain, $params) {
   $domain_ = $params['domain_'];
