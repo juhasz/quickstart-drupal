@@ -4,4 +4,3 @@ api = 2
 projects[] = drupal
 projects[] = cck
 projects[] = views
-projects[] = poormanscron
