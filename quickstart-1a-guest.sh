@@ -2,12 +2,17 @@
 
 ## install guest additions 
 
+
+# Install virtual kernel.  Better performance.
+# Removed for 10.10 - http://bugs.launchpad.net/ubuntu/+source/linux/+bug/69224
+#sudo apt-get -y install linux-virtual linux-headers-virtual 
+
 # dkms recommended on virtualbox.org for upgrade compatibility
 sudo apt-get -y install build-essential linux-headers-$(uname -r)
 sudo apt-get -y install dkms
 sudo apt-get -y install virtualbox-ose-guest-x11
 
-# ################################################################################ Shared folder
+## Shared folders
 
 # Setup shared folders between virtualbox host and virtualbox guest
 # Note difference between shared and vbox-shared.  That's important.  Requires reboot

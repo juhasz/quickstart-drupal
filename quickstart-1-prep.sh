@@ -12,16 +12,6 @@ This script shouldn't be run more than once."
 echo "quickstart ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers > /dev/null
 
 
-## Upgrade
-
-# Do this here because update-manager seems to interupt apt
-sudo apt-get -y update
-sudo apt-get -y upgrade
-
-# Install virtual kernel.  Better performance.
-# Removed for 10.10 - http://bugs.launchpad.net/ubuntu/+source/linux/+bug/69224
-#sudo apt-get -y install linux-virtual linux-headers-virtual 
-
 
 ## Disk size Accounting
 

@@ -27,14 +27,15 @@ sed -i 's/gnome-terminal -x bash -c/# deleteme /g' ~/.profile
 case "$1" in
 "")
   bash -x ~/quickstart/quickstart-1-prep.sh  2>&1 | tee -a ~/quickstart/quickstart-install.log
-  reboot 1a
-  ;;
-"1a")
   bash -x ~/quickstart/quickstart-1a-guest.sh  2>&1 | tee -a ~/quickstart/quickstart-install.log
   reboot 2
   ;;
 "2")
   bash -x ~/quickstart/quickstart-2-slim.sh  2>&1 | tee -a ~/quickstart/quickstart-install.log
+  bash -x ~/quickstart/quickstart-2a-update.sh  2>&1 | tee -a ~/quickstart/quickstart-install.log
+  reboot 3
+  ;;
+"3")
   bash -x ~/quickstart/quickstart-3-lamp.sh  2>&1 | tee -a ~/quickstart/quickstart-install.log
   bash -x ~/quickstart/quickstart-4-ides.sh  2>&1 | tee -a ~/quickstart/quickstart-install.log
   reboot 5
