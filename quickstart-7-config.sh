@@ -32,7 +32,7 @@ Icon=/home/quickstart/eclipse/icon.xpm
 " | tee /home/quickstart/.gnome2/panel2.d/default/launchers/eclipse.desktop > /dev/null
 # created with: gconftool-2 --dump /apps/panel > my-panel-setup.entries
 gconftool-2 --load ~/quickstart/config/my-panel-setup.entries
-killall gnome-panel
+#killall gnome-panel  #this not working for some reason.  Just did a reboot after this script
 
 # final size
 df -h -T > ~/quickstart/quickstart-size-end.txt
