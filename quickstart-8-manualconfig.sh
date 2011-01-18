@@ -3,6 +3,7 @@
 # Create example site.  This done after previous reboot to avoid error.
 cd ~/websites
 drush qc --domain=example.dev
+drush qc --domain=example6.dev --makefile=d6.make
 
 
 # final size
