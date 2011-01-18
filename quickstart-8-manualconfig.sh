@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Create example site.
+# Create example site.  This done after previous reboot to avoid error.
 cd ~/websites
 drush qc --domain=example.dev
 
