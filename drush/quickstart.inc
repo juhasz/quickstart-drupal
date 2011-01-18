@@ -268,7 +268,6 @@ function quickstart_create_install($domain, $params) {
   // Nuff foreplay, let's install this sucker!
   switch ($dversion) {
     case 'd7':
-      die("WRONG TURN!");
       quickstart_create_install_D7($domain, $params);
       break;
     case 'd6':
