@@ -42,7 +42,7 @@ For more information:
 
 DRUSH_FILE='drush-All-versions-4.1.tar.gz'
 DRUSH_MAKE='drush_make-6.x-2.0-beta11'
-DRUSH_SITE_INSTALL6='drush_site_install-6-6.x-1.0'
+DRUSH_SITE_INSTALL6='drush_site_install6-6.x-1.0'
 
 wget http://ftp.drupal.org/files/projects/$DRUSH_FILE
 tar -xzf $DRUSH_FILE
