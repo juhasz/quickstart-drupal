@@ -8,6 +8,7 @@ Quickstart has been installed.  To complete the image:
                     ->Editor->Formatting.  Spaces per indent: 2, Tab size 2
       Close
       Open again and Install updates (popup)
+      Create project for example.dev
                     
     ECLIPSE:
       Set workspace to /home/quickstart/websites - use as default
