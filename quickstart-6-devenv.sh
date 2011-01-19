@@ -235,3 +235,25 @@ chmod -R 777 /home/quickstart/websites/logs/xhprof
 sudo apache2ctl restart
 
 
+# ################################################################################ Squid caching of ftp.drupal.org
+
+cd ~
+sudo apt-get update
+
+# Install caching proxy server
+sudo apt-get -y install squid3
+
+echo "http_proxy=\"http://localhost:3128\"" | sudo tee -a /etc/environment > /dev/null
+
+echo "
+# Quickstart
+acl drushservers dstdomain ftp.drupal.org
+
+cache allow drushservers
+cache deny all
+
+shutdown_lifetime 0 seconds 
+" | sudo tee -a /etc/squid3/squid.conf
+
+echo "*** REBOOT TO TAKE EFFECT ***"
+
