@@ -14,22 +14,21 @@ mkdir ~/websites
 
 echo "This is where Quickstart websites go.
 
-Quickstart include some commandline scripts to automate site installation.
+Quickstart includes some command line scripts to automate site creation.
 
 To create a site (dns, apache, code, database, and install):
-This will do all the downloads and configurations
 
-  1) Start a terminal (top left, click the black box with a >)
+  1) Start a terminal (top left icon, click the black box with a [>_] )
 
   2) Paste in this command (don't include the $)
-    $ drush quickstart-create all --domain=newsite.dev
+    $ drush quickstart-create --domain=newsite.dev
          or 
-    $ drush qc all --domain=newsite.dev
+    $ drush qc --domain=newsite.dev
 
 To delete a site:
-  $ drush quickstart-delete all --domain=newsite.dev
+  $ drush quickstart-delete --domain=newsite.dev
          or 
-  $ drush qd all --domain=newsite.dev
+  $ drush qd --domain=newsite.dev
 
 For more information:
   $ drush help quickstart-create
