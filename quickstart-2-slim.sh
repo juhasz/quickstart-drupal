@@ -8,9 +8,6 @@
 # 0mb
 sudo apt-get -yq autoremove
 
-# Cleaning utilities
-sudo apt-get -yq install deborphan autoclean bleachbit
-
 # 362mb - Open office
 sudo apt-get -yq remove --purge openoffice.org-core openoffice.org-common openoffice.org-writer openoffice.org-calc openoffice.org-math \
      openoffice.org-impress openoffice.org-base-core openoffice.org-draw openoffice.org-emailmerge openoffice.org-gnome openoffice.org-gtk \
@@ -127,15 +124,6 @@ sudo apt-get -yq remove --purge eog #graphic viewer 1.6mb
 
 # 0mb
 sudo apt-get -yq autoremove
-# 32mb - Remove orphan packages - do a couple times
-sudo deborphan --guess-all # display them to user
-sudo deborphan --guess-all | xargs sudo apt-get -yq remove --purge   
-sudo deborphan --guess-all # display them to user
-sudo deborphan --guess-all | xargs sudo apt-get -yq remove --purge   
-sudo deborphan --guess-all # display them to user
-sudo deborphan --guess-all | xargs sudo apt-get -yq remove --purge   
-sudo deborphan --guess-all # display them to user
-sudo deborphan --guess-all | xargs sudo apt-get -yq remove --purge   
 # Clean out downloaded packages
 sudo apt-get -yq clean
 

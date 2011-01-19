@@ -171,30 +171,6 @@ xdebug.profiler_output_dir=/home/quickstart/websites/logs/profiler
 " | sudo tee -a /etc/php5/conf.d/xdebug.ini > /dev/null
 
 
-
-# ################################################################################ XHProf profiler (Devel Module)
-# Adapted from: http://techportal.ibuildings.com/2009/12/01/profiling-with-xhprof/
-
-wget -nv http://pecl.php.net/get/xhprof-0.9.2.tgz
-tar xvf xhprof-0.9.2.tgz
-cd ./xhprof-0.9.2/extension/
-phpize
-./configure
-make
-sudo make install
-
-echo < END
-[xhprof]
-extension=xhprof.so
-xhprof.output_dir="/home/quickstart/websites/logs/profiler"
-END | sudo tee /etc/php5/conf.d/xhprof.ini > /dev/null
-
-cd ~
-rm  xhprof-0.9.2.tgz
-rm -rf  xhprof-0.9.2
-sudo apache2ctl restart
-
-
 # ################################################################################ Install a web-based profile viewer
 cd ~/websites/logs/profiler
 
@@ -215,6 +191,44 @@ echo "Alias /profiler /home/quickstart/websites/logs/profiler/webgrind
 " | sudo tee /etc/apache2/conf.d/webgrind > /dev/null
 
 chmod -R 777 /home/quickstart/websites/logs/profiler
+
+
+# ################################################################################ XHProf profiler (Devel Module)
+# Adapted from: http://techportal.ibuildings.com/2009/12/01/profiling-with-xhprof/
+
+# get it
+cd ~
+wget -nv http://pecl.php.net/get/xhprof-0.9.2.tgz
+tar xvf xhprof-0.9.2.tgz
+mv xhprof-0.9.2 /home/quickstart/websites/logs/xhprof
+
+# build and install it
+cd /home/quickstart/websites/logs/xhprof/extension/
+phpize
+./configure
+make
+sudo make install
+
+# configure php
+echo "
+[xhprof]
+extension=xhprof.so
+xhprof.output_dir=\"/home/quickstart/websites/logs/xhprof\"
+" | sudo tee /etc/php5/conf.d/xhprof.ini > /dev/null
+ 
+# configure apache
+echo "Alias /xhprof /home/quickstart/websites/logs/xhprof/xhprof_html
+
+<Directory /home/quickstart/websites/logs/profiler/xhprof/xhprof_html>
+  Allow from All
+</Directory>
+" | sudo tee /etc/apache2/conf.d/xhprof > /dev/null
+
+# clean up
+cd ~
+rm xhprof-0.9.2.tgz
+rm package.xml
+
 
 # ################################################################################ Restart apache
 sudo apache2ctl restart
