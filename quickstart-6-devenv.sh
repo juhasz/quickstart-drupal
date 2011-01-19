@@ -196,11 +196,16 @@ chmod -R 777 /home/quickstart/websites/logs/profiler
 # ################################################################################ XHProf profiler (Devel Module)
 # Adapted from: http://techportal.ibuildings.com/2009/12/01/profiling-with-xhprof/
 
+# supporting packages
+sudo apt-get -yq install graphviz
+
 # get it
 cd ~
 wget -nv http://pecl.php.net/get/xhprof-0.9.2.tgz
 tar xvf xhprof-0.9.2.tgz
 mv xhprof-0.9.2 /home/quickstart/websites/logs/xhprof
+rm xhprof-0.9.2.tgz
+rm package.xml
 
 # build and install it
 cd /home/quickstart/websites/logs/xhprof/extension/
@@ -224,10 +229,7 @@ echo "Alias /xhprof /home/quickstart/websites/logs/xhprof/xhprof_html
 </Directory>
 " | sudo tee /etc/apache2/conf.d/xhprof > /dev/null
 
-# clean up
-cd ~
-rm xhprof-0.9.2.tgz
-rm package.xml
+chmod -R 777 /home/quickstart/websites/logs/xhprof
 
 
 # ################################################################################ Restart apache
