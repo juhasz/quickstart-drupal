@@ -63,8 +63,8 @@ cp ~/quickstart/make_templates/*.make ~/websites
 # Add interesting default document for localhost
 sudo rm /var/www/index.html
 sudo chmod 777 /var/www
-cp ~/quickstart/config/index/php /var/www/index.php
-sudo chmod 755 /var/www
+cp ~/quickstart/config/index.php /var/www/index.php
+sudo chmod 755 /var/www/index.php
 
 
 # ################################################################################ Command line shortcuts (bash aliases)
