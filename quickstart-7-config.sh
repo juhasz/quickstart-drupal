@@ -37,3 +37,6 @@ gconftool-2 --load ~/quickstart/config/my-panel-setup.entries
 # final size
 df -h -T > ~/quickstart/quickstart-size-end.txt
 
+# If the world was built by designers, it would be gorgeous, and noone could do anything.  Make windows edges dragable for resizing.
+sudo cp ~/quickstart/config/radiance-metacity-theme-1.xml /usr/share/themes/Radiance/metacity-1/metacity-theme-1.xml
+
