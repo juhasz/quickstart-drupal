@@ -7,8 +7,8 @@
             <td bgcolor="#FFFFee"><strong>Quickstart Support and Questions:</strong></td>
           </tr>
           <tr>
-            <td bgcolor="#FFFFee"><a href='http://localhost/phpmyadmin'>phpmyadmin</a></td>
-            <td bgcolor="#FFFFee">Tutorials: <a href="http://www.youtube.com/user/drupalquickstart">Youtube videos<img src="http://s.ytimg.com/yt/img/creators_corner/YouTube/youtube_24x24.png" alt="Subscribe to me on YouTube"/></a>
+            <td bgcolor="#FFFFee"><a href='http://localhost/phpmyadmin'>phpmyadmin</a> (password quickstart)</td>
+            <td bgcolor="#FFFFee">Tutorials: <a href="http://www.youtube.com/user/drupalquickstart">Youtube videos<img src="http://s.ytimg.com/yt/img/creators_corner/YouTube/youtube_24x24.png" alt="Subscribe to me on YouTube"/>&nbsp;</a>
             
             </td>
           </tr>
@@ -33,7 +33,7 @@
             <td bgcolor="#FFFFee"><a href="http://drupal.org/project/quickstart">Quickstart Project</a></td>
           </tr>
           <tr>
-            <td bgcolor="#FFFFee"><p><a href="example6.dev">example6.dev</a> - Drupal 6</p></td>
+            <td bgcolor="#FFFFee"><p><a href="http://example6.dev">example6.dev</a> - Drupal 6</p></td>
             <td bgcolor="#FFFFee"><a href="http://drupal.org/node/788080">Handbook Documentation</a></td>
           </tr>
           <tr>
