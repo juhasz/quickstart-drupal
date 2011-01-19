@@ -35,6 +35,9 @@ AEGIR_GIT_URL="http://git.aegirproject.org/?p=provision.git;a=blob_plain;f=insta
 # This is taken from http://git.aegirproject.org/?p=provision.git;a=blob;f=docs/INSTALL.txt;h=7fd286f74fa719c6d6551081dc106cecd517a903;hb=299e9b83fdc653b1152e5394799bf99a5ff238c3
 # some of these steps are already covered in quickstart's install.sh, but we can still run them here...
 
+cd ~
+sudo apt-get update
+
 ## DNS
 echo "127.0.0.1 $AEGIR_LOCAL_DOMAIN" | sudo tee -a /etc/hosts > /dev/null
 

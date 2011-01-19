@@ -19,8 +19,8 @@ To admin Hudson: http://localhost:8081/
 For details on using Hudson with Drupal, see here: http://groups.drupal.org/node/96289
 "
 
-
 cd ~
+sudo apt-get update
 
 # Get the package signer key
 wget -O /tmp/key http://hudson-ci.org/debian/hudson-ci.org.key

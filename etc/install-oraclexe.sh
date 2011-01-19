@@ -26,6 +26,9 @@ For details on using Oracle with Drupal, see here: http://api.drupal.org/api/dru
 REBOOT YOUR SERVER FOR APACHE TO SEE THE OCI8 DRIVER
 "
 
+cd ~
+sudo apt-get update
+
 #install server
 echo "deb http://oss.oracle.com/debian unstable main non-free" | sudo tee -a /etc/apt/sources.list
 wget http://oss.oracle.com/el4/RPM-GPG-KEY-oracle -O- | sudo apt-key add - 
