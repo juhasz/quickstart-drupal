@@ -240,7 +240,7 @@ function drush_quickstart_create() {
       drush_log(' ', 'ok');
     }
     if (array_search("install", $params)) {
-      drush_log('Running installer ... (this could take a minute, check cpu activity) ...', 'ok');
+      drush_log('Running installer (this could take a minute, check cpu activity) ...', 'ok');
       quickstart_create_install($domain, $params);
       drush_log(' ', 'ok');
     }

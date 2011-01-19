@@ -40,3 +40,7 @@ df -h -T > ~/quickstart/quickstart-size-end.txt
 # If the world was built by designers, it would be gorgeous, and noone could do anything.  Make windows edges dragable for resizing.
 sudo cp ~/quickstart/config/radiance-metacity-theme-1.xml /usr/share/themes/Radiance/metacity-1/metacity-theme-1.xml
 
+# get rid of subversion commit keyring.  Store passwords plain on disk
+sudo sed -i 's/# password-stores = gnome-keyring,kwallet/password-stores = /g' ~/.subversion/config
+sudo sed -i 's/# store-plaintext-passwords = no/store-plaintext-passwords = yes/g' ~/.subversion/servers
+
