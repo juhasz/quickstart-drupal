@@ -278,7 +278,7 @@ function drush_quickstart_destroy() {
       drush_log('... code done.', 'ok');
     }
     if (array_search("database", $params)) {
-      drush_log('Destroying database ' . $params['domain_'] . ' ...', 'ok');
+      drush_log('Destroying database and user ' . $params['domain_'] . ' ...', 'ok');
       quickstart_destroy_database($domain, $params);
       drush_log('... database done.', 'ok');
     }
