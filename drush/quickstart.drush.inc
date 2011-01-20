@@ -215,12 +215,11 @@ function drush_quickstart_create() {
   $params = _quickstart_params(array('domain'));
   if (isset($params['fail'])) return drush_set_error(0, dt('Bad parameters.  Try "drush help quickstart-create"'));
   $domain = $params['domain'];
-
-  $domain_ = str_replace('.','_',$domain);
+  $domain_ = $params['domain_'];
 
   try {
     if (array_search("dns", $params)) {
-      drush_log('Creating dns config (/etc/hosts) ...', 'ok');
+      drush_log("Creating dns config (add $domain to /etc/hosts) ...", 'ok');
       quickstart_create_dns($domain, $params);
       drush_log(' ', 'ok');
     }
@@ -230,7 +229,7 @@ function drush_quickstart_create() {
       drush_log(' ', 'ok');
     }
     if (array_search("code", $params)) {
-      drush_log('Downloading code (this could take a minute, check network activity) ...', 'ok');
+      drush_log('Downloading code to ' . $params['codepath'] . ' (takes a minute, check network activity) ...', 'ok');
       quickstart_create_code($domain, $params);
       drush_log(' ', 'ok');
     }
@@ -240,7 +239,7 @@ function drush_quickstart_create() {
       drush_log(' ', 'ok');
     }
     if (array_search("install", $params)) {
-      drush_log('Running installer (this could take a minute, check cpu activity) ...', 'ok');
+      drush_log('Running installer (takes a minute, check cpu activity) ...', 'ok');
       quickstart_create_install($domain, $params);
       drush_log(' ', 'ok');
     }
@@ -269,17 +268,17 @@ function drush_quickstart_destroy() {
 
   try {
     if (array_search("install", $params)) {
-      drush_log('Destroying installation ...', 'ok');
-      quickstart_destroy_install($domain, $params);
+      drush_log('Destroying installation (nothing to do) ...', 'ok');
+      // quickstart_destroy_install($domain, $params);
       drush_log('... installation done.', 'ok');
     }
     if (array_search("code", $params)) {
-      drush_log('Destroying code ...', 'ok');
+      drush_log('Destroying code at ' . $params['codepath'] . ' ...', 'ok');
       quickstart_destroy_code($domain, $params);
       drush_log('... code done.', 'ok');
     }
     if (array_search("database", $params)) {
-      drush_log('Destroying database [domain] ...', 'ok');
+      drush_log('Destroying database ' . $params['domain_'] . ' ...', 'ok');
       quickstart_destroy_database($domain, $params);
       drush_log('... database done.', 'ok');
     }
@@ -289,7 +288,7 @@ function drush_quickstart_destroy() {
       drush_log('... apache config done.', 'ok');
     }
     if (array_search("dns", $params)) {
-      drush_log('Destroying dns config (/etc/hosts) ...', 'ok');
+      drush_log("Destroying dns config (remove $domain from /etc/hosts) ...", 'ok');
       quickstart_destroy_dns($domain, $params);
       drush_log('... dns config done.', 'ok');
     }
