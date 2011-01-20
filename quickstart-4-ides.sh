@@ -35,7 +35,7 @@ sudo apt-get -yq install gimp
 ## GUI IDE's
 
 # Download and install eclipse - 167mb
-ECLIPSE_URL="http://mirrors.ibiblio.org/pub/mirrors/eclipse/technology/epp/downloads/release/helios/SR1/eclipse-php-helios-SR1-linux-gtk.tar.gz"
+ECLIPSE_URL="http://ftp.osuosl.org/pub/eclipse//technology/epp/downloads/release/helios/SR1/eclipse-php-helios-SR1-linux-gtk.tar.gz"
 wget -nv -O eclipse.tar.gz $ECLIPSE_URL
 tar -xvf eclipse.tar.gz
 sudo ln -s /home/quickstart/eclipse/eclipse /usr/bin/eclipse 
