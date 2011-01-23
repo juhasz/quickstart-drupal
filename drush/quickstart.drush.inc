@@ -227,27 +227,27 @@ function drush_quickstart_create() {
     if (array_search("dns", $params)) {
       drush_log("Creating dns config (add $domain to /etc/hosts) ...", 'ok');
       quickstart_create_dns($domain, $params);
-      drush_log('       ... done.', 'ok');
+      drush_log('                                                ... done.', 'ok');
     }
     if (array_search("database", $params)) {
       drush_log("Creating database: $domain_", 'ok');
       quickstart_create_database($domain, $params);
-      drush_log('       ... done.', 'ok');
+      drush_log('                                                ... done.', 'ok');
     }
     if (array_search("code", $params)) {
       drush_log('Downloading code to ' . $params['codepath'] . ' (takes a minute, check network activity) ...', 'ok');
       quickstart_create_code($domain, $params);
-      drush_log('       ... done.', 'ok');
+      drush_log('                                                ... done.', 'ok');
     }
     if (array_search("apache", $params)) {  // apache after code to handle mkdir
       drush_log("Creating apache config (/etc/apache2/sites-enabled/$domain)", 'ok');
       quickstart_create_apache($domain, $params);
-      drush_log('       ... done.', 'ok');
+      drush_log('                                                ... done.', 'ok');
     }
     if (array_search("install", $params)) {
       drush_log('Running installer (takes a minute, check cpu activity) ...', 'ok');
       quickstart_create_install($domain, $params);
-      drush_log('       ... done.', 'ok');
+      drush_log('                                                ... done.', 'ok');
     }
   } catch (Exception $e) {
     $message = $e->getMessage();
@@ -278,27 +278,27 @@ function drush_quickstart_destroy() {
     if (array_search("install", $params)) {
       drush_log('Destroying installation (nothing to do) ...', 'ok');
       // quickstart_destroy_install($domain, $params);
-      drush_log('       ... done.', 'ok');
+      drush_log('                                        ... done.', 'ok');
     }
     if (array_search("code", $params)) {
       drush_log('Destroying code at ' . $params['codepath'] . ' ...', 'ok');
       quickstart_destroy_code($domain, $params);
-      drush_log('       ... done.', 'ok');
+      drush_log('                                        ... done.', 'ok');
     }
     if (array_search("database", $params)) {
       drush_log('Destroying database and user ' . $params['domain_'] . ' ...', 'ok');
       quickstart_destroy_database($domain, $params);
-      drush_log('       ... done.', 'ok');
+      drush_log('                                        ... done.', 'ok');
     }
     if (array_search("apache", $params)) {
       drush_log("Destroying apache config (/etc/apache2/sites-enabled/$domain) ...", 'ok');
       quickstart_destroy_apache($domain, $params);
-      drush_log('       ... done.', 'ok');
+      drush_log('                                        ... done.', 'ok');
     }
     if (array_search("dns", $params)) {
       drush_log("Destroying dns config (remove $domain from /etc/hosts) ...", 'ok');
       quickstart_destroy_dns($domain, $params);
-      drush_log('       ... done.', 'ok');
+      drush_log('                                        ... done.', 'ok');
     }
   } catch (Exception $e) {
     $message = $e->getMessage();

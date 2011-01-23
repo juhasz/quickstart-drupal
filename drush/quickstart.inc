@@ -254,10 +254,10 @@ function quickstart_destroy_code($domain, $params) {
 function quickstart_create_install($domain, $params) {
   // detect the drupal version from the CHANGELOG.txt file.
   $dversion = 'unknown';
-  $changelog = $params['codepath'] . '/CHANGELOG.txt';
+  $codepath = $params['codepath'];
 
   // load make file into string
-  $str=file_get_contents($changelog);
+  $str=file_get_contents($codepath . '/CHANGELOG.txt');
   if ( preg_match("/^Drupal 6./m", $str) ) {
     $dversion = 'd6';
   }
