@@ -84,10 +84,10 @@ function quickstart_drush_command() {
   );
 
   $items['quickstart-fixperms'] = array(
-          'description' => "Fix permissions for a quickstart development website.
-            sudo chown -R quickstart:www-data \$codepath
-            sudo chmod -R a=,u=rwX,g=rX \$codepath
-            sudo find \$codepath/sites -type d -name files -exec chmod -R a=,ug=rwX '{}' \;",
+          'description' => "Fix permissions for a quickstart development website:
+  \$ sudo chown -R quickstart:www-data <codepath>
+  \$ sudo chmod -R a=,u=rwX,g=rX <codepath>
+  \$ sudo find <codepath>/sites -type d -name files -exec chmod -R a=,ug=rwX '{}' \;",
           'arguments' => array(
           ),
           'options' => array(
@@ -206,7 +206,7 @@ function drush_quickstart_fixperms() {
   drush_print("sudo chmod -R a=,u=rwX,g=rX $codepath");
   quickstart_shell_exec("sudo chmod -R a=,u=rwX,g=rX $codepath");
   // find directories named "files" and run chmod on them.
-  drush_print("sudo find $codepath/sites -type d -name files -exec chmod -R a=,ug=rwX '{}' \;", 'ok');  
+  drush_print("sudo find $codepath/sites -type d -name files -exec chmod -R a=,ug=rwX '{}' \;");  
   quickstart_shell_exec("sudo find $codepath/sites -type d -name files -exec chmod -R a=,ug=rwX '{}' \;");  
 }
 
