@@ -280,7 +280,7 @@ function quickstart_create_install($domain, $params) {
 
   // Create a private files folder.  This is done to make fix-perms not break configuring a private files directory
   quickstart_shell_exec("mkdir $codepath/sites/default/files_private");
-  drush_backend_invode("variable-set file_private_path sites/default/files_private --always-set --root=$codepath ")
+  drush_backend_invode("variable-set file_private_path sites/default/files_private --always-set --root=$codepath");
   drush_backend_invode("quickstart-fixperms --domain=$domain");
 
   drush_log("\nAdmin user:  ".$params['account-name']."\nAdmin password: ".$params['account-pass'], 'ok');
