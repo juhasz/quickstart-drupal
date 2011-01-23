@@ -201,13 +201,11 @@ function drush_quickstart_fixperms() {
 
   $codepath = $params['codepath'];
 
-  drush_print("sudo chown -R quickstart:www-data $codepath");
   quickstart_shell_exec("sudo chown -R quickstart:www-data $codepath");
-  drush_print("sudo chmod -R a=,u=rwX,g=rX $codepath");
   quickstart_shell_exec("sudo chmod -R a=,u=rwX,g=rX $codepath");
   // find directories named "files" and run chmod on them.
-  drush_print("sudo find $codepath/sites -type d -name files -exec chmod -R a=,ug=rwX '{}' \;");  
   quickstart_shell_exec("sudo find $codepath/sites -type d -name files -exec chmod -R a=,ug=rwX '{}' \;");  
+  quickstart_shell_exec("sudo find $codepath/sites -type d -name files_private -exec chmod -R a=,ug=rwX '{}' \;");  
 }
 
 /**
