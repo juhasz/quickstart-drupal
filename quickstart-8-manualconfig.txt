@@ -6,6 +6,7 @@ Quickstart has been installed.  To complete the image:
       Install updates (popup)
       Tools->Options->General, web browser->Firefox
                     ->Editor->Formatting.  Spaces per indent: 2, Tab size 2
+                    ->PHP->Uncheck "Stop at First Line"
       Close
       Open again and Install updates (popup)
       Create project for example.dev
