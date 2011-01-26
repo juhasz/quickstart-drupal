@@ -30,4 +30,6 @@ zenity --info --text="Firefox profile manager will start.\n1) Delete temp profil
 firefox -ProfileManager
 rm profileFx3{default}.fbu
 
-
+# Use firefox as default browser.  Chrome, I'm looking at you...
+sudo update-alternatives --set gnome-www-browser /usr/bin/firefox
+sudo update-alternatives --set x-www-browser /usr/bin/firefox

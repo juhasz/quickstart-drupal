@@ -63,7 +63,7 @@ function quickstart_fixpath($pathin) {
  */
 function quickstart_create_dns($domain, $params) {
   // FIXME detect duplicates
-  quickstart_shell_exec("echo '127.0.0.1 $domain #quickstart' >> /etc/hosts");
+  quickstart_shell_exec("echo '127.0.0.1 $domain #quickstart' | sudo tee -a /etc/hosts");
 }
 
 /**
@@ -73,9 +73,7 @@ function quickstart_create_dns($domain, $params) {
  * @param <type> $params
  */
 function quickstart_destroy_dns($domain, $params) {
-  quickstart_shell_exec("sed \"/ $domain .*#quickstart/d\" /etc/hosts > ~/hosts.tmp");
-  quickstart_shell_exec("cat ~/hosts.tmp > /etc/hosts");
-  quickstart_shell_exec("rm ~/hosts.tmp");
+  quickstart_shell_exec("sudo sed -i \"/ $domain .*#quickstart/d\" /etc/hosts");
 }
 
 
@@ -225,8 +223,8 @@ function quickstart_create_code($domain, $params) {
   }
 
   drush_backend_invoke("make --prepare-install $makefile $codepath");
-  quickstart_shell_exec("chown quickstart:www-data -R $codepath");
-  quickstart_shell_exec("chmod g+w -R $codepath");
+  quickstart_shell_exec("sudo chown quickstart:www-data -R $codepath");
+  quickstart_shell_exec("sudo chmod g+w -R $codepath");
 }
 
 /**
@@ -242,7 +240,7 @@ function quickstart_destroy_code($domain, $params) {
       drush_log('No index.php found.  Aborting deletion of files...', 'warning');
       return;
   }
-  quickstart_shell_exec("rm -rf $codepath");
+  quickstart_shell_exec("sudo rm -rf $codepath");
 }
 
 /**
@@ -349,8 +347,8 @@ function quickstart_create_install_D6_manual($domain, $params) {
   $domain_ = $params['domain_'];
   $codepath = $params['codepath'];
   
-  quickstart_shell_exec("chown quickstart:www-data -R \"$codepath\"");
-  quickstart_shell_exec("chmod g+w -R \"$codepath\"");
+  quickstart_shell_exec("sudo chown quickstart:www-data -R \"$codepath\"");
+  quickstart_shell_exec("sudo chmod g+w -R \"$codepath\"");
 
   quickstart_shell_exec("zenity --info --text=\"Drupal installer will now start.\n  dbuser, password, and database are: $domain_\n  Return to this window and press ENTER to fix settings.php warning.\"");
 
@@ -358,8 +356,8 @@ function quickstart_create_install_D6_manual($domain, $params) {
 
   quickstart_shell_exec("zenity --info --text=\"**** AFTER INSTALLER HAS COMPLETED ****\n close this dialog to finish\"");
 
-  quickstart_shell_exec("chmod g-w \"$codepath/sites/default/settings.php\"");
-  quickstart_shell_exec("chmod g-w \"$codepath/sites/default\"");
+  quickstart_shell_exec("sudo chmod g-w \"$codepath/sites/default/settings.php\"");
+  quickstart_shell_exec("sudo chmod g-w \"$codepath/sites/default\"");
 }
 
 /**
@@ -382,8 +380,8 @@ function quickstart_destroy_install($domain, $params) {
   quickstart_create_database($domain, $params);
 
   // delete settings.php file
-  quickstart_shell_exec("rm -f $codepath/sites/all/default/settings.php");
+  quickstart_shell_exec("sudo rm -f $codepath/sites/all/default/settings.php");
 
   // delete files folder
-  quickstart_shell_exec("rm -rf $codepath/sites/all/default/files");
+  quickstart_shell_exec("sudo rm -rf $codepath/sites/all/default/files");
 }
