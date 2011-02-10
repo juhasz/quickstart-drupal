@@ -91,7 +91,7 @@ function quickstart_drush_command() {
           'arguments' => array(
           ),
           'options' => array(
-                  'domain' => 'Domain name to destroy.',
+                  'domain' => 'Domain name to fix permissions.',
                   'codepath' => 'Path to drupal code.  Defaults to ~/websites/[domain]',
           ),
           'examples' => array(
