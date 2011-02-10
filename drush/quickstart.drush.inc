@@ -36,7 +36,7 @@ function quickstart_drush_command() {
                   'dbpassword'   => 'Optional (db).  Root mysql password.  Defaults to "quickstart"',
                   'codepath'     => 'Optional (apache,code,install).  Path to drupal code.  Defaults to "~/websites/[domain]"',
                   'makefile'     => 'Optional (code).  Path to drupal make file.  Defaults to D7 "~/websites/default.make"',
-                  'profile'      => 'Optional (install).  Name of profile to install.  Defaults to "default"',
+                  'profile'      => 'Optional (install).  Name of profile to install.  Defaults to "default" in D6, "standard" in D7',
                   'db-url'       => 'Optional (install).  DB url.  Defaults to "mysql://[domain]]:[domain]@localhost/[domain]" (replace . with _ in [domian])',
                   'db-prefix'    => 'Optional (install).  DB table prefix.  Defaults to ""',
                   'account-name' => 'Optional (install).  Name of user 1.  Defaults to "admin"',
@@ -161,7 +161,7 @@ function _quickstart_params($required) {
   // code, install (check version)
   $defaults['makefile'] = quickstart_fixpath("~/websites/default.make");
   // install
-  $defaults['profile'] = 'default';
+  $defaults['profile'] = 'standard';
   $defaults['db-url'] = "mysql://$domain_:$domain_@localhost/$domain_";
   $defaults['db-prefix'] = '';
   $defaults['account-name'] = 'admin';

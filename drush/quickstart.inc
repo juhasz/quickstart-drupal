@@ -263,32 +263,27 @@ function quickstart_create_install($domain, $params) {
   if ( preg_match("/^Drupal 7./m", $str) ) {
     $dversion = 'd7';
   }
-  // Nuff foreplay, let's install this sucker!
-  switch ($dversion) {
-    case 'd7':
-      quickstart_create_install_D7($domain, $params);
-      break;
-    case 'd6':
-      quickstart_create_install_D6($domain, $params);
-      break;
-    default: 
-      quickstart_create_install_D6_manual($domain, $params);
-      break;
+  
+  // D6 specific
+  if ($dversion=='d6') {
+    // D6 and D7 have different names for the default profile.
+    if ($params['profile']=='standard') {
+      $params['profile'] = "default";
+    }
+    // copy default.settings.php to settings.php and change URL and prefix
+    $str = file_get_contents("$codepath/sites/default/default.settings.php");
+    $str = str_replace("mysql://username:password@localhost/databasename",
+          $params['db-url'],
+          $str);
+    $str = str_replace("\$db_prefix = ''",
+          $params['db-prefix'],
+          $str);
+    file_put_contents("$codepath/sites/$sites_subdir/settings.php",$str);
   }
-
-  // Create a private files folder.  This is done to make fix-perms not break configuring a private files directory
-  quickstart_shell_exec("sudo mkdir $codepath/sites/default/files_private");
-  drush_backend_invoke("variable-set file_private_path sites/default/files_private --always-set --root=$codepath");
-  drush_backend_invoke("quickstart-fixperms --domain=$domain");
-
-  drush_log("\nAdmin user:  ".$params['account-name']."\nAdmin password: ".$params['account-pass'], 'ok');
-}
-
-/**
- * Install a D7 site, using core 'drush site-install' command
- */
-function quickstart_create_install_D7($domain, $params) {
+  
+  // Nuff foreplay, let's install!
   drush_backend_invoke("site-install"
+      . " " . $params['profile']
       . " --root=" . $params['codepath']
       . " --db-url=" . $params['db-url']
       . " --db-prefix=" . $params['db-prefix']
@@ -300,64 +295,17 @@ function quickstart_create_install_D7($domain, $params) {
       . " --site-name=" . $params['site-name']
       . " --site-mail=" . $params['site-mail']
       . " --sites-subdir=" . $params['sites-subdir']
-      . " --dbuser=" . $params['dbuser']
-      . " --dbpassword=" . $params['dbpassword']
   );
-}
- 
-/**
- * Install a D6 site, using contrib 'drush site-install6' command.  
- * Project: http://drupal.org/project/drush_site_install6
- */
-function quickstart_create_install_D6($domain, $params) {
-  $codepath = $params['codepath'];
-  $sites_subdir = $params['sites-subdir'];
-  
-  // copy default.settings.php to settings.php and change URL and prefix
-  $str = file_get_contents("$codepath/sites/default/default.settings.php");
-  $str = str_replace("mysql://username:password@localhost/databasename",
-          $params['db-url'],
-          $str);
-  $str = str_replace("\$db_prefix = ''",
-          $params['db-prefix'],
-          $str);
-  file_put_contents("$codepath/sites/$sites_subdir/settings.php",$str);
 
-  drush_backend_invoke("site-install6 " . $params['profile']
-                          . " --root=" . $params['codepath']
-                          . " --db-url=" . $params['db-url']
-                          . " --db-prefix=" . $params['db-prefix']
-                          . " --account-name=" . $params['account-name']
-                          . " --account-pass=" . $params['account-pass']
-                          . " --account-mail=" . $params['account-mail']
-                          . " --locale=" . $params['locale']
-                          . " --clean-url=" . $params['clean-url']
-                          . " --site-name=" . $params['site-name']
-                          . " --site-mail=" . $params['site-mail']
-                          . " --sites-subdir=" . $params['sites-subdir']
-          );
+  // D7 specific
+  if ($dversion=='d7') {
+    // Create a private files folder.  This is done to make fix-perms not break configuring a private files directory
+    quickstart_shell_exec("sudo mkdir $codepath/sites/default/files_private");
+    drush_backend_invoke("variable-set file_private_path sites/default/files_private --always-set --root=$codepath");
+    drush_backend_invoke("quickstart-fixperms --domain=$domain");
+  }
 
-  return true;
-}
-
-/** 
- * Install site manually.  This code shouldn't be used anymore if site-install6 is available
- */
-function quickstart_create_install_D6_manual($domain, $params) {
-  $domain_ = $params['domain_'];
-  $codepath = $params['codepath'];
-  
-  quickstart_shell_exec("sudo chown quickstart:www-data -R \"$codepath\"");
-  quickstart_shell_exec("sudo chmod g+w -R \"$codepath\"");
-
-  quickstart_shell_exec("zenity --info --text=\"Drupal installer will now start.\n  dbuser, password, and database are: $domain_\n  Return to this window and press ENTER to fix settings.php warning.\"");
-
-  quickstart_shell_exec("firefox http://$domain");
-
-  quickstart_shell_exec("zenity --info --text=\"**** AFTER INSTALLER HAS COMPLETED ****\n close this dialog to finish\"");
-
-  quickstart_shell_exec("sudo chmod g-w \"$codepath/sites/default/settings.php\"");
-  quickstart_shell_exec("sudo chmod g-w \"$codepath/sites/default\"");
+  drush_log("\nURL:  http://".$params['domain']."\nAdmin user:  ".$params['account-name']."\nAdmin password: ".$params['account-pass'], 'ok');
 }
 
 /**
