@@ -223,8 +223,7 @@ function quickstart_create_code($domain, $params) {
   }
 
   drush_backend_invoke("make --prepare-install $makefile $codepath");
-  quickstart_shell_exec("sudo chown quickstart:www-data -R $codepath");
-  quickstart_shell_exec("sudo chmod g+w -R $codepath");
+  drush_backend_invoke("quickstart-fixperms --domain=$domain --codepath=$codepath");
 }
 
 /**

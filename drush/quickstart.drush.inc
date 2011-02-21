@@ -87,7 +87,8 @@ function quickstart_drush_command() {
           'description' => "Fix permissions for a quickstart development website:
   \$ sudo chown -R quickstart:www-data <codepath>
   \$ sudo chmod -R a=,u=rwX,g=rX <codepath>
-  \$ sudo find <codepath>/sites -type d -name files -exec chmod -R a=,ug=rwX '{}' \;",
+  \$ sudo find <codepath>/sites -type d -name files -exec chmod -R a=,ug=rwX '{}' \;
+  \$ sudo find <codepath>/sites -type d -name files_private -exec chmod -R a=,ug=rwX '{}' \;",
           'arguments' => array(
           ),
           'options' => array(
