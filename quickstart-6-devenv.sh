@@ -6,6 +6,9 @@ cd ~
 echo "qs091" | sudo tee /etc/hostname
 
 
+# ################################################################################ Configure phpmyadmin to show hex data on detail pages.  Non-optimal.
+echo "\$cfg['ProtectBinary'] = FALSE;" | sudo tee -a /etc/phpmyadmin/config.inc.php
+
 # ################################################################################ user management
 # Make quickstart a user of group www-data
 sudo adduser quickstart www-data    
