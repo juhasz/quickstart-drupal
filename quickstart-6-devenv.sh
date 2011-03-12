@@ -251,12 +251,15 @@ sudo apt-get -y install squid3
 echo "http_proxy=\"http://localhost:3128\"" | sudo tee -a /etc/environment > /dev/null
 
 echo "
+# fix for git 417 errors
+ignore_expect_100 on
+
 # Quickstart
 acl drushservers dstdomain ftp.drupal.org
-
 cache allow drushservers
 cache deny all
 
+# don't wait to finish requests before shutting down.  Do it now!
 shutdown_lifetime 0 seconds 
 " | sudo tee -a /etc/squid3/squid.conf
 
