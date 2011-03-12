@@ -14,19 +14,19 @@ Quickstart has been installed.  To complete the image:
     ECLIPSE:
       Set workspace to /home/quickstart/websites - use as default
       Help->Check for updates
-      Window->Preferences->General->Web Browser, use external browser. 
-       Add firefox (Firefox, /usr/bin/firefox, %URL%)
+      Window->Preferences->General->Editors->Text Editors.  Displayed tab width: 2, Check insert spaces for tabs
                          ->PHP->Debug, set the default to Xdebug.
-                         ->General->Editors->Text Editors.  Displayed tab width: 2, Check insert spaces for tabs
 
 2) Update firefox plugins 
 
-3) Prepare for export:
+3) Log into phpmyadmin, example.dev, and example6.dev
+
+4) Prepare for export:
    bash -x ~/quickstart/export-prep.sh
 
-4) Shutdown
+5) Shutdown
 
-5) Export virtual machine
+6) Export virtual machine
 
-6) Create torrent
+7) Create torrent
 

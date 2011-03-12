@@ -89,11 +89,6 @@ sudo sed -i 's/#log_slow_queries/log_slow_queries/g'          /etc/mysql/my.cnf
 sudo sed -i 's/#long_query_time/long_query_time/g'            /etc/mysql/my.cnf
 
 
-# ################################################################################ Configure phpmyadmin
-
-echo "\$cfg['MaxRows'] = 1000;" | sudo tee -a /usr/share/phpmyadmin/config.inc.php > /dev/null
-
-
 # ################################################################################ Configure PHP
 # FIXME haven't checked for unnecessary code since 9.10
 # sudo sed -i 's/find_this/replace_with_this/g' infile1 infile2 etc
