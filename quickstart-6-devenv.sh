@@ -52,11 +52,11 @@ sudo ln -s ~/drush/drush /usr/local/bin/drush
 mkdir ~/.drush
 cd ~/.drush
 git clone --branch 6.x-3.x http://git.drupal.org/project/drush_make.git
+cd ~
 
 # Install drush quickstart
 ln -s ~/quickstart/drush ~/.drush/quickstart
 cp ~/quickstart/make_templates/*.make ~/websites
-
 
 # ################################################################################ Replace localhost/index.html
 # Add interesting default document for localhost
@@ -69,7 +69,7 @@ sudo chmod 755 /var/www/index.php
 # ################################################################################ Command line shortcuts (bash aliases)
 
 # Don't sudo here...
-cat > .bash_aliases <<END
+cat > ~/.bash_aliases <<END
 #   svn_add_all [folder]            - recursive add folders unversioned files (espects svn:ignore and spaces in filenames)
 #   svn_rid_all [folder]            - recursive svn-deletes missing files (deleted by user, but not svn-deleted)
 #   svn_revert_all [folder]         - recursive revert any change in folder
