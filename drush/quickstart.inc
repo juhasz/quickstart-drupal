@@ -277,7 +277,7 @@ function quickstart_create_install($domain, $params) {
     $str = str_replace("\$db_prefix = ''",
           $params['db-prefix'],
           $str);
-    file_put_contents("$codepath/sites/$sites_subdir/settings.php",$str);
+    file_put_contents("$codepath/sites/".$params['sites-subdir']."/settings.php",$str);
   }
   
   // Nuff foreplay, let's install!

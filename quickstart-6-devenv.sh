@@ -2,13 +2,18 @@
 
 cd ~
 
+# ################################################################################ Shorten prompt and set version
+echo "qs091" | sudo tee /etc/hostname
+
+
+# ################################################################################ user management
 # Make quickstart a user of group www-data
 sudo adduser quickstart www-data    
 # Make quickstart a user of group root to edit config files
 sudo adduser quickstart root    
 
-# ################################################################################ Drupal sites
 
+# ################################################################################ Drupal sites
 # Create folder for websites to live in
 mkdir ~/websites
 
@@ -43,7 +48,7 @@ git clone --branch 7.x-4.x http://git.drupal.org/project/drush.git
 chmod u+x ~/drush/drush
 sudo ln -s ~/drush/drush /usr/local/bin/drush
 
-# Install drush make
+# Install drush make and drush site-install6
 mkdir ~/.drush
 cd ~/.drush
 git clone --branch 6.x-3.x http://git.drupal.org/project/drush_make.git
@@ -52,8 +57,8 @@ git clone --branch 6.x-3.x http://git.drupal.org/project/drush_make.git
 ln -s ~/quickstart/drush ~/.drush/quickstart
 cp ~/quickstart/make_templates/*.make ~/websites
 
-# ################################################################################ Replace localhost/index.html
 
+# ################################################################################ Replace localhost/index.html
 # Add interesting default document for localhost
 sudo rm /var/www/index.html
 sudo chmod 777 /var/www
