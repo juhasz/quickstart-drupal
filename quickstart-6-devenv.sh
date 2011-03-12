@@ -39,20 +39,14 @@ For more information:
 # ################################################################################ Drush
 # Install drush
 
-DRUSH_FILE='drush-All-versions-4.1.tar.gz'
-DRUSH_MAKE='drush_make-6.x-2.0-beta11'
-DRUSH_SITE_INSTALL6='drush_site_install6-6.x-1.0'
-
-wget -nv http://ftp.drupal.org/files/projects/$DRUSH_FILE
-tar -xzf $DRUSH_FILE
+git clone --branch 7.x-4.x http://git.drupal.org/project/drush.git
 chmod u+x ~/drush/drush
 sudo ln -s ~/drush/drush /usr/local/bin/drush
-rm $DRUSH_FILE
 
 # Install drush make
 mkdir ~/.drush
-drush dl $DRUSH_MAKE --destination=/home/quickstart/.drush
-drush dl $DRUSH_SITE_INSTALL6 --destination=/home/quickstart/.drush
+cd ~/.drush
+git clone --branch 6.x-3.x http://git.drupal.org/project/drush_make.git
 
 # Install drush quickstart
 ln -s ~/quickstart/drush ~/.drush/quickstart
