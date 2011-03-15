@@ -6,10 +6,17 @@ cd ~
 echo "qs091" | sudo tee /etc/hostname
 
 
-# ################################################################################ Configure phpmyadmin to show hex data on detail pages.  Non-optimal.
-echo "\$cfg['ProtectBinary'] = false;"      | sudo tee -a /etc/phpmyadmin/config.inc.php
-echo "\$cfg['MaxRows'] = 1000;"             | sudo tee -a /etc/phpmyadmin/config.inc.php
-echo "\$cfg['DisplayBinaryAsHex'] = false;" | sudo tee -a /etc/phpmyadmin/config.inc.php
+# ################################################################################ Configure phpmyadmin to show hex data on detail pages.
+echo "
+# Show 1000 rows instead of 30 by default
+\$cfg['MaxRows'] = 1000;
+# Show BLOB data as a string not hex.
+\$cfg['DisplayBinaryAsHex'] = false;
+# Show BLOB data in row detail pages.
+\$cfg['ProtectBinary'] = false;
+# Show BLOB data on table browse pages.  Hack to hardcode all requests.
+\$_REQUEST['display_blob'] = true;
+" | sudo tee -a /etc/phpmyadmin/config.inc.php
 
 
 # ################################################################################ user management
