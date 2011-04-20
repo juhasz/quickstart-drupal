@@ -6,7 +6,9 @@ cd ~
 echo "qs091" | sudo tee /etc/hostname
 
 
-# ################################################################################ Configure phpmyadmin to show hex data on detail pages.
+# ################################################################################ Configure phpmyadmin
+
+# show hex data on detail pages.
 echo "
 # Show 1000 rows instead of 30 by default
 \$cfg['MaxRows'] = 1000;
@@ -16,6 +18,16 @@ echo "
 \$cfg['ProtectBinary'] = false;
 # Show BLOB data on table browse pages.  Hack to hardcode all requests.
 \$_REQUEST['display_blob'] = true;
+" | sudo tee -a /etc/phpmyadmin/config.inc.php
+
+# never log me out!
+echo "
+/*
+* Prevent timeout for a year at a time.
+* (seconds * minutes * hours * days * weeks)
+*/
+$cfg['LoginCookieValidity'] = 60*60*24*7*52;
+ini_set('session.gc_maxlifetime', $cfg['LoginCookieValidity']);
 " | sudo tee -a /etc/phpmyadmin/config.inc.php
 
 
