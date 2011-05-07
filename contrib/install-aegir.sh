@@ -57,7 +57,7 @@ sudo adduser --system --group --home /var/aegir aegir
 sudo adduser aegir www-data    #make aegir a user of group www-data
 
 # 3.6. Sudo configuration
-echo "aegir ALL=NOPASSWD: /usr/sbin/apache2ctl" | sudo tee -a /etc/sudoers.d/aegir > /dev/null
+echo "aegir ALL=NOPASSWD: /usr/sbin/apache2ctl" | sudo tee -a /etc/sudoers > /dev/null
 
 # 5. Install Aegir components
 echo "Run these commands:
