@@ -6,6 +6,7 @@ if $(uname -a | grep 'x86_64'); then
 else
   ECLIPSE_URL="http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release/helios/SR2/eclipse-php-helios-SR2-linux-gtk.tar.gz"
 fi
+echo "*** ECLIPSE URL: $ECLIPSE_URL"
 
 cd ~
 
