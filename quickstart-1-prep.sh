@@ -9,9 +9,7 @@ This script shouldn't be run more than once."
 ## The last password you'll ever need.
 
 # add to sudoers file - careful, this line could brick the box.
-echo "quickstart ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers > /dev/null
-
-
+echo "quickstart ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/sudoers.local > /dev/null
 
 ## Disk size Accounting
 
