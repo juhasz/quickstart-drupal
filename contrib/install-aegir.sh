@@ -31,6 +31,65 @@ MYSQL_PASS=quickstart
 AEGIR_LOCAL_DOMAIN=aegir.dev
 AEGIR_GIT_URL="http://git.aegirproject.org/?p=provision.git;a=blob_plain;f=install.sh.txt;hb=provision-0.4-beta1"
 
+# FROM: http://community.aegirproject.org/node/389
+
+# 2. Install system requirements
+sudo apt-get -y install apache2 php5 php5-cli php5-gd php5-mysql postfix sudo rsync git-core unzip
+
+# 3.1.1. Apache configuration
+sudo a2enmod rewrite
+sudo ln -s /var/aegir/config/apache.conf /etc/apache2/conf.d/aegir.conf
+
+# 3.2. DNS configuration
+# this is already setup
+
+# 3.3. PHP configuration
+## This is set in quickstart-3-lamp.sh
+sudo sed -i 's/memory_limit = 64M/memory_limit = 192M/g'            /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
+
+# 3.4. Database configuration
+sudo apt-get install mysql-server
+sudo sed -i 's/bind-address		= 127.0.0.1/#ind-address		= 127.0.0.1/g'            /etc/mysql/my.cnf
+sudo /etc/init.d/mysql restart
+
+# 3.5. Create the Aegir user
+sudo adduser --system --group --home /var/aegir aegir
+sudo adduser aegir www-data    #make aegir a user of group www-data
+
+# 3.6. Sudo configuration
+echo "aegir ALL=NOPASSWD: /usr/sbin/apache2ctl" | sudo tee -a /etc/sudoers.d/sudoers.local > /dev/null
+
+# 5. Install Aegir components
+echo "Run these commands:
+drush dl --destination=/var/aegir/.drush provision-6.x
+drush hostmaster-install
+exit"
+
+# 4. Stop! Now become the Aegir user!
+su -s /bin/bash aegir
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+exit
+
+#OLD
 # ###################################################### BEGIN INSTALL.txt instructions
 # This is taken from http://git.aegirproject.org/?p=provision.git;a=blob;f=docs/INSTALL.txt;h=7fd286f74fa719c6d6551081dc106cecd517a903;hb=299e9b83fdc653b1152e5394799bf99a5ff238c3
 # some of these steps are already covered in quickstart's install.sh, but we can still run them here...
