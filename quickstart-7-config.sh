@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Remove fancy high-falutin new 3d-glasses scrollbars.  In my day we just had arrow keys!
+sudo apt-get remove overlay-scrollbar liboverlay-scrollbar-0.1-0
+
 # Change default theme
 gconftool-2 -s /apps/metacity/general/theme --type=string Radiance
 gconftool-2 -s /desktop/gnome/interface/gtk_theme --type=string Radiance
