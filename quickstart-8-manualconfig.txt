@@ -3,10 +3,15 @@ Quickstart has been installed.  To complete the image:
 1) Configure Netbeans and Eclipse:
 
     NETBEANS: 
+      Start page: Uncheck Show On Startup 
       Install updates (popup)
-      Tools->Options->General, web browser->Firefox
-                    ->Editor->Formatting.  Spaces per indent: 2, Tab size 2
-                    ->PHP->Uncheck "Stop at First Line"
+      Tools->Options->General
+                               Web browser->Firefox
+                    ->Editor->Formatting.  
+                               Spaces per indent: 2
+                               Tab size 2
+                    ->PHP
+                               Uncheck "Stop at First Line"
       Close
       Open again and Install updates (popup)
       Create project for example.dev
@@ -14,8 +19,11 @@ Quickstart has been installed.  To complete the image:
     ECLIPSE:
       Set workspace to /home/quickstart/websites - use as default
       Help->Check for updates
-      Window->Preferences->General->Editors->Text Editors.  Displayed tab width: 2, Check insert spaces for tabs
-                         ->PHP->Debug, set the default to Xdebug.
+      Window->Preferences->General->Editors->Text Editors.  
+                                Displayed tab width: 2
+                                Check insert spaces for tabs
+                         ->PHP->Debug
+                                Set the default to Xdebug.
 
 2) Update firefox plugins 
 

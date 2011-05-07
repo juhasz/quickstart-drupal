@@ -29,8 +29,8 @@ echo "
 * Prevent timeout for a year at a time.
 * (seconds * minutes * hours * days * weeks)
 */
-$cfg['LoginCookieValidity'] = 60*60*24*7*52;
-ini_set('session.gc_maxlifetime', $cfg['LoginCookieValidity']);
+\$cfg['LoginCookieValidity'] = 60*60*24*7*52;
+ini_set('session.gc_maxlifetime', \$cfg['LoginCookieValidity']);
 " | sudo tee -a /etc/phpmyadmin/config.inc.php
 
 
