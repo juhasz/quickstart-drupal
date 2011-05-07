@@ -69,14 +69,14 @@ For more information:
 # ################################################################################ Drush
 # Install drush
 
-git clone --branch 7.x-4.x http://git.drupal.org/project/drush.git
+git clone --branch 7.x-4.4 http://git.drupal.org/project/drush.git
 chmod u+x ~/drush/drush
 sudo ln -s ~/drush/drush /usr/local/bin/drush
 
 # Install drush make and drush site-install6
 mkdir ~/.drush
 cd ~/.drush
-git clone --branch 6.x-3.x http://git.drupal.org/project/drush_make.git
+git clone --branch 6.x-2.2 http://git.drupal.org/project/drush_make.git
 cd ~
 
 # Install drush quickstart

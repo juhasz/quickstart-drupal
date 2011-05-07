@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DRUSH=7.x-4.3
-DRUSH_MAKE=6.x-2.1
+DRUSH=7.x-4.4
+DRUSH_MAKE=6.x-2.2
 
 # Update drush
 echo "Updating Drush to $DRUSH"
