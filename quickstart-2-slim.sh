@@ -8,14 +8,14 @@
 # 0mb
 sudo apt-get -yq autoremove
 
-# 362mb - Libre Office
+# 305mb - Libre Office
 sudo apt-get -yq remove --purge libreoffice-core libreoffice-common libreoffice-writer libreoffice-help-en-us \
        libreoffice-help-en-gb  libreoffice-draw libreoffice-l10n-en-gb libreoffice-l10n-en-za libreoffice-style-human \
        libreoffice-base-core  libreoffice-impress libreoffice-math libreoffice-gtk libreoffice-l10n-common libreoffice-gnome \
        libreoffice-emailmerge 
 sudo apt-get -yq remove --purge language-support-writing-en language-support-en uno-libs3 ure
 #  18mb - Games
-sudo apt-get -yq remove --purge quadrapassel gbrainy aisleriot gnomine gnome-mahjongg gnome-sudoku
+sudo apt-get -yq remove --purge gbrainy aisleriot gnomine gnome-mahjongg gnome-sudoku
 #  12mb - Accessability
 sudo apt-get -yq remove --purge gnome-orca gnome-mag brltty brltty-x11 onboard                                           
 #   9mb - Screen savers
@@ -27,7 +27,7 @@ sudo apt-get -yq remove --purge gnome-bluetooth bluez bluez-alsa bluez-gstreamer
 #  .3mb - Skype clone FIXME (9)
 sudo apt-get -yq remove --purge espeak                                                 
 #  23mb - Email FIXME (75)
-sudo apt-get -yq remove --purge evolution evolution-common evolution-data-server evolution-exchange evolution-indicator evolution-plugins evolution-webcal evolution-couchdb libevolution
+sudo apt-get -yq remove --purge evolution evolution-common evolution-data-server evolution-exchange evolution-indicator evolution-plugins evolution-webcal libevolution
 #   1mb - Spam filter
 sudo apt-get -yq remove --purge bogofilter bogofilter-bdb bogofilter-common                  
 #  63mb - Printing FIXME (98)
@@ -46,14 +46,14 @@ sudo apt-get -yq remove --purge shotwell
 sudo apt-get -yq remove --purge tomboy
 #  28mb - Mono .net layer
 sudo apt-get -yq remove --purge libart2.0-cil libgconf2.0-cil libglade2.0-cil libglib2.0-cil \
-  libgmime2.4-cil libgnome-vfs2.0-cil libgnome2.24-cil libgnomepanel2.24-cil libgtk2.0-cil \
+  libgmime2.4-cil libgnome-vfs2.0-cil libgnome2.24-cil libgtk2.0-cil \
   liblaunchpad-integration1.0-cil libmono-addins-gui0.2-cil libmono-addins0.2-cil libmono-cairo2.0-cil \
   libmono-corlib2.0-cil libmono-i18n-west2.0-cil libmono-posix2.0-cil \
   libmono-security2.0-cil libmono-sharpzip2.84-cil libmono-system2.0-cil \
   libndesk-dbus-glib1.0-cil libndesk-dbus1.0-cil mono-2.0-gac mono-gac mono-runtime
   # don't include ubuntu-mono, or light-themes will go too (ambiance and clearlooks)
 #   8mb - Fancy GUI Compiz (FIXME 15)
-sudo apt-get -yq remove --purge compiz compiz-core compiz-gnome compiz-plugins compiz-fusion-plugins-main compizconfig-backend-gconf libcompizconfig0 libdecoration0 
+sudo apt-get -yq remove --purge compiz compiz-core compiz-gnome compiz-plugins compizconfig-backend-gconf libcompizconfig0 libdecoration0 
 #   6mb - Example videos and stuff
 sudo apt-get -yq remove --purge example-content
 #  43mb - Video drivers
@@ -77,50 +77,11 @@ sudo apt-get -yq remove --purge gwibber gwibber-service telepathy-gabble libtele
 #   2mb - video editor
 sudo apt-get -yq remove --purge pitivi
 #   5mb - Etc
-sudo apt-get -yq remove --purge usb-creator-gtk checkbox-gtk ubuntuone-client-gnome jockey-gtk byobu computer-janitor-gtk gnome-dictionary
+sudo apt-get -yq remove --purge usb-creator-gtk checkbox-gtk ubuntuone-client-gnome jockey-gtk computer-janitor-gtk
 #   2mb - Etc Etc
 sudo apt-get -yq remove --purge xserver-xorg-input-all xserver-xorg-input-synaptics xserver-xorg-input-wacom #touchpad .5mb
-sudo apt-get -yq remove --purge nvidia-96-modaliases nvidia-180-modaliases nvidia-173-modaliases # graphics card detection .1mb
+sudo apt-get -yq remove --purge nvidia-96-modaliases nvidia-173-modaliases # graphics card detection .1mb
 sudo apt-get -yq remove --purge eog #graphic viewer 1.6mb
-
-#  40mb - This is a hack - no way to "undo", not a good idea for non-english speakers.
-#sudo apt-get -yq install localepurge # package to delete unnecessary translations.  Select en and en_us packages to keep them.
-
-# Other opportunities FIXME
-#   9mb - User guide - for 9mb, not worth it.
-#sudo apt-get -yq remove --purge man-db manpages yelp info evolution-documentation-en ubuntu-standard 
-#  39mb - OpenGL
-#sudo apt-get -yq remove --purge mesa-utils libglu1-mesa libgl1-mesa-dri libgl1-mesa-glx libvisual-0.4-plugins x11-utils xorg libglew1.5 libglitz-glx1 
-#  13mb - Pgp GUI - keep for communicating with hosting companies silly!
-#sudo apt-get -yq remove --purge seahorse seahorse-plugins                                   
-#  93mb - Headers for Programming linux - need these for VBox Extensions
-#sudo apt-get -yq remove --purge linux-headers-2.6.28-11 linux-headers-2.6.28-11-generic linux-headers-generic linux-libc-dev libc6-dev 
-#  60mb - Asian fonts - leave in for international
-#sudo apt-get -yq remove --purge ttf-arphic-uming ttf-indic-fonts-core ttf-lao ttf-sazanami-gothic ttf-sazanami-mincho ttf-thai-tlwg ttf-unfonts-core # Thai/korean/chinese/indian/lao fonts
-#   4mb - Doc utils
-#sudo apt-get -yq remove --purge gnome-doc-utils
-
-
-# Multi-media Players
-#  7mb - Music player cd creator 
-# sudo apt-get -yq remove --purge rhythmbox brasero wodim libbrasero-media0 cdparanoia rhythmbox-plugins rhythmbox-ubuntuone-music-store rhythmbox-plugin-cdrecorder
-#  5mb - Video player 
-# sudo apt-get -yq remove --purge totem totem-mozilla totem-common totem-gstreamer totem-plugins 
-
-# Multi-media 
-#sudo apt-get -yq remove --purge gstreamer0.10-plugins-good gstreamer0.10-alsa gstreamer0.10-x gnome-media #4mb
-#sudo apt-get -yq remove --purge libpt2.6.1 libpt2.6.1-plugins-alsa libpt2.6.1-plugins-v4l2 libv4l-0 libopal3.6.1 #video4linux stuff 4mb
-#sudo apt-get -yq remove --purge gstreamer0.10-schroedinger libschroedinger-1.0-0 #video codec .5mb
-#sudo apt-get -yq remove --purge libiec61883-0 #codec stuff .1mb
-#sudo apt-get -yq remove --purge libavc1394-0 libraw1394-8 #firewire driver .2mb
-
-# Pulse audio
-#sudo apt-get -yq remove --purge libpulsecore9 libshout3 pulseaudio pulseaudio-esound-compat pulseaudio-module-gconf pulseaudio-module-hal  pulseaudio-module-x11 libspeex1 libspeexdsp1 #audio codec
-#sudo apt-get -yq remove --purge tsclient libasound2-plugins rdesktop libsamplerate0 #audio rate conversion  3mb
-#sudo apt-get -yq remove --purge libwavpack1 # audio codec
-#sudo apt-get -yq remove --purge alsa-base alsa-utils esound-clients libespeak1 espeak-data libpulse-browse0 linux-sound-base pulseaudio-utils libgnome-speech7 #more audio
-#sudo apt-get -yq remove --purge libvisual-0.4-0  gstreamer0.10-plugins-base # audio playback visualization 2mb
-#sudo apt-get -yq remove --purge libtag1c2a #mp3 tags .5mb
 
 # 0mb
 sudo apt-get -yq autoremove
