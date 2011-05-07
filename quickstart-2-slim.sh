@@ -8,12 +8,12 @@
 # 0mb
 sudo apt-get -yq autoremove
 
-# 362mb - Open office
-sudo apt-get -yq remove --purge openoffice.org-core openoffice.org-common openoffice.org-writer openoffice.org-calc openoffice.org-math \
-     openoffice.org-impress openoffice.org-base-core openoffice.org-draw openoffice.org-emailmerge openoffice.org-gnome openoffice.org-gtk \
-     openoffice.org-help-en-gb openoffice.org-help-en-us openoffice.org-l10n-en-gb openoffice.org-l10n-en-za openoffice.org-style-human \
-     openoffice.org-thesaurus-en-au python-uno language-support-writing-en openoffice.org-thesaurus-en-us openoffice.org-hyphenation \
-     openoffice.org-hyphenation-en-us openoffice.org-l10n-common language-support-en uno-libs3 ure
+# 362mb - Libre Office
+sudo apt-get -yq remove --purge libreoffice-core libreoffice-common libreoffice-writer libreoffice-help-en-us \
+       libreoffice-help-en-gb  libreoffice-draw libreoffice-l10n-en-gb libreoffice-l10n-en-za libreoffice-style-human \
+       libreoffice-base-core  libreoffice-impress libreoffice-math libreoffice-gtk libreoffice-l10n-common libreoffice-gnome \
+       libreoffice-emailmerge 
+sudo apt-get -yq remove --purge language-support-writing-en language-support-en uno-libs3 ure
 #  18mb - Games
 sudo apt-get -yq remove --purge quadrapassel gbrainy aisleriot gnomine gnome-mahjongg gnome-sudoku
 #  12mb - Accessability
