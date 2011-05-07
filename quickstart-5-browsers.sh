@@ -21,7 +21,8 @@ firefox
 firefox -CreateProfile temp
 
 zenity --info --text="Firefox will start.\n\n1) Please install the FEBE backup extension.\n2) Then CLOSE FIREFOX." &
-firefox -P temp https://addons.mozilla.org/en-US/firefox/downloads/latest/2109/addon-2109-latest.xpi?src=addondetail
+#firefox -P temp https://addons.mozilla.org/en-US/firefox/downloads/latest/2109/addon-2109-latest.xpi?src=addondetail
+firefox -P temp http://softwarebychuck.com/xpis/FEBE7.0beta3.xpi
 
 zenity --info --text="Firefox will start.\n\n1) Tools -> FEBE -> Restore profile.\n2) Click 'default' in list (create if it's not there).\n3) 'Select local backup' in the list.\n4) Choose file: ~/profileFx3{default}.fbu.\n5) Start profile restore.\n6) Ok, ok, then CLOSE FIREFOX" &
 firefox -P temp
