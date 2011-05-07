@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DRUSH_VERSION="7.x-4.4"
+DRUSH_MAKE_VERSION="6.x-2.2"
+
 cd ~
 
 # ################################################################################ Shorten prompt and set version
@@ -69,14 +72,19 @@ For more information:
 # ################################################################################ Drush
 # Install drush
 
-git clone --branch 7.x-4.4 http://git.drupal.org/project/drush.git
+git clone http://git.drupal.org/project/drush.git
+cd ~/drush
+git checkout $DRUSH_VERSION
+
 chmod u+x ~/drush/drush
 sudo ln -s ~/drush/drush /usr/local/bin/drush
 
 # Install drush make and drush site-install6
 mkdir ~/.drush
 cd ~/.drush
-git clone --branch 6.x-2.2 http://git.drupal.org/project/drush_make.git
+git clone http://git.drupal.org/project/drush_make.git
+cd drush_make
+git checkout $DRUSH_MAKE_VERSION
 cd ~
 
 # Install drush quickstart
