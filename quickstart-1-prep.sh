@@ -11,8 +11,9 @@ This script shouldn't be run more than once."
 ## The last password you'll ever need.
 
 # add to sudoers file - careful, this line could brick the box.
-sudo sed -i 's|#includedir /etc/sudoers.d|#includedir /etc/sudoers.d|g' /etc/sudoers
-echo "quickstart ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/sudoers.local > /dev/null
+
+echo "includedir /etc/sudoers.d" | sudo tee -a /etc/sudoers
+echo "quickstart ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/quickstart > /dev/null
 
 
 ## Disk size Accounting
