@@ -4,11 +4,7 @@
 #
 # 1) Open a terminal window in the virtual machine (Applications->Accessories->Terminal)
 #
-# 2) Paste in these three commands: (install cvs, download from drupal.org, run install.sh)
-#
-# sudo apt-get -y install cvs
-# cvs -z6 -d:pserver:anonymous:anonymous@cvs.drupal.org:/cvs/drupal-contrib checkout -d quickstart contributions/modules/quickstart
-# bash ~/quickstart/install-quickstart.sh
+# 2) bash ~/quickstart/install-quickstart.sh
 
 function reboot {
   echo "gnome-terminal -x bash -c \"~/quickstart/install-quickstart.sh $1\" &" >> ~/.profile

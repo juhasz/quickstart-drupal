@@ -3,10 +3,11 @@
 This folder includes installation scripts for some useful tools for Drupal
 development in quickstart.
 
- * Aegir   - Hosting management platform
- * Hudson  - Continious integration server
- * Oracle  - Insanity in a DB server.  Legacy apps.
- * Solr    - Search server
+ * Aegir     - Hosting management platform
+ * Hudson    - Continious integration server
+ * memcached - Memory object caching system
+ * Oracle    - Insanity in a DB server.  Legacy apps.
+ * Solr      - Search server
 
 =========== Tips =========== 
 
