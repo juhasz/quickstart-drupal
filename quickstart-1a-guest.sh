@@ -1,7 +1,8 @@
 #!/bin/bash
 
 ## install guest additions 
-
+echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" | sudo tee -a /etc/apt/sources.list
+wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
 
 # Install virtual kernel.  Better performance.
 # Removed for 10.10 - http://bugs.launchpad.net/ubuntu/+source/linux/+bug/69224

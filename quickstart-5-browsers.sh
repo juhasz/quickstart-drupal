@@ -2,6 +2,14 @@
 
 # See here for list of browsers and rendering engines http://en.wikipedia.org/wiki/List_of_web_browsers
 
+# Use PPA's to get most recent versions of browsers on apt-get upgrade
+## Chrome
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+sudo apt-get update
+## Firefox
+sudo add-apt-repository ppa:mozillateam/ppa
+
 
 # Install chrome browser (Webkit - fork of KHTML/Konquerer, also used by Safari)
 sudo apt-get -yq install chromium-browser flashplugin-nonfree
