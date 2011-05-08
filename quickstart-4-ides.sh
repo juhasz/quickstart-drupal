@@ -1,7 +1,8 @@
 #!/bin/bash
 
 NETBEANS_URL="http://download.netbeans.org/netbeans/7.0/final/bundles/netbeans-7.0-ml-php-linux.sh"
-if $(uname -a | grep 'x86_64'); then
+if [ `uname -p` == "x86_64" ] 
+then
   ECLIPSE_URL="http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release/helios/SR2/eclipse-php-helios-SR2-linux-gtk-x86_64.tar.gz"
 else
   ECLIPSE_URL="http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release/helios/SR2/eclipse-php-helios-SR2-linux-gtk.tar.gz"
