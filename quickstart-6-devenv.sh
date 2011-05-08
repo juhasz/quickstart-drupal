@@ -5,10 +5,6 @@ DRUSH_MAKE_VERSION="6.x-2.2"
 
 cd ~
 
-# ################################################################################ Shorten prompt and set version
-echo "qs091" | sudo tee /etc/hostname
-
-
 # ################################################################################ Configure phpmyadmin
 
 # show hex data on detail pages.

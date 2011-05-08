@@ -6,6 +6,12 @@
 #
 # 2) bash ~/quickstart/install-quickstart.sh
 
+
+# ################################################################################ Shorten prompt and set version
+echo "qs10" | sudo tee /etc/hostname
+
+
+# ################################################################################ Reboot functions
 function reboot {
   echo "gnome-terminal -x bash -c \"~/quickstart/install-quickstart.sh $1\" &" >> ~/.profile
   echo "*** REBOOTING ***" | tee -a ~/quickstart/quickstart-install.log
@@ -14,12 +20,12 @@ function reboot {
   exit
 }
 
-cd ~
-
 # Undo any previous reboot script
 sed -i 's/gnome-terminal -x bash -c/# deleteme /g' ~/.profile
 
+# ################################################################################ Install it!
 # this switch statement handles reboots.
+cd ~
 case "$1" in
 "")
   bash -x ~/quickstart/quickstart-1-prep.sh  2>&1 | tee -a ~/quickstart/quickstart-install.log
