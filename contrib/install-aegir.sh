@@ -73,7 +73,7 @@ echo "aegir ALL=NOPASSWD: /usr/sbin/apache2ctl" | sudo tee -a /etc/sudoers > /de
 
 # 5. Install Aegir components
 
-echo $HELP
+echo "$HELP"
 
 # 4. Stop! Now become the Aegir user!
 sudo su -s /bin/bash aegir
