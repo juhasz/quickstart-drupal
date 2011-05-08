@@ -22,8 +22,13 @@ NOTE: ABOVE IS A PASSWORD RESET URL.  USE IT TO LOGIN INITIALLY.
 
 NOTE 2: If you lost your password reset url, get a new one for user 'admin' and 
         check the ~/websites/log/mail folder for a password reset email.
-        
-RESTART OR RELOGIN for apache2ctl to work.
+
+********************** TO FINISH, run these commands: **********************
+drush dl --destination=/var/aegir/.drush provision-6.x
+drush hostmaster-install
+exit
+# reboot 
+********************** TO FINISH, run these commands: **********************
 "
 
 MYSQL_USER=root
@@ -34,6 +39,11 @@ AEGIR_GIT_URL="http://git.aegirproject.org/?p=provision.git;a=blob_plain;f=insta
 # FROM: http://community.aegirproject.org/node/389
 
 # 2. Install system requirements
+zenity --info --text="For local-only development choose:
+
+'Local only' the first Postfix config screen
+default on the second config screen"
+
 sudo apt-get -y install apache2 php5 php5-cli php5-gd php5-mysql postfix sudo rsync git-core unzip
 
 # 3.1.1. Apache configuration
@@ -60,12 +70,11 @@ sudo adduser aegir www-data    #make aegir a user of group www-data
 echo "aegir ALL=NOPASSWD: /usr/sbin/apache2ctl" | sudo tee -a /etc/sudoers > /dev/null
 
 # 5. Install Aegir components
-echo "Run these commands:
-drush dl --destination=/var/aegir/.drush provision-6.x
-drush hostmaster-install
-exit"
+
+echo $HELP
 
 # 4. Stop! Now become the Aegir user!
+zenity --info --text="This is for the 'aegir' user.  Password is 'aegir'"
 su -s /bin/bash aegir
 
 
