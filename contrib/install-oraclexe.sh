@@ -4,9 +4,10 @@
 #
 # This script will install Oracle XE (Express Edition) on port 8080
 #
+
 HELP="
 
-Oracle XE Installation complete.
+Oracle XE Installation complete.  Review output for any errors.
 
 Oracle is a legacy database server.  Oracle XE is the 'developers version',
 and may be useful in porting legacy data from Oracle DB into something useful.
@@ -25,6 +26,18 @@ For details on using Oracle with Drupal, see here: http://api.drupal.org/api/dru
 
 REBOOT YOUR SERVER FOR APACHE TO SEE THE OCI8 DRIVER
 "
+
+if [ `uname -p` == "x86_64" ] 
+then
+  echo "
+
+*** 32-bit only.  Oracle doesn't offer 64-bit version in their PPA ***
+
+"
+  exit
+fi
+
+
 
 cd ~
 sudo apt-get update

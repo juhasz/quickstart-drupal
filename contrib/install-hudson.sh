@@ -35,8 +35,8 @@ sudo apt-get -y install -f
 
 # Configure
 sudo /etc/init.d/hudson stop
-sudo sed -i 's/HUDSON_USER=hudson/HUDSON_USER=quickstart/g'     /etc/default/hudson
-sudo sed -i 's/HTTP_PORT=8080/HTTP_PORT=8081/g'       /etc/default/hudson
+sudo sed -i 's/HUDSON_USER=hudson/HUDSON_USER=quickstart/g'           /etc/default/hudson
+sudo sed -i 's/HTTP_PORT=8080/HTTP_PORT=8081/g'                       /etc/default/hudson
 mkdir /home/quickstart/hudson
 sudo sed -i 's/\/var\/lib\/hudson/\/home\/quickstart\/hudson/g'       /etc/default/hudson
 sudo /etc/init.d/hudson start

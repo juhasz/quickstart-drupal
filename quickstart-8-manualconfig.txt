@@ -28,15 +28,20 @@ Quickstart has been installed.  To complete the image:
 2) Open chrome. Not default
    Open FF.  Default
    Repeat till no messages
-   
+
 3) Log into phpmyadmin, example.dev, and example6.dev
 
-4) Prepare for export:
+4) Share the ~/quickstart/websites folder (not the link on desktop):
+   right-click websites folder -> "Sharing Options" -> Install
+   check "allow others"
+   (reboot to test)
+
+5) Prepare for export:
    bash -x ~/quickstart/export-prep.sh
 
-5) Shutdown
+6) Shutdown
 
-6) Export virtual machine
+7) Export virtual machine
 
-7) Create torrent
+8) Create torrent
 
