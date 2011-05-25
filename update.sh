@@ -1,12 +1,9 @@
 cd ~/quickstart
 
-QUICKSTART=master
 DRUSH=7.x-4.4
 DRUSH_MAKE=6.x-2.2
 
-# Update Quickstart.  Master is always tag of latest version
-echo "Updating Quickstart"
-git checkout $QUICKSTART 2> /dev/null;
+echo "*** Run 'git pull' before running this to get latest version ***"
 
 # Update drush
 echo "Updating Drush to $DRUSH"
