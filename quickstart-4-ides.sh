@@ -33,7 +33,7 @@ sudo apt-get -yq install gedit-plugins
 gconftool-2 -s /apps/gnome-terminal/profiles/Default/scrollback_unlimited --type=bool true
 
 # Install graphical version control - weighs about 58mb
-sudo add-apt-repository ppa:rabbitvcs/ppa && sudo apt-get update
+# sudo add-apt-repository ppa:rabbitvcs/ppa && sudo apt-get update # ppa not working 2011-05-25
 sudo apt-get -yq install rabbitvcs-nautilus
 sudo killall nautilus
 

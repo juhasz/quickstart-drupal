@@ -8,7 +8,7 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 sudo apt-get update
 ## Firefox
-sudo add-apt-repository ppa:mozillateam/ppa
+# sudo add-apt-repository ppa:mozillateam/ppa #not working 2011-05-25
 
 
 # Install chrome browser (Webkit - fork of KHTML/Konquerer, also used by Safari)
