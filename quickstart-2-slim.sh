@@ -1,4 +1,6 @@
 #!/bin/bash
+# TODO: make this configurable.
+# TODO: optimalize this for other systems then ubuntu.
 
 # See also http://benhodge.wordpress.com/2008/02/17/cleaning-up-a-ubuntu-gnulinux-system/
 
@@ -12,24 +14,24 @@ sudo apt-get -yq autoremove
 sudo apt-get -yq remove --purge libreoffice-core libreoffice-common libreoffice-writer libreoffice-help-en-us \
        libreoffice-help-en-gb  libreoffice-draw libreoffice-l10n-en-gb libreoffice-l10n-en-za libreoffice-style-human \
        libreoffice-base-core  libreoffice-impress libreoffice-math libreoffice-gtk libreoffice-l10n-common libreoffice-gnome \
-       libreoffice-emailmerge 
+       libreoffice-emailmerge
 sudo apt-get -yq remove --purge language-support-writing-en language-support-en uno-libs3 ure
 #  18mb - Games
 sudo apt-get -yq remove --purge gbrainy aisleriot gnomine gnome-mahjongg gnome-sudoku
 #  12mb - Accessability
-sudo apt-get -yq remove --purge gnome-orca gnome-mag brltty brltty-x11 onboard                                           
+sudo apt-get -yq remove --purge gnome-orca gnome-mag brltty brltty-x11 onboard
 #   9mb - Screen savers
 sudo apt-get -yq remove --purge xscreensaver-data xscreensaver-gl screensaver-default-images gnome-screensaver ubuntu-desktop
 # 144mb - User guide
-sudo apt-get -yq remove --purge gnome-user-guide gnome-user-guide-en ubuntu-docs             
+sudo apt-get -yq remove --purge gnome-user-guide gnome-user-guide-en ubuntu-docs
 #   3mb - Bluetooth FIXME
-sudo apt-get -yq remove --purge gnome-bluetooth bluez bluez-alsa bluez-gstreamer bluez-cups 
+sudo apt-get -yq remove --purge gnome-bluetooth bluez bluez-alsa bluez-gstreamer bluez-cups
 #  .3mb - Skype clone FIXME (9)
-sudo apt-get -yq remove --purge espeak                                                 
+sudo apt-get -yq remove --purge espeak
 #  23mb - Email FIXME (75)
 sudo apt-get -yq remove --purge evolution evolution-common evolution-data-server evolution-exchange evolution-indicator evolution-plugins evolution-webcal libevolution
 #   1mb - Spam filter
-sudo apt-get -yq remove --purge bogofilter bogofilter-bdb bogofilter-common                  
+sudo apt-get -yq remove --purge bogofilter bogofilter-bdb bogofilter-common
 #  63mb - Printing FIXME (98)
 sudo apt-get -yq remove --purge ubuntu-standard \
      cups cups-bsd cups-client cups-common \
@@ -53,23 +55,23 @@ sudo apt-get -yq remove --purge libart2.0-cil libgconf2.0-cil libglade2.0-cil li
   libndesk-dbus-glib1.0-cil libndesk-dbus1.0-cil mono-2.0-gac mono-gac mono-runtime
   # don't include ubuntu-mono, or light-themes will go too (ambiance and clearlooks)
 #   8mb - Fancy GUI Compiz (FIXME 15)
-sudo apt-get -yq remove --purge compiz compiz-core compiz-gnome compiz-plugins compizconfig-backend-gconf libcompizconfig0 libdecoration0 
+sudo apt-get -yq remove --purge compiz compiz-core compiz-gnome compiz-plugins compizconfig-backend-gconf libcompizconfig0 libdecoration0
 #   6mb - Example videos and stuff
 sudo apt-get -yq remove --purge example-content
 #  43mb - Video drivers
-sudo apt-get -yq remove --purge nvidia-common libgl1-mesa-dri                                       
+sudo apt-get -yq remove --purge nvidia-common libgl1-mesa-dri
 #   8mb - Video Drivers
 sudo apt-get -yq remove --purge xserver-xorg-video-all xserver-xorg-video-apm xserver-xorg-video-ark xserver-xorg-video-ati xserver-xorg-video-chips xserver-xorg-video-cirrus xserver-xorg-video-geode xserver-xorg-video-i128 xserver-xorg-video-i740 xserver-xorg-video-intel xserver-xorg-video-mach64 xserver-xorg-video-mga xserver-xorg-video-neomagic xserver-xorg-video-nv xserver-xorg-video-openchrome xserver-xorg-video-r128 xserver-xorg-video-radeon xserver-xorg-video-rendition xserver-xorg-video-s3 xserver-xorg-video-s3virge xserver-xorg-video-savage xserver-xorg-video-siliconmotion xserver-xorg-video-sis xserver-xorg-video-sisusb xserver-xorg-video-tdfx xserver-xorg-video-trident xserver-xorg-video-tseng xserver-xorg-video-vmware xserver-xorg-video-voodoo
 #  .7mb - Math app - linear programming
 sudo apt-get -yq remove --purge lp-solve
 #   1mb - Bittorrent client
-sudo apt-get -yq remove --purge transmission-common transmission-gtk                         
-#  13mb - Instant Messaging 
+sudo apt-get -yq remove --purge transmission-common transmission-gtk
+#  13mb - Instant Messaging
 sudo apt-get -yq remove --purge empathy empathy-common nautilus-sendto-empathy nautilus-sendto telepathy-haze nautilus-sendto-empathy libpurple0 libpurple-bin libtelepathy-farsight0
 #   5mb - Laptop stuff
-sudo apt-get -yq remove --purge gnome-power-manager wireless-tools 
+sudo apt-get -yq remove --purge gnome-power-manager wireless-tools
 #   6mb - Desktop theming
-sudo apt-get -yq remove --purge gnome-accessibility-themes ubuntu-sounds gnome-games-common 
+sudo apt-get -yq remove --purge gnome-accessibility-themes ubuntu-sounds gnome-games-common
 #   3mb - VNC
 sudo apt-get -yq remove --purge vinagre libgtk-vnc-1.0-0 vino
 #   3mb - Chat client
@@ -99,6 +101,6 @@ df -h -T > ~/quickstart/quickstart-size-slim.txt
 # 3.0gb -> 2.2gb
 
 # To "unslim" try this (untested, and written for 9.04):
-#   sudo apt-get -yq install ubuntu-desktop ubuntu-standard 
+#   sudo apt-get -yq install ubuntu-desktop ubuntu-standard
 #   sudo apt-get -yq install xserver-xorg-input-all xserver-xorg-video-all nvidia-common
 #   sudo apt-get -yq install ubuntu-restricted-extras

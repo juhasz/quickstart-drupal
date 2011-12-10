@@ -1,15 +1,18 @@
 #!/bin/bash
 
+# TODO: make this configurable.
 mkdir ~/websites
 
 
 
 # ##### Install some basics
+# TODO: make this configurable.
 sudo apt-get -yq install cvs subversion git-core bzr
 sudo apt-get -yq install wget curl
 
 
 # ##### Install openssh-server
+# TODO: make this configurable.
 # This is a security risk, and unneeded for development.  The risk is when using bridged networking with known passwords.
 # sudo apt-get -yq install openssh-server
 
@@ -109,7 +112,7 @@ sudo sed -i 's/# /\/\/ /g'            /etc/php5/cli/conf.d/mcrypt.ini
 sudo sed -i 's/# /\/\/ /g'            /etc/php5/cli/conf.d/imap.ini
 
 # Install upload progress (warning in D7)
-sudo pecl -q install uploadprogress 
+sudo pecl -q install uploadprogress
 echo "extension=uploadprogress.so" | sudo tee /etc/php5/apache2/conf.d/uploadprogress.ini > /dev/null
 
 
@@ -142,6 +145,7 @@ ln -s          /var/log/mysql/mysql-slow.log             $LOGS/mysql-slow.log
 
 
 # ################################################################################ Config Files
+# TODO: make this configurable.
 CONFIGS=~/websites/config
 mkdir $CONFIGS
 sudo chmod -R g+w /etc/apache2
@@ -157,7 +161,7 @@ ln -s /etc/mysql/my.cnf              $CONFIGS/mysql.cnf
 sudo chmod g+w /etc/hosts
 ln -s /etc/hosts                     $CONFIGS/hosts
 
-echo "This folder contains links (shortcuts) to LAMP configuration files located around 
+echo "This folder contains links (shortcuts) to LAMP configuration files located around
 quickstart.  To see the links, and where they point to, start a terminal and type:
 
 ll

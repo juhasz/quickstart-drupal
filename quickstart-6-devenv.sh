@@ -138,36 +138,6 @@ END
 
 # ################################################################################ Desktop shortcuts
 
-cat > ~/Desktop/README.desktop <<END
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Type=Link
-URL=http://localhost
-Name=README
-Icon=/usr/share/pixmaps/firefox.png
-END
-
-cat > ~/Desktop/gnome-terminal.desktop <<END
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Name=Terminal
-Comment=Use the command line
-TryExec=gnome-terminal
-Exec=gnome-terminal
-Icon=utilities-terminal
-Type=Application
-X-GNOME-DocPath=gnome-terminal/index.html
-X-GNOME-Bugzilla-Bugzilla=GNOME
-X-GNOME-Bugzilla-Product=gnome-terminal
-X-GNOME-Bugzilla-Component=BugBuddyBugs
-X-GNOME-Bugzilla-Version=2.29.6
-Categories=GNOME;GTK;Utility;TerminalEmulator;
-StartupNotify=true
-OnlyShowIn=GNOME;
-X-Ubuntu-Gettext-Domain=gnome-terminal
-END
-chmod 755 ~/Desktop/gnome-terminal.desktop
-
 ln -s ~/websites ~/Desktop/websites
 ln -s /mnt/vbox-shared ~/Desktop/vbox-shared
 
