@@ -8,12 +8,14 @@
 
 
 # ################################################################################ Shorten prompt and set version
+# TODO: configurable hostname
 echo "qs10" | sudo tee /etc/hostname
 
 
 # ################################################################################ Reboot functions
+# TODO: better solution for script running after reboot
 function reboot {
-  echo "gnome-terminal -x bash -c \"~/quickstart/install-quickstart.sh $1\" &" >> ~/.profile
+  echo "lxterminal -x bash -c \"~/quickstart/install-quickstart.sh $1\" &" >> ~/.profile
   echo "*** REBOOTING ***" | tee -a ~/quickstart/quickstart-install.log
   sleep 2
   sudo reboot now
@@ -21,7 +23,7 @@ function reboot {
 }
 
 # Undo any previous reboot script
-sed -i 's/gnome-terminal -x bash -c/# deleteme /g' ~/.profile
+sed -i 's/lxterminal -x bash -c/# deleteme /g' ~/.profile
 
 # ################################################################################ Install it!
 # this switch statement handles reboots.
