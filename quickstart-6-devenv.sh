@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DRUSH_VERSION="7.x-4.4"
-DRUSH_MAKE_VERSION="6.x-2.2"
+DRUSH_VERSION="7.x-4.5"
+DRUSH_MAKE_VERSION="6.x-2.3"
 
 cd ~
 
@@ -32,9 +32,9 @@ ini_set('session.gc_maxlifetime', \$cfg['LoginCookieValidity']);
 
 # ################################################################################ user management
 # Make quickstart a user of group www-data
-sudo adduser quickstart www-data    
+sudo adduser quickstart www-data
 # Make quickstart a user of group root to edit config files
-sudo adduser quickstart root    
+sudo adduser quickstart root
 
 
 # ################################################################################ Drupal sites
@@ -51,12 +51,12 @@ To create a site (dns, apache, code, database, and install):
 
   2) Paste in this command (don't include the $)
     $ drush quickstart-create --domain=newsite.dev
-         or 
+         or
     $ drush qc --domain=newsite.dev
 
 To delete a site:
   $ drush quickstart-delete --domain=newsite.dev
-         or 
+         or
   $ drush qd --domain=newsite.dev
 
 For more information:
@@ -109,7 +109,7 @@ svn_trim_all   () { svn status "\$1" | grep '^!' | cut -b 8- | xargs -I {} svn r
 svn_revert_all () { svn revert "\$1" -R; }
 svn_ignore     () { svn_prop_add ignore "\$1" "\$2"; }
 svn_external   () { svn_prop_add external "\$1" "\$2"; }
-svn_prop_add   () { FILE="\$RANDOM.svnprop"; svn propget svn:"\$1" "\$2" > \$FILE; echo "\$3" >> \$FILE;	
+svn_prop_add   () { FILE="\$RANDOM.svnprop"; svn propget svn:"\$1" "\$2" > \$FILE; echo "\$3" >> \$FILE;
 			sed -i '/^\$/d' \$FILE; # remove blank lines
 			svn propset svn:"\$1" "\$2" -F $FILE; rm $FILE; }
 svn_prop_edit  () { svn pe svn:"\$2" "\$1"; }
@@ -149,7 +149,7 @@ ln -s /mnt/vbox-shared ~/Desktop/vbox-shared
 mkdir /home/quickstart/websites/logs/mail
 chmod -R 777 /home/quickstart/websites/logs/mail
 sudo sed -i 's/;sendmail_path =/sendmail_path=\/home\/quickstart\/quickstart\/config\/sendmail.php/g' /etc/php5/apache2/php.ini /etc/php5/cli/php.ini
-chmod +x /home/quickstart/quickstart/config/sendmail.php 
+chmod +x /home/quickstart/quickstart/config/sendmail.php
 
 
 
@@ -217,7 +217,7 @@ echo "
 extension=xhprof.so
 xhprof.output_dir=\"/home/quickstart/websites/logs/xhprof\"
 " | sudo tee /etc/php5/conf.d/xhprof.ini > /dev/null
- 
+
 # configure apache
 echo "Alias /xhprof /home/quickstart/websites/logs/xhprof/xhprof_html
 
@@ -253,7 +253,7 @@ cache allow drushservers
 cache deny all
 
 # don't wait to finish requests before shutting down.  Do it now!
-shutdown_lifetime 0 seconds 
+shutdown_lifetime 0 seconds
 " | sudo tee -a /etc/squid3/squid.conf
 
 echo "*** REBOOT TO TAKE EFFECT ***"
