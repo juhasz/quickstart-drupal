@@ -14,7 +14,7 @@ sudo apt-get -yq install wget curl
 # ##### Install openssh-server
 # TODO: make this configurable.
 # This is a security risk, and unneeded for development.  The risk is when using bridged networking with known passwords.
-# sudo apt-get -yq install openssh-server
+sudo apt-get -yq install openssh-server
 
 
 # ##### Install LAMP packages
