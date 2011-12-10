@@ -31,7 +31,8 @@ cd ~
 case "$1" in
 "")
   bash -x ~/quickstart/quickstart-1-prep.sh  2>&1 | tee -a ~/quickstart/quickstart-install.log
-  bash -x ~/quickstart/quickstart-1a-guest.sh  2>&1 | tee -a ~/quickstart/quickstart-install.log
+  # TODO: make this configurable.
+  # bash -x ~/quickstart/quickstart-1a-guest.sh  2>&1 | tee -a ~/quickstart/quickstart-install.log
   reboot 2
   ;;
 "2")
